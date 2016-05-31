@@ -1,5 +1,5 @@
 language: c
-sudo: false
+sudo: required
 addons:
   apt:
     packages:
@@ -14,4 +14,5 @@ script:
   - ./autogen.sh
   - ./configure
   - make
+  - sudo make install
   - make check
