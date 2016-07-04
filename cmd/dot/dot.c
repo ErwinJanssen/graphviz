@@ -19,6 +19,7 @@
 #include "config.h"
 #endif
 
+#include "parse_arguments.h"
 #include "gvc.h"
 #include "gvio.h"
 
@@ -152,6 +153,7 @@ static graph_t *create_test_graph(void)
 
 int main(int argc, char **argv)
 {
+	print();
     graph_t *prev = NULL;
     int r, rc = 0;
 

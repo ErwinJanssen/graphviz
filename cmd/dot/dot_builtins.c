@@ -15,6 +15,7 @@
 #include "config.h"
 #endif
 
+#include "parse_arguments.h"
 #include "gvplugin.h"
 
 #if defined(GVDLL) && !defined(ENABLE_LTDL)
