@@ -1,5 +1,5 @@
 language: c
-sudo: false
+sudo: true
 addons:
   apt:
     packages:
@@ -9,6 +9,16 @@ addons:
       - libdevil-dev
       - libxaw7-dev
       - freeglut3-dev
+
+install:
+  # Install unit test framework Criterion
+  - CRITERION_VERSION=v2.2.2
+  - wget -O criterion-${CRITERION_VERSION}.tar.bz2 https://github.com/Snaipe/Criterion/releases/download/${CRITERION_VERSION}/criterion-${CRITERION_VERSION}-linux-x86_64.tar.bz2
+  - tar xvjf criterion-${CRITERION_VERSION}.tar.bz2
+  - rm criterion-${CRITERION_VERSION}.tar.bz2
+  - sudo mv criterion-${CRITERION_VERSION}/include/criterion /usr/local/include/
+  - sudo mv criterion-${CRITERION_VERSION}/lib/libcriterion.so /usr/local/lib/libcriterion.so
+  - rm -r criterion-${CRITERION_VERSION}
 
 script:
   - GRAPHVIZ_DESTINATION_FOLDER="graphviz-build"
