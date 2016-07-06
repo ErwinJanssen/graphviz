@@ -3207,7 +3207,6 @@ AC_CONFIG_FILES(Makefile
 	plugin/neato_layout/Makefile
 	cmd/Makefile
 	cmd/dot/Makefile
-	cmd/dot/tests/Makefile
 	cmd/tools/Makefile
 	cmd/gvpr/Makefile
 	cmd/gvpr/lib/Makefile
@@ -3250,6 +3249,9 @@ AC_CONFIG_FILES(Makefile
 	share/gui/Makefile
 	graphviz.spec
 	Doxyfile
+  tests/Makefile
+  tests/lib/Makefile
+  tests/lib/common/Makefile
 	)
 
 AC_OUTPUT

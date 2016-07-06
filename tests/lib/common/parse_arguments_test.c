@@ -11,5 +11,5 @@
 
 Test(parse_argument, true_test)
 {
-	cr_assert(1== 1);
+	argument_options* options = initialize_argument_options();
 }

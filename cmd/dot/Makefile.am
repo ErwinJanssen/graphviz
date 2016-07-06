@@ -1,8 +1,6 @@
 # $Id$ $Revision$
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = tests
-
 pdfdir = $(pkgdatadir)/doc/pdf
 
 linkedman = neato.1 twopi.1 fdp.1 circo.1
@@ -46,7 +44,7 @@ endif
 man_MANS = dot.1 osage.1 patchwork.1
 pdf_DATA = dot.1.pdf osage.1.pdf patchwork.1.pdf
 
-dot_SOURCES = parse_arguments.c dot.c no_builtins.c
+dot_SOURCES = dot.c no_builtins.c
 dot_CPPFLAGS = $(AM_CPPFLAGS) -DDEMAND_LOADING=1
 dot_LDADD = \
 	$(top_builddir)/lib/gvc/libgvc.la \
@@ -77,7 +75,7 @@ osage.1.pdf: $(srcdir)/osage.1
 patchwork.1.pdf: $(srcdir)/patchwork.1
 	- $(GROFF) -Tps -man $(srcdir)/patchwork.1 | $(PS2PDF) - - >patchwork.1.pdf
 
-dot_static_SOURCES = parse_arguments.c dot.c dot_builtins.c
+dot_static_SOURCES = dot.c dot_builtins.c
 dot_static_CPPFLAGS = $(AM_CPPFLAGS) -DDEMAND_LOADING=0
 dot_static_LDADD = \
 	$(top_builddir)/plugin/dot_layout/libgvplugin_dot_layout_C.la \
@@ -90,7 +88,7 @@ dot_static_LDADD = \
 	$(top_builddir)/lib/cdt/libcdt_C.la \
        	$(PANGOCAIRO_LIBS) $(PANGOFT2_LIBS) $(GTS_LIBS) $(EXPAT_LIBS) $(Z_LIBS) $(LIBGEN_LIBS) $(SOCKET_LIBS) $(IPSEPCOLA_LIBS) $(MATH_LIBS)
 
-dot_builtins_SOURCES = parse_arguments.c dot.c dot_builtins.c
+dot_builtins_SOURCES = dot.c dot_builtins.c
 dot_builtins_CPPFLAGS = $(AM_CPPFLAGS) -DDEMAND_LOADING=1
 dot_builtins_LDADD = \
 	$(top_builddir)/plugin/dot_layout/libgvplugin_dot_layout.la \

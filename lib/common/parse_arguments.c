@@ -14,10 +14,18 @@
  * Written by Erwin Janssen
  */
 
-#ifndef CMD_DOT_PARSE_ARGUMENTS_H_
-#define CMD_DOT_PARSE_ARGUMENTS_H_
+#include "parse_arguments.h"
 
+#include <stdlib.h>
 
+argument_options* initialize_argument_options(void)
+{
+	argument_options* options = (argument_options*) malloc(sizeof(argument_options));
+	return options;
+}
 
-
-#endif /* CMD_DOT_PARSE_ARGUMENTS_H_ */
+argument_options* parse_arguments(int argc, char** argv)
+{
+	argument_options* options = initialize_argument_options();
+	return 0;
+}
