@@ -1,6 +1,8 @@
 # $Id$ $Revision$
 ## Process this file with automake to produce Makefile.in
 
+SUBDIRS = tests
+
 pdfdir = $(pkgdatadir)/doc/pdf
 
 linkedman = neato.1 twopi.1 fdp.1 circo.1

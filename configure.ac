@@ -3207,6 +3207,7 @@ AC_CONFIG_FILES(Makefile
 	plugin/neato_layout/Makefile
 	cmd/Makefile
 	cmd/dot/Makefile
+	cmd/dot/tests/Makefile
 	cmd/tools/Makefile
 	cmd/gvpr/Makefile
 	cmd/gvpr/lib/Makefile

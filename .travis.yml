@@ -19,6 +19,7 @@ install:
   - sudo mv criterion-${CRITERION_VERSION}/include/criterion /usr/local/include/
   - sudo mv criterion-${CRITERION_VERSION}/lib/libcriterion.so /usr/local/lib/libcriterion.so
   - rm -r criterion-${CRITERION_VERSION}
+  - sudo ldconfig
 
 script:
   - GRAPHVIZ_DESTINATION_FOLDER="graphviz-build"
