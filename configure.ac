@@ -304,6 +304,11 @@ if test "x$TCLSH" = "x"; then
 #  fi
 fi
 
+dnl ===========================================================================
+dnl Set compiler flags
+
+CFLAGS="${CFLAGS} -std=c99 -D_POSIX_C_SOURCE=200112L"
+
 dnl -----------------------------------
 dnl checks for compilers
 
