@@ -14,11 +14,16 @@
  * Written by Erwin Janssen
  */
 
-#include <stdbool.h>
-
 #ifndef LIB_COMMON_PARSE_ARGUMENTS_H_
 #define LIB_COMMON_PARSE_ARGUMENTS_H_
 
+#include <stdbool.h>
+
+/**
+ * This struct contains the possible options and values that are passed as
+ * arguments on the command line. To initialize this struct with the proper
+ * default values set, use initialize_argument_options().
+ */
 typedef struct argument_options
 {
 	bool print_version;
@@ -31,14 +36,21 @@ typedef struct argument_options
 /**
  * This function returns an argument_options struct with all values
  * set to their default value.
+ *
+ * - `print_version` set to `false`
  */
 argument_options* initialize_argument_options(void);
 
 /**
  * Reads the input arguments as given by the commandline, parses it
- * and stored the results in a argument_options struct. Values not
- * present in the commandline arguments are flags unset will remain
- * their default value.
+ * and stores the results in an argument_options struct. Values and flags not
+ * present in the commandline arguments will keep their default value as given
+ * by initialize_argument_options();
+ *
+ * \pre
+ * 		- The length of argv will be equal to the value of argc.
+ * 		- No element of argv will be NULL.
+ * 		- Every element of argv will be a NUll terminated string.
  */
 argument_options* parse_arguments(int argc, char** argv);
 

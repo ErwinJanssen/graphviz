@@ -17,15 +17,27 @@
 #include "parse_arguments.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 argument_options* initialize_argument_options(void)
 {
 	argument_options* options = (argument_options*) malloc(sizeof(argument_options));
+	options->print_version = false;
 	return options;
 }
 
 argument_options* parse_arguments(int argc, char** argv)
 {
 	argument_options* options = initialize_argument_options();
-	return 0;
+
+	// Value at argv[0] is the name of the calling program, so for parsing the
+	// options we start at 1.
+	for(unsigned long i = 1; i < argc; i++)
+	{
+		if((strcmp(argv[i], "-V") == 0) || strcmp(argv[i], "--version") == 0)
+		{
+			options->print_version = true;
+		}
+	}
+	return options;
 }
