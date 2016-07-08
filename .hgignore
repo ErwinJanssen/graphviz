@@ -215,5 +215,9 @@ graphviz*.tar.gz*
 *.VC.opendb
 *.vcxproj.user
 
+# Eclipse project files
+/.cproject
+/.project
+
 # Do not ignore Windows MSI setup.exe untill a new MSI can be generated.
 !windows/graphviz-msi/setup/Release/setup.exe
