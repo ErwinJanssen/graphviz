@@ -14,7 +14,7 @@
  * Written by Erwin Janssen
  */
 
-#include "parse_arguments.h"
+#include "arguments.h"
 
 #include <stdlib.h>
 #include <string.h>

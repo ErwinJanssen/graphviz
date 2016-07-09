@@ -19,7 +19,7 @@
 #include "config.h"
 #endif
 
-#include "parse_arguments.h"
+#include "arguments.h"
 #include "gvc.h"
 #include "gvio.h"
 

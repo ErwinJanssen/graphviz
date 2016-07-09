@@ -15,7 +15,7 @@
  */
 
 #include <criterion/criterion.h>
-#include "parse_arguments.h"
+#include "arguments.h"
 
 Test(initialize_argument_options, print_version_default)
 {
