@@ -17,13 +17,7 @@
 #include <criterion/criterion.h>
 #include "arguments.h"
 
-Test(initialize_argument_options, print_version_default)
-{
-	argument_options* default_options = initialize_argument_options();
-	cr_assert(!default_options->print_version);
-}
-
-Test(parse_arguments, dash_V_true)
+Test(arguments_parse_version, dash_V_true)
 {
 	int argc = 2;
 	char* argv[] = {"dot", "-V"};
@@ -31,7 +25,7 @@ Test(parse_arguments, dash_V_true)
 	cr_assert(options->print_version);
 }
 
-Test(parse_arguments, dash_v_false)
+Test(arguments_parse_version, dash_v_false)
 {
 	int argc = 2;
 	char* argv[] = {"dot", "-v"};
@@ -39,7 +33,7 @@ Test(parse_arguments, dash_v_false)
 	cr_assert(!options->print_version);
 }
 
-Test(parse_arguments, dash_dash_V_false)
+Test(arguments_parse_version, dash_dash_V_false)
 {
 	int argc = 2;
 	char* argv[] = {"dot", "--V"};
@@ -47,7 +41,15 @@ Test(parse_arguments, dash_dash_V_false)
 	cr_assert(!options->print_version);
 }
 
-Test(parse_arguments, dash_dash_version_true)
+Test(arguments_parse_version, dash_VX_false)
+{
+	int argc = 2;
+	char* argv[] = {"dot", "-VX"};
+	argument_options* options = parse_arguments(argc, argv);
+	cr_assert(!options->print_version);
+}
+
+Test(arguments_parse_version, dash_dash_version_true)
 {
 	int argc = 2;
 	char* argv[] = {"dot", "--version"};
@@ -55,10 +57,18 @@ Test(parse_arguments, dash_dash_version_true)
 	cr_assert(options->print_version);
 }
 
-Test(parse_arguments, dash_version_false)
+Test(arguments_parse_version, dash_version_false)
 {
 	int argc = 2;
 	char* argv[] = {"dot", "-version"};
+	argument_options* options = parse_arguments(argc, argv);
+	cr_assert(!options->print_version);
+}
+
+Test(arguments_parse_version, dash_dash_version_random_false)
+{
+	int argc = 2;
+	char* argv[] = {"dot", "--version-random"};
 	argument_options* options = parse_arguments(argc, argv);
 	cr_assert(!options->print_version);
 }

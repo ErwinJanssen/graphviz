@@ -14,8 +14,8 @@
  * Written by Erwin Janssen
  */
 
-#ifndef LIB_COMMON_PARSE_ARGUMENTS_H_
-#define LIB_COMMON_PARSE_ARGUMENTS_H_
+#ifndef LIB_COMMON_ARGUMENTS_H_
+#define LIB_COMMON_ARGUMENTS_H_
 
 #include <stdbool.h>
 
@@ -27,10 +27,6 @@
 typedef struct argument_options
 {
 	bool print_version;
-	bool print_usage;
-	bool configure_plugins;
-	char** input_files;
-	char** output_files;
 } argument_options;
 
 /**
@@ -42,15 +38,19 @@ typedef struct argument_options
 argument_options* initialize_argument_options(void);
 
 /**
- * Reads the input arguments as given by the commandline, parses it
+ * Reads the input arguments as given by the command line, parses it
  * and stores the results in an argument_options struct. Values and flags not
- * present in the commandline arguments will keep their default value as given
- * by initialize_argument_options();
+ * present in argv will keep their default value as given
+ * by `initialize_argument_options()`.
  *
  * \pre
  * 		- The length of argv will be equal to the value of argc.
  * 		- No element of argv will be NULL.
  * 		- Every element of argv will be a NUll terminated string.
+ *
+ * \post
+ * 		Flags and values will have the following effects
+ * 		- `-V` and `--version` will set `print_version` to true.
  */
 argument_options* parse_arguments(int argc, char** argv);
 
@@ -66,5 +66,17 @@ argument_options* parse_arguments(int argc, char** argv);
  * 		- Every element of argv will be a NUll terminated string.
  */
 void process_arguments(int argc, char** argv);
+
+/**
+ * Print the version number. The name of the program will be a hard coded
+ * string, not the name of the executed program (argv[0]). This value is not
+ * guaranteed to be set or contain the actual program name, for example when
+ * the executable as been renamed.
+ *
+ * \pre
+ * 		`PACKAGE_VERSION` should be defined and contain the current version,
+ * 		it usually defined in config.h.
+ */
+void print_graphviz_version(void);
 
 #endif /* LIB_COMMON_PARSE_ARGUMENTS_H_ */

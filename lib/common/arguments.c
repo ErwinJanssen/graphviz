@@ -16,8 +16,11 @@
 
 #include "arguments.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "config.h"
 
 argument_options* initialize_argument_options(void)
 {
@@ -45,4 +48,14 @@ argument_options* parse_arguments(int argc, char** argv)
 void process_arguments(int argc, char** argv)
 {
 	argument_options* options = parse_arguments(argc, argv);
+	if(options->print_version)
+	{
+		print_graphviz_version();
+		exit(0);
+	}
+}
+
+void print_graphviz_version(void)
+{
+	printf("Graphviz version %s\n", PACKAGE_VERSION);
 }

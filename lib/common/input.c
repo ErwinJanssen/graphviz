@@ -362,14 +362,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 			case 'P':
 				P_graph = gvplugin_graph(gvc);
 				break;
-			case 'V':
-				fprintf(stderr, "%s - %s version %s (%s)\n",
-						gvc->common.cmdname, gvc->common.info[0],
-						gvc->common.info[1], gvc->common.info[2]);
-				if (GvExitOnUsage)
-					exit(0);
-				return (1);
-				break;
 			case 'l':
 				val = getFlagOpt(argc, argv, &i);
 				if (!val)
