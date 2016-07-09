@@ -54,4 +54,17 @@ argument_options* initialize_argument_options(void);
  */
 argument_options* parse_arguments(int argc, char** argv);
 
+/**
+ * This functions receives the command line arguments by the `main` function
+ * and processes them. They are first parsed by `parse_arguments`. The
+ * resulting `argument_options` struct will be used to determine the following
+ * actions.
+ *
+ * \pre
+ * 		- The length of argv will be equal to the value of argc.
+ * 		- No element of argv will be NULL.
+ * 		- Every element of argv will be a NUll terminated string.
+ */
+void process_arguments(int argc, char** argv);
+
 #endif /* LIB_COMMON_PARSE_ARGUMENTS_H_ */

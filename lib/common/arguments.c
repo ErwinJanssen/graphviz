@@ -41,3 +41,8 @@ argument_options* parse_arguments(int argc, char** argv)
 	}
 	return options;
 }
+
+void process_arguments(int argc, char** argv)
+{
+	argument_options* options = parse_arguments(argc, argv);
+}
