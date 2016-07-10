@@ -72,7 +72,7 @@ argument_options* parse_arguments(int argc, char** argv);
  * 		- No element of argv will be NULL.
  * 		- Every element of argv will be a NUll terminated string.
  */
-void process_arguments(int argc, char** argv);
+void process_arguments_options(argument_options* options);
 
 /**
  * Print the version number. The name of the program will be a hard coded

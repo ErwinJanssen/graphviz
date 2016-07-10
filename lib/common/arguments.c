@@ -51,9 +51,8 @@ argument_options* parse_arguments(int argc, char** argv)
 	return options;
 }
 
-void process_arguments(int argc, char** argv)
+void process_arguments_options(argument_options* options)
 {
-	argument_options* options = parse_arguments(argc, argv);
 	if(options->print_version)
 	{
 		print_graphviz_version();

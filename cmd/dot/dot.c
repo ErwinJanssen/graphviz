@@ -159,7 +159,11 @@ int main(int argc, char **argv)
 
     Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
     GvExitOnUsage = 1;
-    process_arguments(argc, argv);
+
+    argument_options* options = parse_arguments(argc, argv);
+    process_arguments_options(options);
+    free_argument_options(&options);
+
     gvParseArgs(Gvc, argc, argv);
 #ifndef WIN32
     signal(SIGUSR1, gvToggle);
