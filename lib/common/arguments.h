@@ -38,6 +38,13 @@ typedef struct argument_options
 argument_options* initialize_argument_options(void);
 
 /**
+ * Properly frees the argument_options struct and all it's children.
+ * Takes a pointer to an argument_options pointer, frees it and sets its value
+ * to NULL.
+ */
+void free_argument_options(argument_options** options);
+
+/**
  * Reads the input arguments as given by the command line, parses it
  * and stores the results in an argument_options struct. Values and flags not
  * present in argv will keep their default value as given

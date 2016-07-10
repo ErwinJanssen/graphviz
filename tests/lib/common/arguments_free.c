@@ -17,9 +17,10 @@
 #include <criterion/criterion.h>
 #include "arguments.h"
 
-Test(initialize_argument_options, print_version_default)
+Test(free_argument_options, pointer_becomes_null)
 {
-	argument_options* default_options = initialize_argument_options();
-	cr_assert(!default_options->print_version);
-	free_argument_options(&default_options);
+	argument_options* options = initialize_argument_options();
+	cr_assert_not_null(options);
+	free_argument_options(&options);
+	cr_assert_null(options);
 }

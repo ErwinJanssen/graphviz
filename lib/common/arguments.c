@@ -29,6 +29,12 @@ argument_options* initialize_argument_options(void)
 	return options;
 }
 
+void free_argument_options(argument_options** options)
+{
+	free(*options);
+	*options = NULL;
+}
+
 argument_options* parse_arguments(int argc, char** argv)
 {
 	argument_options* options = initialize_argument_options();

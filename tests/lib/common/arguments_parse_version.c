@@ -23,6 +23,7 @@ Test(arguments_parse_version, dash_V_true)
 	char* argv[] = {"dot", "-V"};
 	argument_options* options = parse_arguments(argc, argv);
 	cr_assert(options->print_version);
+	free_argument_options(&options);
 }
 
 Test(arguments_parse_version, dash_v_false)
@@ -31,6 +32,7 @@ Test(arguments_parse_version, dash_v_false)
 	char* argv[] = {"dot", "-v"};
 	argument_options* options = parse_arguments(argc, argv);
 	cr_assert(!options->print_version);
+	free_argument_options(&options);
 }
 
 Test(arguments_parse_version, dash_dash_V_false)
@@ -39,6 +41,7 @@ Test(arguments_parse_version, dash_dash_V_false)
 	char* argv[] = {"dot", "--V"};
 	argument_options* options = parse_arguments(argc, argv);
 	cr_assert(!options->print_version);
+	free_argument_options(&options);
 }
 
 Test(arguments_parse_version, dash_VX_false)
@@ -47,6 +50,7 @@ Test(arguments_parse_version, dash_VX_false)
 	char* argv[] = {"dot", "-VX"};
 	argument_options* options = parse_arguments(argc, argv);
 	cr_assert(!options->print_version);
+	free_argument_options(&options);
 }
 
 Test(arguments_parse_version, dash_dash_version_true)
@@ -55,6 +59,7 @@ Test(arguments_parse_version, dash_dash_version_true)
 	char* argv[] = {"dot", "--version"};
 	argument_options* options = parse_arguments(argc, argv);
 	cr_assert(options->print_version);
+	free_argument_options(&options);
 }
 
 Test(arguments_parse_version, dash_version_false)
@@ -63,6 +68,7 @@ Test(arguments_parse_version, dash_version_false)
 	char* argv[] = {"dot", "-version"};
 	argument_options* options = parse_arguments(argc, argv);
 	cr_assert(!options->print_version);
+	free_argument_options(&options);
 }
 
 Test(arguments_parse_version, dash_dash_version_random_false)
@@ -71,4 +77,5 @@ Test(arguments_parse_version, dash_dash_version_random_false)
 	char* argv[] = {"dot", "--version-random"};
 	argument_options* options = parse_arguments(argc, argv);
 	cr_assert(!options->print_version);
+	free_argument_options(&options);
 }
