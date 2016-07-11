@@ -360,3 +360,7 @@ findCluster
 rank2
 makeStraightEdge
 makeStraightEdges
+initialize_argument_options
+free_argument_options
+parse_arguments
+process_arguments_options

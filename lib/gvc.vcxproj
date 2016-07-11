@@ -114,6 +114,7 @@ copy $(SolutionDir)windows\dependencies\rxspencer\bin\rxspencer.dll $(OutDir)rxs
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="common\arguments.h" />
     <ClInclude Include="common\arith.h" />
     <ClInclude Include="common\color.h" />
     <ClInclude Include="common\colorprocs.h" />
@@ -154,6 +155,7 @@ copy $(SolutionDir)windows\dependencies\rxspencer\bin\rxspencer.dll $(OutDir)rxs
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common\args.c" />
+    <ClCompile Include="common\arguments.c" />
     <ClCompile Include="common\arrows.c" />
     <ClCompile Include="common\colxlate.c" />
     <ClCompile Include="common\ellipse.c" />
