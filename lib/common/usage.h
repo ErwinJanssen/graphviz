@@ -37,4 +37,10 @@ void print_graphviz_usage_to_stream(FILE* stream, char* layout_engine);
  */
 void print_generic_usage(FILE* stream, char* layout_engine);
 
+/**
+ * Prints the generic options that are used by all Graphviz command line
+ * programs and layout engines.
+ */
+void print_generic_options(FILE* stream);
+
 #endif /* LIB_COMMON_USAGE_H_ */

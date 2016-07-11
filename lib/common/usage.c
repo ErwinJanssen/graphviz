@@ -20,7 +20,6 @@
 
 static char *genericItems =
 		"\n\
- -V          - Print version and exit\n\
  -v          - Enable verbose mode \n\
  -Gname=val  - Set graph attribute 'name' to 'val'\n\
  -Nname=val  - Set node attribute 'name' to 'val'\n\
@@ -62,8 +61,7 @@ static char *configFlags = "(additional options for config)  [-cv]\n";
 static char *configItems =
 		"\n\
  -c          - Configure plugins (Writes $prefix/lib/graphviz/config \n\
-               with available plugin information.  Needs write privilege.)\n\
- -?          - Print usage and exit\n";
+               with available plugin information.  Needs write privilege.)\n";
 
 void print_graphviz_usage(char* layout_engine)
 {
@@ -75,6 +73,8 @@ void print_graphviz_usage_to_stream(FILE* stream, char* layout_engine)
 	print_graphviz_version_to_stream(stream);
 	fprintf(stream, "\n");
 	print_generic_usage(stream, layout_engine);
+	fprintf(stream, "\n");
+	print_generic_options(stream);
 	fprintf(stream, "\n");
 	fputs(neatoFlags, stream);
 	fputs(fdpFlags, stream);
@@ -92,4 +92,11 @@ void print_generic_usage(FILE* stream, char* layout_engine)
 	fprintf(stream, "Usage:\n"
 			"  %s [options]\n"
 			"  %s [options] <input files>\n", layout_engine, layout_engine);
+}
+
+void print_generic_options(FILE* stream)
+{
+	fprintf(stream, "Options:\n"
+			"  -? -h --help     Show this help message and exit.\n"
+			"  -V --version     Show the version number and exit.\n");
 }
