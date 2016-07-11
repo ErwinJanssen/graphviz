@@ -44,7 +44,7 @@ argument_options* parse_arguments(int argc, char** argv)
 
 	// Value at argv[0] is the name of the calling program, so for parsing the
 	// options we start at 1.
-	for (unsigned long i = 1; i < argc; i++)
+	for (int i = 1; i < argc; i++)
 	{
 		if ((strcmp(argv[i], "-V") == 0) || strcmp(argv[i], "--version") == 0)
 		{
