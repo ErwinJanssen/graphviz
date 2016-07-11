@@ -61,6 +61,7 @@ void free_argument_options(argument_options** options);
  * \post
  * 		Flags and values will have the following effects
  * 		- `-V` and `--version` will set `print_version` to true.
+ * 		- `-?`, `-h` and `--help` will set `print_usage` to true.
  */
 argument_options* parse_arguments(int argc, char** argv);
 
@@ -78,7 +79,7 @@ argument_options* parse_arguments(int argc, char** argv);
 void process_arguments_options(argument_options* options);
 
 /**
- * Print the version number to stdout, then exit. The name of the program will
+ * Print the version number to stdout. The name of the program will
  * be a hard coded string, not the name of the executed program (argv[0]).
  * This value is not guaranteed to be set or contain the actual program name,
  * for example when the executable has been renamed.

@@ -27,7 +27,7 @@ void print_graphviz_usage(void);
 
 /**
  * Print usage of the command line program and the current Graphviz version to
- * the specified output stream, then exit.
+ * the specified output stream.
  */
 void print_graphviz_usage_to_stream(FILE* stream);
 
