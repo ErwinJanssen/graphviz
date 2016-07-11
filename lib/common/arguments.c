@@ -24,8 +24,10 @@
 
 argument_options* initialize_argument_options(void)
 {
-	argument_options* options = (argument_options*) malloc(sizeof(argument_options));
+	argument_options* options = (argument_options*) malloc(
+			sizeof(argument_options));
 	options->print_version = false;
+	options->print_usage = false;
 	return options;
 }
 
@@ -41,11 +43,16 @@ argument_options* parse_arguments(int argc, char** argv)
 
 	// Value at argv[0] is the name of the calling program, so for parsing the
 	// options we start at 1.
-	for(unsigned long i = 1; i < argc; i++)
+	for (unsigned long i = 1; i < argc; i++)
 	{
-		if((strcmp(argv[i], "-V") == 0) || strcmp(argv[i], "--version") == 0)
+		if ((strcmp(argv[i], "-V") == 0) || strcmp(argv[i], "--version") == 0)
 		{
 			options->print_version = true;
+		}
+		else if ((strcmp(argv[i], "-?") == 0) || (strcmp(argv[i], "-h") == 0)
+				|| (strcmp(argv[i], "--help") == 0))
+		{
+			options->print_usage = true;
 		}
 	}
 	return options;
@@ -53,14 +60,25 @@ argument_options* parse_arguments(int argc, char** argv)
 
 void process_arguments_options(argument_options* options)
 {
-	if(options->print_version)
+	if (options->print_version)
 	{
 		print_graphviz_version();
+		exit(0);
+	}
+	else if (options->print_usage)
+	{
+		print_graphviz_usage();
 		exit(0);
 	}
 }
 
 void print_graphviz_version(void)
 {
-	printf("Graphviz version %s\n", PACKAGE_VERSION);
+	printf("Graphviz - version %s\n", PACKAGE_VERSION);
+}
+
+void print_graphviz_usage(void)
+{
+	print_graphviz_version();
+	printf("Print usage.\n");
 }

@@ -27,6 +27,7 @@
 typedef struct argument_options
 {
 	bool print_version;
+	bool print_usage;
 } argument_options;
 
 /**
@@ -34,6 +35,7 @@ typedef struct argument_options
  * set to their default value.
  *
  * - `print_version` set to `false`
+ * - `print_usage` set to `false`
  */
 argument_options* initialize_argument_options(void);
 
@@ -85,5 +87,11 @@ void process_arguments_options(argument_options* options);
  * 		it usually defined in config.h.
  */
 void print_graphviz_version(void);
+
+/**
+ * Print usage of the commandline program, and the current Graphviz version,
+ * and exit.
+ */
+void print_graphviz_usage(void);
 
 #endif /* LIB_COMMON_PARSE_ARGUMENTS_H_ */

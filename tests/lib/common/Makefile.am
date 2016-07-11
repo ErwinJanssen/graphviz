@@ -7,9 +7,17 @@ AM_CPPFLAGS = \
 AM_LDFLAGS = \
 	-lcriterion
 
-TESTS = arguments_initialize arguments_free arguments_parse_version
+TESTS = \
+	arguments_initialize \
+	arguments_free \
+	arguments_parse_version \
+	arguments_parse_usage
 
-bin_PROGRAMS = arguments_initialize arguments_free arguments_parse_version
+bin_PROGRAMS = \
+	arguments_initialize \
+	arguments_free \
+	arguments_parse_version \
+	arguments_parse_usage
 
 arguments_initialize_SOURCES = arguments_initialize.c
 arguments_initialize_CPPFLAGS = $(AM_CPPFLAGS) -DDEMAND_LOADING=1
@@ -24,4 +32,9 @@ arguments_free_LDADD = \
 arguments_parse_version_SOURCES = arguments_parse_version.c
 arguments_parse_version_CPPFLAGS = $(AM_CPPFLAGS) -DDEMAND_LOADING=1
 arguments_parse_version_LDADD = \
+	$(top_builddir)/lib/gvc/libgvc.la
+
+arguments_parse_usage_SOURCES = arguments_parse_usage.c
+arguments_parse_usage_CPPFLAGS = $(AM_CPPFLAGS) -DDEMAND_LOADING=1
+arguments_parse_usage_LDADD = \
 	$(top_builddir)/lib/gvc/libgvc.la
