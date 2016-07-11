@@ -94,16 +94,4 @@ void print_graphviz_version(void);
  */
 void print_graphviz_version_to_stream(FILE* stream);
 
-/**
- * Print usage of the command line program and the current Graphviz version to
- * stdout, then exit.
- */
-void print_graphviz_usage(void);
-
-/**
- * Print usage of the command line program and the current Graphviz version to
- * the specified output stream, then exit.
- */
-void print_graphviz_usage_to_stream(FILE* stream);
-
 #endif /* LIB_COMMON_PARSE_ARGUMENTS_H_ */

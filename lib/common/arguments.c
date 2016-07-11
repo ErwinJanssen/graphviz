@@ -21,6 +21,7 @@
 #include <string.h>
 
 #include "config.h"
+#include "usage.h"
 
 argument_options* initialize_argument_options(void)
 {
@@ -80,15 +81,4 @@ void print_graphviz_version(void)
 void print_graphviz_version_to_stream(FILE* stream)
 {
 	fprintf(stream, "Graphviz - version %s\n", PACKAGE_VERSION);
-}
-
-void print_graphviz_usage(void)
-{
-	print_graphviz_usage_to_stream(stdout);
-}
-
-void print_graphviz_usage_to_stream(FILE* stream)
-{
-	print_graphviz_version_to_stream(stream);
-	fprintf(stream, "Print usage.\n");
 }
