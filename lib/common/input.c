@@ -34,7 +34,7 @@ int dotneato_usage(int exval)
 	else
 		outs = stdout;
 
-	print_graphviz_usage_to_stream(outs);
+	print_graphviz_usage_to_stream(outs, CmdName);
 
 	if (GvExitOnUsage && (exval >= 0))
 		exit(exval);

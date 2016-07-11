@@ -18,9 +18,6 @@
 
 #include "arguments.h"
 
-static char *usageFmt =
-		"Usage: %s [-Vv?] [-(GNE)name=val] [-(KTlso)<val>] <dot files>\n";
-
 static char *genericItems =
 		"\n\
  -V          - Print version and exit\n\
@@ -68,15 +65,17 @@ static char *configItems =
                with available plugin information.  Needs write privilege.)\n\
  -?          - Print usage and exit\n";
 
-void print_graphviz_usage(void)
+void print_graphviz_usage(char* layout_engine)
 {
-	print_graphviz_usage_to_stream(stdout);
+	print_graphviz_usage_to_stream(stdout, layout_engine);
 }
 
-void print_graphviz_usage_to_stream(FILE* stream)
+void print_graphviz_usage_to_stream(FILE* stream, char* layout_engine)
 {
 	print_graphviz_version_to_stream(stream);
-	fprintf(stream, usageFmt, "dot");
+	fprintf(stream, "\n");
+	print_generic_usage(stream, layout_engine);
+	fprintf(stream, "\n");
 	fputs(neatoFlags, stream);
 	fputs(fdpFlags, stream);
 	fputs(memtestFlags, stream);
@@ -86,4 +85,11 @@ void print_graphviz_usage_to_stream(FILE* stream)
 	fputs(fdpItems, stream);
 	fputs(memtestItems, stream);
 	fputs(configItems, stream);
+}
+
+void print_generic_usage(FILE* stream, char* layout_engine)
+{
+	fprintf(stream, "Usage:\n"
+			"  %s [options]\n"
+			"  %s [options] <input files>\n", layout_engine, layout_engine);
 }

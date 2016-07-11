@@ -23,12 +23,18 @@
  * Print usage of the command line program and the current Graphviz version to
  * stdout, then exit.
  */
-void print_graphviz_usage(void);
+void print_graphviz_usage(char* layout_engine);
 
 /**
  * Print usage of the command line program and the current Graphviz version to
  * the specified output stream.
  */
-void print_graphviz_usage_to_stream(FILE* stream);
+void print_graphviz_usage_to_stream(FILE* stream, char* layout_engine);
+
+/**
+ * Prints the generic usage of the command line programs. Requires the name
+ * of the layout engine as input.
+ */
+void print_generic_usage(FILE* stream, char* layout_engine);
 
 #endif /* LIB_COMMON_USAGE_H_ */

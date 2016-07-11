@@ -68,7 +68,7 @@ void process_arguments_options(argument_options* options)
 	}
 	else if (options->print_usage)
 	{
-		print_graphviz_usage();
+		print_graphviz_usage("dot");
 		exit(0);
 	}
 }
