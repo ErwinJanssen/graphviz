@@ -74,11 +74,21 @@ void process_arguments_options(argument_options* options)
 
 void print_graphviz_version(void)
 {
-	printf("Graphviz - version %s\n", PACKAGE_VERSION);
+	print_graphviz_version_to_stream(stdout);
+}
+
+void print_graphviz_version_to_stream(FILE* stream)
+{
+	fprintf(stream, "Graphviz - version %s\n", PACKAGE_VERSION);
 }
 
 void print_graphviz_usage(void)
 {
-	print_graphviz_version();
-	printf("Print usage.\n");
+	print_graphviz_usage_to_stream(stdout);
+}
+
+void print_graphviz_usage_to_stream(FILE* stream)
+{
+	print_graphviz_version_to_stream(stream);
+	fprintf(stream, "Print usage.\n");
 }

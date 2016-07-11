@@ -18,6 +18,7 @@
 #define LIB_COMMON_ARGUMENTS_H_
 
 #include <stdbool.h>
+#include <stdio.h>
 
 /**
  * This struct contains the possible options and values that are passed as
@@ -77,10 +78,10 @@ argument_options* parse_arguments(int argc, char** argv);
 void process_arguments_options(argument_options* options);
 
 /**
- * Print the version number. The name of the program will be a hard coded
- * string, not the name of the executed program (argv[0]). This value is not
- * guaranteed to be set or contain the actual program name, for example when
- * the executable as been renamed.
+ * Print the version number to stdout, then exit. The name of the program will
+ * be a hard coded string, not the name of the executed program (argv[0]).
+ * This value is not guaranteed to be set or contain the actual program name,
+ * for example when the executable has been renamed.
  *
  * \pre
  * 		`PACKAGE_VERSION` should be defined and contain the current version,
@@ -89,9 +90,20 @@ void process_arguments_options(argument_options* options);
 void print_graphviz_version(void);
 
 /**
- * Print usage of the commandline program, and the current Graphviz version,
- * and exit.
+ * Print the version number to the specified output stream.
+ */
+void print_graphviz_version_to_stream(FILE* stream);
+
+/**
+ * Print usage of the command line program and the current Graphviz version to
+ * stdout, then exit.
  */
 void print_graphviz_usage(void);
+
+/**
+ * Print usage of the command line program and the current Graphviz version to
+ * the specified output stream, then exit.
+ */
+void print_graphviz_usage_to_stream(FILE* stream);
 
 #endif /* LIB_COMMON_PARSE_ARGUMENTS_H_ */
