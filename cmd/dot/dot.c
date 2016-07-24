@@ -19,6 +19,7 @@
 #include "config.h"
 #endif
 
+#include "command_line.h"
 #include "gvc.h"
 #include "gvio.h"
 
@@ -160,7 +161,15 @@ int main(int argc, char **argv)
 
 	Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
 	GvExitOnUsage = 1;
-	gvParseArgs(Gvc, argc, argv);
+
+	gv_stream_and_exit_info stream_and_exit_info = {
+		.output_stream = stdout,
+		.error_stream = stderr,
+		.exit_function = &exit
+	};
+
+	gvParseArgs(Gvc, argc, argv, stream_and_exit_info);
+
 #ifndef WIN32
 	signal(SIGUSR1, gvToggle);
 	signal(SIGINT, intr);

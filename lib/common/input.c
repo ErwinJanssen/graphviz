@@ -72,7 +72,7 @@ static char *configItems =
  * Print usage information. If GvExitOnUsage is set, exit with
  * given exval, else return exval+1.
  */
-int dotneato_usage(int exval)
+int dotneato_usage(int exval, gv_stream_and_exit_info stream_and_exit_info)
 {
 	FILE *outs;
 
@@ -236,7 +236,8 @@ graph_t *gvPluginsGraph(GVC_t *gvc)
  * Return 0 on success; v+1 if calling function should call exit(v).
  * If -c is set, config file is created and we exit. 
  */
-int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
+int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv,
+		gv_stream_and_exit_info stream_and_exit_info)
 {
 	char c, *rest, *layout;
 	const char *val;
@@ -291,7 +292,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 				else
 				{
 					fprintf(stderr, "Missing argument for -G flag\n");
-					return (dotneato_usage(1));
+					return (dotneato_usage(1, stream_and_exit_info));
 				}
 				break;
 			case 'N':
@@ -300,7 +301,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 				else
 				{
 					fprintf(stderr, "Missing argument for -N flag\n");
-					return (dotneato_usage(1));
+					return (dotneato_usage(1, stream_and_exit_info));
 				}
 				break;
 			case 'E':
@@ -309,7 +310,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 				else
 				{
 					fprintf(stderr, "Missing argument for -E flag\n");
-					return (dotneato_usage(1));
+					return (dotneato_usage(1, stream_and_exit_info));
 				}
 				break;
 			case 'T':
@@ -317,7 +318,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 				if (!val)
 				{
 					fprintf(stderr, "Missing argument for -T flag\n");
-					return (dotneato_usage(1));
+					return (dotneato_usage(1, stream_and_exit_info));
 				}
 				v = gvjobs_output_langname(gvc, val);
 				if (!v)
@@ -335,7 +336,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 				if (!val)
 				{
 					fprintf(stderr, "Missing argument for -K flag\n");
-					return (dotneato_usage(1));
+					return (dotneato_usage(1, stream_and_exit_info));
 				}
 				v = gvlayout_select(gvc, val);
 				if (v == NO_SUPPORT)
@@ -375,7 +376,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 				if (!val)
 				{
 					fprintf(stderr, "Missing argument for -l flag\n");
-					return (dotneato_usage(1));
+					return (dotneato_usage(1, stream_and_exit_info));
 				}
 				use_library(gvc, val);
 				break;
@@ -384,7 +385,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 				if (!val)
 				{
 					fprintf(stderr, "Missing argument for -o flag\n");
-					return (dotneato_usage(1));
+					return (dotneato_usage(1, stream_and_exit_info));
 				}
 				if (!gvc->common.auto_outfile_names)
 					gvjobs_output_filename(gvc, val);
@@ -415,7 +416,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 					{
 						fprintf(stderr,
 								"Invalid parameter \"%s\" for -s flag\n", rest);
-						return (dotneato_usage(1));
+						return (dotneato_usage(1, stream_and_exit_info));
 					}
 					else if (PSinputscale == 0)
 						PSinputscale = POINTS_PER_INCH;
@@ -430,12 +431,12 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 				Y_invert = TRUE;
 				break;
 			case '?':
-				return (dotneato_usage(0));
+				return (dotneato_usage(0, stream_and_exit_info));
 				break;
 			default:
 				agerr(AGERR, "%s: option -%c unrecognized\n\n",
 						gvc->common.cmdname, c);
-				return (dotneato_usage(1));
+				return (dotneato_usage(1, stream_and_exit_info));
 			}
 		}
 		else if (argv[i])

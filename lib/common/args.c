@@ -21,6 +21,7 @@
  */
 
 #include <ctype.h>
+#include "command_line.h"
 #include "render.h"
 #include "tlayout.h"
 #include "gvc.h"
@@ -30,7 +31,8 @@
  * Handle special neato arguments.
  * Return number of unprocessed arguments; return < 0 on error.
  */
-static int neato_extra_args(GVC_t *gvc, int argc, char** argv)
+static int neato_extra_args(GVC_t *gvc, int argc, char** argv,
+		gv_stream_and_exit_info stream_and_exit_info)
 {
 	char** p = argv + 1;
 	int i;
@@ -55,7 +57,7 @@ static int neato_extra_args(GVC_t *gvc, int argc, char** argv)
 					{
 						agerr(AGERR, "Invalid parameter \"%s\" for -n flag\n",
 								arg + 2);
-						dotneato_usage(1);
+						dotneato_usage(1, stream_and_exit_info);
 						return -1;
 					}
 				}
@@ -86,7 +88,8 @@ static int neato_extra_args(GVC_t *gvc, int argc, char** argv)
  * Handle special memtest arguments.
  * Return number of unprocessed arguments; return < 0 on error.
  */
-static int memtest_extra_args(GVC_t *gvc, int argc, char** argv)
+static int memtest_extra_args(GVC_t *gvc, int argc, char** argv,
+		gv_stream_and_exit_info stream_and_exit_info)
 {
 	char** p = argv + 1;
 	int i;
@@ -108,7 +111,7 @@ static int memtest_extra_args(GVC_t *gvc, int argc, char** argv)
 					{
 						agerr(AGERR, "Invalid parameter \"%s\" for -m flag\n",
 								arg + 2);
-						dotneato_usage(1);
+						dotneato_usage(1, stream_and_exit_info);
 						return -1;
 					}
 				}
@@ -139,7 +142,8 @@ static int memtest_extra_args(GVC_t *gvc, int argc, char** argv)
  * Handle special config arguments.
  * Return number of unprocessed arguments; return < 0 on error.
  */
-static int config_extra_args(GVC_t *gvc, int argc, char** argv)
+static int config_extra_args(GVC_t *gvc, int argc, char** argv,
+		gv_stream_and_exit_info stream_and_exit_info)
 {
 	char** p = argv + 1;
 	int i;
@@ -271,7 +275,8 @@ static int setFDPAttr(char* arg)
  * These have the form -L<name>=<value>.
  * Return number of unprocessed arguments; return < 0 on error.
  */
-static int fdp_extra_args(GVC_t *gvc, int argc, char** argv)
+static int fdp_extra_args(GVC_t *gvc, int argc, char** argv,
+		gv_stream_and_exit_info stream_and_exit_info)
 {
 	char** p = argv + 1;
 	int i;
@@ -285,7 +290,7 @@ static int fdp_extra_args(GVC_t *gvc, int argc, char** argv)
 		{
 			if (setFDPAttr(arg + 2))
 			{
-				dotneato_usage(1);
+				dotneato_usage(1, stream_and_exit_info);
 				return -1;
 			}
 		}
@@ -305,18 +310,19 @@ static int fdp_extra_args(GVC_t *gvc, int argc, char** argv)
  * Return 0 on success.
  * Return x if calling function should call exit(x-1).
  */
-int gvParseArgs(GVC_t *gvc, int argc, char** argv)
+int gvParseArgs(GVC_t *gvc, int argc, char** argv,
+		gv_stream_and_exit_info stream_and_exit_info)
 {
 	int rv;
-	if ((argc = neato_extra_args(gvc, argc, argv)) < 0)
+	if ((argc = neato_extra_args(gvc, argc, argv, stream_and_exit_info)) < 0)
 		return (1 - argc);
-	if ((argc = fdp_extra_args(gvc, argc, argv)) < 0)
+	if ((argc = fdp_extra_args(gvc, argc, argv, stream_and_exit_info)) < 0)
 		return (1 - argc);
-	if ((argc = memtest_extra_args(gvc, argc, argv)) < 0)
+	if ((argc = memtest_extra_args(gvc, argc, argv, stream_and_exit_info)) < 0)
 		return (1 - argc);
-	if ((argc = config_extra_args(gvc, argc, argv)) < 0)
+	if ((argc = config_extra_args(gvc, argc, argv, stream_and_exit_info)) < 0)
 		return (1 - argc);
-	if ((rv = dotneato_args_initialize(gvc, argc, argv)))
+	if ((rv = dotneato_args_initialize(gvc, argc, argv, stream_and_exit_info)))
 		return rv;
 	if (Verbose)
 		gvplugin_write_status(gvc);

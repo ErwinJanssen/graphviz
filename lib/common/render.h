@@ -43,6 +43,7 @@ extern "C" {
 #include <string.h>
 #endif
 
+#include "command_line.h"
 #include "types.h"
 #include "macros.h"
 #include "const.h"
@@ -96,8 +97,9 @@ extern "C" {
     extern void do_graph_label(graph_t * sg);
     extern void graph_init(graph_t * g, boolean use_rankdir);
     extern void graph_cleanup(graph_t * g);
-    extern int dotneato_args_initialize(GVC_t * gvc, int, char **);
-    extern int dotneato_usage(int);
+    extern int dotneato_args_initialize(GVC_t * gvc, int, char **,
+    		gv_stream_and_exit_info stream_and_exit_info);
+    extern int dotneato_usage(int, gv_stream_and_exit_info stream_and_exit_info);
     extern void dotneato_postprocess(Agraph_t *);
     extern void gv_postprocess(Agraph_t *, int);
     extern void dotneato_set_margins(GVC_t * gvc, Agraph_t *);

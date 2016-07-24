@@ -14,6 +14,7 @@
 #ifndef			GVC_H
 #define			GVC_H
 
+#include "command_line.h"
 #include "types.h"
 #include "gvplugin.h"
 
@@ -55,7 +56,8 @@ extern char *gvcVersion(GVC_t*);
 extern char *gvcBuildDate(GVC_t*);
 
 /* parse command line args - minimally argv[0] sets layout engine */
-extern int gvParseArgs(GVC_t *gvc, int argc, char **argv);
+extern int gvParseArgs(GVC_t *gvc, int argc, char **argv,
+		gv_stream_and_exit_info stream_and_exit_info);
 extern graph_t *gvNextInputGraph(GVC_t *gvc);
 extern graph_t *gvPluginsGraph(GVC_t *gvc);
 
