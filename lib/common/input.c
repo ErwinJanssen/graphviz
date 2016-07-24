@@ -238,6 +238,9 @@ graph_t *gvPluginsGraph(GVC_t *gvc)
  */
 int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 {
+	void (*exit_function)(int);
+	exit_function = &exit;
+
 	char c, *rest, *layout;
 	const char *val;
 	int i, v, nfiles;

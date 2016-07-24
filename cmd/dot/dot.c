@@ -21,6 +21,7 @@
 
 #include "gvc.h"
 #include "gvio.h"
+#include "command_line.h"
 
 #ifdef WIN32_DLL
 __declspec(dllimport) boolean MemTest;

@@ -15,24 +15,26 @@
 #define GVCOMMON_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-    typedef struct GVCOMMON_s {
+typedef struct GVCOMMON_s
+{
 	char **info;
 	char *cmdname;
 	int verbose;
 	boolean config, auto_outfile_names;
-        void (*errorfn) (const char *fmt, ...);
+	void (*errorfn)(const char *fmt, ...);
 	const char **show_boxes; /* emit code for correct box coordinates */
-	const char **lib; 
+	const char **lib;
 
 	/* rendering state */
-	int viewNum;     /* current view - 1 based count of views,
-			    all pages in all layers */
+	int viewNum; /* current view - 1 based count of views,
+	 all pages in all layers */
 	const lt_symlist_t *builtins;
 	int demand_loading;
-    } GVCOMMON_t;
+} GVCOMMON_t;
 
 #ifdef __cplusplus
 }
