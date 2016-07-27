@@ -3148,6 +3148,22 @@ AM_CONDITIONAL(WITH_CGRAPH, [true])
 
 # -----------------------------------------------------------------------
 
+# Checking for unit testing framework Criterion
+AC_CHECK_LIB(
+  criterion,
+  main,
+  [
+    use_criterion="Yes"
+    AC_DEFINE_UNQUOTED(HAVE_CRITERION,1,[Define if you have the Criterion unit test framework])
+  ],
+  [
+    use_criterion="No (Criterion unit testing framework not installed)"
+    AC_MSG_WARN(Criterion unit testing framework not installed)
+  ],
+  []
+)
+
+
 # Generate Makefiles
 AC_CONFIG_FILES(Makefile
 	debian/changelog
@@ -3381,4 +3397,7 @@ echo ""
 echo "  tcldot:        $use_tcldot"
 echo "  tclpathplan:   $use_tclpathplan"
 echo "  gdtclft:       $use_gdtclft"
+echo ""
+echo "Testing utilities:"
+echo "  criterion:     $use_criterion"
 
