@@ -126,6 +126,9 @@
     <ClInclude Include="gvc\gvplugin_render.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="common\command_line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common\args.c">
@@ -261,6 +264,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="label\xlabels.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\command_line.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
