@@ -13,6 +13,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+size_t gv_common_arguments_length(void)
+{
+	return sizeof(gv_common_arguments) / sizeof(gv_cmdline_argument);
+}
+
 gv_config* initialize_gv_config(void)
 {
 	gv_config* default_gv_config = malloc(sizeof(gv_config));
@@ -50,7 +55,7 @@ gv_config* gv_parse_arguments(int argc, char** argv)
 			continue;
 		}
 		bool no_value_argument = false;
-		for(int j = 0; j < GV_COMMON_ARGUMENTS_LENGTH; j++)
+		for(int j = 0; j < gv_common_arguments_length(); j++)
 		{
 			fflush(stdout);
 			if(argument[1] == gv_common_arguments[j].flag)
@@ -74,7 +79,7 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 	{
 		char flag = flags[i];
 		bool flag_valid = false;
-		for(size_t j = 0; j < GV_COMMON_ARGUMENTS_LENGTH; j++)
+		for(size_t j = 0; j < gv_common_arguments_length(); j++)
 		{
 			if (flag == gv_common_arguments[j].flag)
 			{
