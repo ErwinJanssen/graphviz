@@ -50,7 +50,7 @@ typedef struct
 
 /**
  * A list containing information about the common command line arguments.
- * Its length is stored in GV_COMMON_ARGUMENTS_LENGTH.
+ * Its length is computed by gv_common_arguments_length().
  */
 gv_cmdline_argument gv_common_arguments[] =
 {
@@ -69,9 +69,9 @@ gv_cmdline_argument gv_common_arguments[] =
 };
 
 /**
- * The length of the gv_common_arguments array.
+ * Get the length of the gv_common_arguments array.
  */
-const size_t GV_COMMON_ARGUMENTS_LENGTH = 2;
+size_t gv_common_arguments_length(void);
 
 /**
  * This function returns an initialized gv_config struct with all values
