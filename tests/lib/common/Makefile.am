@@ -15,13 +15,23 @@ AM_CPPFLAGS = \
 AM_LDFLAGS = \
 	-lcriterion
 
-TESTS = command_line
+TESTS = \
+	command_line \
+	command_line_initialize \
+	command_line_free
 
 bin_PROGRAMS = $(TESTS)
 
 command_line_SOURCES = command_line.c
-command_line_CPPFLAGS = $(AM_CPPFLAGS) -DDEMAND_LOADING=1
 command_line_LDADD = \
+	$(top_builddir)/lib/gvc/libgvc.la
+
+command_line_initialize_SOURCES = command_line_initialize.c
+command_line_initialize_LDADD = \
+	$(top_builddir)/lib/gvc/libgvc.la
+
+command_line_free_SOURCES = command_line_free.c
+command_line_free_LDADD = \
 	$(top_builddir)/lib/gvc/libgvc.la
 
 endif

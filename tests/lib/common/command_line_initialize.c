@@ -10,24 +10,16 @@
 
 #include "command_line.h"
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <criterion/criterion.h>
 
-gv_config* initialize_gv_config(void)
+Test(command_line_initialze, not_null)
 {
-	gv_config* default_gv_config = malloc(sizeof(gv_config));
-	if(!default_gv_config)
-	{
-		fprintf(stderr, "Error: Not enough memory could be allocated for "
-				"gv_config in function '%s'.\n", __FUNCTION__);
-		exit(EXIT_FAILURE);
-	}
-	default_gv_config->print_version = false;
-	return default_gv_config;
+	gv_config* config = initialize_gv_config();
+	cr_assert_not_null(config);
 }
 
-void free_gv_config(gv_config** config)
+Test(command_line_initialze, print_version)
 {
-	free(*config);
-	*config = NULL;
+	gv_config* config = initialize_gv_config();
+	cr_assert_not(config->print_version);
 }
