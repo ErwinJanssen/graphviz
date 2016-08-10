@@ -23,6 +23,7 @@ gv_config* initialize_gv_config(void)
 		exit(EXIT_FAILURE);
 	}
 	default_gv_config->print_version = false;
+	default_gv_config->print_usage = false;
 	return default_gv_config;
 }
 
@@ -30,4 +31,64 @@ void free_gv_config(gv_config** config)
 {
 	free(*config);
 	*config = NULL;
+}
+
+gv_config* gv_parse_arguments(int argc, char** argv)
+{
+	gv_config* config = initialize_gv_config();
+	// Skip argv[0] because this doesn't contain reliable data.
+	for(int i = 1; i < argc; i++)
+	{
+		char* argument = argv[i];
+		// For now, assume that an argument must start with a
+		// ARGUMENT_WITHOUT_VALUE type flag before we process it.
+		// These are some simple and dirty check that will be replaced
+		// when more arguments are added to the new code.
+		// Also require that it starts with a dash.
+		if(argument[0] != '-')
+		{
+			continue;
+		}
+		bool no_value_argument = false;
+		for(int j = 0; j < GV_COMMON_ARGUMENTS_LENGTH; j++)
+		{
+			fflush(stdout);
+			if(argument[1] == gv_common_arguments[j].flag)
+			{
+				no_value_argument = true;
+			}
+		}
+		if(!no_value_argument)
+		{
+			continue;
+		}
+		gv_parse_flags_without_value(config, argument);
+	}
+	return config;
+}
+
+void gv_parse_flags_without_value(gv_config* config, char* flags)
+{
+	// Start at 1 to skip the dash.
+	for(size_t i = 1; i < strlen(flags); i++)
+	{
+		char flag = flags[i];
+		bool flag_valid = false;
+		for(size_t j = 0; j < GV_COMMON_ARGUMENTS_LENGTH; j++)
+		{
+			if (flag == gv_common_arguments[j].flag)
+			{
+				bool* field_value = (((bool*) config)
+						+ gv_common_arguments[j].field_offset);
+				*field_value = true;
+				flag_valid = true;
+				continue;
+			}
+		}
+	}
+}
+
+void gv_process_arguments(gv_config* config)
+{
+
 }

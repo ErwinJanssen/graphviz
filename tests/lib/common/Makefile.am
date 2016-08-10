@@ -18,7 +18,8 @@ AM_LDFLAGS = \
 TESTS = \
 	command_line \
 	command_line_initialize \
-	command_line_free
+	command_line_free \
+	command_line_parse_arguments
 
 bin_PROGRAMS = $(TESTS)
 
@@ -32,6 +33,10 @@ command_line_initialize_LDADD = \
 
 command_line_free_SOURCES = command_line_free.c
 command_line_free_LDADD = \
+	$(top_builddir)/lib/gvc/libgvc.la
+
+command_line_parse_arguments_SOURCES = command_line_parse_arguments.c
+command_line_parse_arguments_LDADD = \
 	$(top_builddir)/lib/gvc/libgvc.la
 
 endif
