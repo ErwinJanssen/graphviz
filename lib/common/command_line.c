@@ -27,13 +27,17 @@ gv_config* initialize_gv_config(void)
 				"gv_config in function '%s'.\n", __FUNCTION__);
 		exit(EXIT_FAILURE);
 	}
+
 	default_gv_config->print_version = false;
 	default_gv_config->print_usage = false;
+	default_gv_config->invalid_flags_without_value = NULL;
+
 	return default_gv_config;
 }
 
 void free_gv_config(gv_config** config)
 {
+	free((*config)->invalid_flags_without_value);
 	free(*config);
 	*config = NULL;
 }
@@ -78,7 +82,7 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 	for(size_t i = 1; i < strlen(flags); i++)
 	{
 		char flag = flags[i];
-		bool flag_valid = false;
+		bool valid_flag = false;
 		for(size_t j = 0; j < gv_common_arguments_length(); j++)
 		{
 			if (flag == gv_common_arguments[j].flag)
@@ -86,9 +90,19 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 				bool* field_value = (((bool*) config)
 						+ gv_common_arguments[j].field_offset);
 				*field_value = true;
-				flag_valid = true;
+				valid_flag = true;
 				continue;
 			}
+		}
+		if(!valid_flag)
+		{
+			if(!config->invalid_flags_without_value)
+			{
+				config->invalid_flags_without_value = malloc(sizeof(char));
+				*config->invalid_flags_without_value = '\0';
+			}
+			sprintf(config->invalid_flags_without_value, "%s%c",
+					config->invalid_flags_without_value, flag);
 		}
 	}
 }
