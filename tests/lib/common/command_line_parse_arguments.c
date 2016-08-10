@@ -51,3 +51,25 @@ Test(command_line_parse_arguments, dash_questionmark_V)
 	cr_assert(config->print_usage);
 	free_gv_config(&config);
 }
+
+Test(command_line_parse_arguments, dash_questionmark_BV)
+{
+	int argc = 2;
+	char* argv[] = {"dot", "-?BV"};
+	gv_config* config = gv_parse_arguments(argc, argv);
+	cr_assert(config->print_version);
+	cr_assert(config->print_usage);
+	cr_assert_str_eq(config->invalid_flags_without_value, "B");
+	free_gv_config(&config);
+}
+
+Test(command_line_parse_arguments, dash_questionmark_BAV)
+{
+	int argc = 2;
+	char* argv[] = {"dot", "-?BAV"};
+	gv_config* config = gv_parse_arguments(argc, argv);
+	cr_assert(config->print_version);
+	cr_assert(config->print_usage);
+	cr_assert_str_eq(config->invalid_flags_without_value, "BA");
+	free_gv_config(&config);
+}

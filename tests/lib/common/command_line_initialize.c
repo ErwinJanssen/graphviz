@@ -25,3 +25,11 @@ Test(command_line_initialze, print_version)
 	cr_assert_not(config->print_version);
 	free_gv_config(&config);
 }
+
+Test(command_line_initialze, invalid_flags_without_value)
+{
+	gv_config* config = initialize_gv_config();
+	cr_assert_null(config->invalid_flags_without_value);
+	free_gv_config(&config);
+}
+
