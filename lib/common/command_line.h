@@ -112,6 +112,12 @@ void gv_parse_flags_without_value(gv_config* config, char* flags);
 void gv_process_arguments(gv_config* config);
 
 /**
+ * Performs like an ordinary malloc, but perform error handling on the returned
+ * pointer. If the pointer is NULL, then exit is called.
+ */
+void* safe_malloc(size_t size, const char* calling_function);
+
+/**
  * Takes the address to a char*, allocates enough memory for one character
  * and sets this character to '\0'.
  */
