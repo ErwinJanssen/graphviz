@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "globals.h"
 #include "render.h"
 
 gv_cmdline_argument gv_common_arguments[] =
@@ -28,6 +29,12 @@ gv_cmdline_argument gv_common_arguments[] =
 		.argument_type = ARGUMENT_WITHOUT_VALUE,
 		.description = "Print the usage and exit",
 		.field_offset = offsetof(gv_config, print_usage)
+	},
+	{
+		.flag = 'x',
+		.argument_type = ARGUMENT_WITHOUT_VALUE,
+		.description = "Reduce graph",
+		.field_offset = offsetof(gv_config, reduce)
 	}
 };
 
@@ -41,6 +48,7 @@ gv_config* initialize_gv_config(void)
 	gv_config* default_gv_config = safe_malloc(sizeof(gv_config), __FUNCTION__);
 	default_gv_config->print_version = false;
 	default_gv_config->print_usage = false;
+	default_gv_config->reduce = false;
 	default_gv_config->invalid_flags_without_value = NULL;
 	return default_gv_config;
 }
@@ -129,6 +137,10 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 	{
 		gv_print_version(stderr, gvc);
 		exit(EXIT_SUCCESS);
+	}
+	if (config->reduce)
+	{
+		Reduce = TRUE;
 	}
 }
 

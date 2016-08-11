@@ -370,7 +370,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 		    PSinputscale = POINTS_PER_INCH;
 		break;
 	    case 'x':
-		Reduce = TRUE;
+		//Reduce = TRUE;
 		break;
 	    case 'y':
 		Y_invert = TRUE;

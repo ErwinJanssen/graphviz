@@ -5,6 +5,7 @@
 
 #include "builddate.h"
 #include "config.h"
+#include "globals.h"
 #include "gvc.h"
 
 static void redirect_all_std(void)
@@ -226,4 +227,16 @@ Test(command_line, dash_V_questionmark_output,
 				PACKAGE_VERSION, BUILDDATE);
 
 	cr_assert_stderr_eq_str(expected_stderr);
+}
+
+Test(command_line, dash_X)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-x"};
+
+	cr_expect_not(Reduce);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Reduce);
 }
