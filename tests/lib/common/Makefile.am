@@ -16,7 +16,7 @@ AM_LDFLAGS = \
 	-lcriterion
 
 TESTS = \
-	command_line \
+	args_gvParseArgs \
 	command_line_initialize \
 	command_line_free \
 	command_line_parse_arguments_seperate \
@@ -24,8 +24,8 @@ TESTS = \
 
 bin_PROGRAMS = $(TESTS)
 
-command_line_SOURCES = command_line.c
-command_line_LDADD = \
+args_gvParseArgs_SOURCES = args_gvParseArgs.c
+args_gvParseArgs_LDADD = \
 	$(top_builddir)/lib/gvc/libgvc.la
 
 command_line_initialize_SOURCES = command_line_initialize.c
