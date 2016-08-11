@@ -111,4 +111,10 @@ void* safe_malloc(size_t size, const char* calling_function);
  */
 void gv_initialize_empty_string(char** target_address);
 
+/**
+ * Prints the version number of Graphviz to the specified FILE* stream, using
+ * the information in gvc.
+ */
+void gv_print_version(FILE* stream, GVC_t* gvc);
+
 #endif /* LIB_COMMON_COMMAND_LINE_H_ */

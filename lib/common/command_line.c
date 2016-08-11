@@ -148,3 +148,10 @@ void gv_initialize_empty_string(char** target_address)
 	(*target_address) = safe_malloc(sizeof(char), __FUNCTION__);
 	(*target_address)[0] = '\0';
 }
+
+void gv_print_version(FILE* stream, GVC_t* gvc)
+{
+	fprintf(stream, "%s - %s version %s (%s)\n",
+		    gvc->common.cmdname, gvc->common.info[0],
+		    gvc->common.info[1], gvc->common.info[2]);
+}
