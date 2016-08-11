@@ -43,7 +43,6 @@ neato_extra_args(GVC_t *gvc, int argc, char** argv)
     arg = argv[i];
     if (arg && *arg == '-') {
       switch (arg[1]) {
-      case 'x' : Reduce = TRUE; break;
       case 'n':
         if (arg[2]) {
           Nop = atoi(arg+2);

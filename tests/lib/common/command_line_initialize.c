@@ -26,6 +26,13 @@ Test(command_line_initialze, print_version)
 	free_gv_config(&config);
 }
 
+Test(command_line_initialze, reduce)
+{
+	gv_config* config = initialize_gv_config();
+	cr_assert_not(config->reduce);
+	free_gv_config(&config);
+}
+
 Test(command_line_initialze, invalid_flags_without_value)
 {
 	gv_config* config = initialize_gv_config();
