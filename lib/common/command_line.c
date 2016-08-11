@@ -127,7 +127,8 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 	}
 	if (config->print_version)
 	{
-		// Print version and exit
+		gv_print_version(stderr, gvc);
+		exit(EXIT_SUCCESS);
 	}
 }
 
