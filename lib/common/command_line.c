@@ -62,7 +62,8 @@ gv_config* gv_parse_arguments(int argc, char** argv)
 		for(int j = 0; j < gv_common_arguments_length(); j++)
 		{
 			fflush(stdout);
-			if(argument[1] == gv_common_arguments[j].flag)
+			if (gv_common_arguments[j].argument_type == ARGUMENT_WITHOUT_VALUE
+					&& argument[1] == gv_common_arguments[j].flag)
 			{
 				no_value_argument = true;
 			}
@@ -85,7 +86,8 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 		bool valid_flag = false;
 		for(size_t j = 0; j < gv_common_arguments_length(); j++)
 		{
-			if (flag == gv_common_arguments[j].flag)
+			if (gv_common_arguments[j].argument_type == ARGUMENT_WITHOUT_VALUE
+					&& flag == gv_common_arguments[j].flag)
 			{
 				bool* field_value = (((bool*) config)
 						+ gv_common_arguments[j].field_offset);
