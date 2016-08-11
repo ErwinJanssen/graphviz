@@ -13,6 +13,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+gv_cmdline_argument gv_common_arguments[] =
+{
+	{
+		.flag = 'V',
+		.argument_type = ARGUMENT_WITHOUT_VALUE,
+		.description = "Print the version and exit",
+		.field_offset = offsetof(gv_config, print_version)
+	},
+	{
+		.flag = '?',
+		.argument_type = ARGUMENT_WITHOUT_VALUE,
+		.description = "Print the usage and exit",
+		.field_offset = offsetof(gv_config, print_usage)
+	}
+};
+
 size_t gv_common_arguments_length(void)
 {
 	return sizeof(gv_common_arguments) / sizeof(gv_cmdline_argument);
@@ -100,9 +116,16 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 	}
 }
 
-void gv_process_arguments(gv_config* config)
+void gv_process_arguments(gv_config* config, GVC_t* gvc)
 {
-
+	if (config->print_usage)
+	{
+		// Print usage and exit
+	}
+	else if (config->print_version)
+	{
+		// Print version and exit
+	}
 }
 
 void* safe_malloc(size_t size, const char* calling_function)

@@ -16,6 +16,8 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "gvc.h"
+
 /**
  * This struct contains the possible options and values that are passed as
  * arguments on the command line. To initialize this struct with the proper
@@ -53,21 +55,7 @@ typedef struct
  * A list containing information about the common command line arguments.
  * Its length is computed by gv_common_arguments_length().
  */
-gv_cmdline_argument gv_common_arguments[] =
-{
-	{
-		.flag = 'V',
-		.argument_type = ARGUMENT_WITHOUT_VALUE,
-		.description = "Print the version and exit",
-		.field_offset = offsetof(gv_config, print_version)
-	},
-	{
-		.flag = '?',
-		.argument_type = ARGUMENT_WITHOUT_VALUE,
-		.description = "Print the usage and exit",
-		.field_offset = offsetof(gv_config, print_usage)
-	}
-};
+extern gv_cmdline_argument gv_common_arguments[];
 
 /**
  * Get the length of the gv_common_arguments array.
@@ -109,7 +97,7 @@ void gv_parse_flags_without_value(gv_config* config, char* flags);
  * `print_version` set, the version will be printed and this function will
  * call exit.
  */
-void gv_process_arguments(gv_config* config);
+void gv_process_arguments(gv_config* config, GVC_t* gvc);
 
 /**
  * Performs like an ordinary malloc, but perform error handling on the returned
