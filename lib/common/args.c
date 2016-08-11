@@ -21,6 +21,7 @@
  */
 
 #include <ctype.h>
+#include "command_line.h"
 #include "render.h"
 #include "tlayout.h"
 #include "gvc.h"
@@ -271,6 +272,8 @@ fdp_extra_args (GVC_t *gvc, int argc, char** argv)
  */
 int gvParseArgs(GVC_t *gvc, int argc, char** argv)
 {
+	gv_config* config = gv_parse_arguments(argc, argv);
+	gv_process_arguments(config, gvc);
     int rv;
     if ((argc = neato_extra_args(gvc, argc, argv)) < 0)
 	return (1-argc);
