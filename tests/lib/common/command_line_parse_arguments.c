@@ -12,64 +12,98 @@
 
 #include <criterion/criterion.h>
 
+static void compare_gv_config(gv_config* actual, gv_config* expected)
+{
+	cr_expect_eq(actual->print_version, expected->print_version);
+	cr_expect_eq(actual->print_usage, expected->print_usage);
+}
+
 Test(command_line_parse_arguments, dash_V)
 {
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->print_version = true;
+
 	int argc = 2;
 	char* argv[] = {"dot", "-V"};
-	gv_config* config = gv_parse_arguments(argc, argv);
-	cr_assert(config->print_version);
-	cr_assert(!config->print_usage);
-	free_gv_config(&config);
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
 }
 
 Test(command_line_parse_arguments, dash_questionmark)
 {
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->print_usage = true;
+
 	int argc = 2;
 	char* argv[] = {"dot", "-?"};
-	gv_config* config = gv_parse_arguments(argc, argv);
-	cr_assert(!config->print_version);
-	cr_assert(config->print_usage);
-	free_gv_config(&config);
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
 }
 
 Test(command_line_parse_arguments, dash_V_questionmark)
 {
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->print_version = true;
+	expected_config->print_usage = true;
+
 	int argc = 2;
 	char* argv[] = {"dot", "-V?"};
-	gv_config* config = gv_parse_arguments(argc, argv);
-	cr_assert(config->print_version);
-	cr_assert(config->print_usage);
-	free_gv_config(&config);
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
 }
 
 Test(command_line_parse_arguments, dash_questionmark_V)
 {
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->print_version = true;
+	expected_config->print_usage = true;
+
 	int argc = 2;
 	char* argv[] = {"dot", "-?V"};
-	gv_config* config = gv_parse_arguments(argc, argv);
-	cr_assert(config->print_version);
-	cr_assert(config->print_usage);
-	free_gv_config(&config);
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
 }
 
 Test(command_line_parse_arguments, dash_questionmark_BV)
 {
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->print_version = true;
+	expected_config->print_usage = true;
+
 	int argc = 2;
 	char* argv[] = {"dot", "-?BV"};
-	gv_config* config = gv_parse_arguments(argc, argv);
-	cr_assert(config->print_version);
-	cr_assert(config->print_usage);
-	cr_assert_str_eq(config->invalid_flags_without_value, "B");
-	free_gv_config(&config);
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+	cr_assert_str_eq(actual_config->invalid_flags_without_value, "B");
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
 }
 
 Test(command_line_parse_arguments, dash_questionmark_BAV)
 {
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->print_version = true;
+	expected_config->print_usage = true;
+
 	int argc = 2;
 	char* argv[] = {"dot", "-?BAV"};
-	gv_config* config = gv_parse_arguments(argc, argv);
-	cr_assert(config->print_version);
-	cr_assert(config->print_usage);
-	cr_assert_str_eq(config->invalid_flags_without_value, "BA");
-	free_gv_config(&config);
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+	cr_assert_str_eq(actual_config->invalid_flags_without_value, "BA");
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
 }
