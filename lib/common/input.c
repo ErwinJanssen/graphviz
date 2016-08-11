@@ -238,9 +238,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 
     gvc->common.cmdname = dotneato_basename(argv[0]);
     if (gvc->common.verbose) {
-        fprintf(stderr, "%s - %s version %s (%s)\n",
-	    gvc->common.cmdname, gvc->common.info[0],
-	    gvc->common.info[1], gvc->common.info[2]);
+    	gv_print_version(stderr, gvc);
     }
 
     /* configure for available plugins */
@@ -329,9 +327,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 		P_graph = gvplugin_graph(gvc);
 		break;
 	    case 'V':
-		fprintf(stderr, "%s - %s version %s (%s)\n",
-			gvc->common.cmdname, gvc->common.info[0], 
-			gvc->common.info[1], gvc->common.info[2]);
+		gv_print_version(stderr, gvc);
 		if (GvExitOnUsage) exit(0);
 		return (1);
 		break;
