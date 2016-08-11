@@ -236,7 +236,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
     /* establish Gvfilepath, if any */
     Gvfilepath = getenv("GV_FILE_PATH");
 
-    gvc->common.cmdname = dotneato_basename(argv[0]);
     if (gvc->common.verbose) {
     	gv_print_version(stderr, gvc);
     }
@@ -251,7 +250,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 
     /* feed the globals */
     Verbose = gvc->common.verbose;
-    CmdName = gvc->common.cmdname;
 
     nfiles = 0;
     for (i = 1; i < argc; i++)
@@ -325,11 +323,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 		break;
 	    case 'P':
 		P_graph = gvplugin_graph(gvc);
-		break;
-	    case 'V':
-		gv_print_version(stderr, gvc);
-		if (GvExitOnUsage) exit(0);
-		return (1);
 		break;
 	    case 'l':
 		val = getFlagOpt(argc, argv, &i);
