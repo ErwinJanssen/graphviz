@@ -59,7 +59,7 @@ gv_config* gv_parse_arguments(int argc, char** argv)
 			continue;
 		}
 		bool no_value_argument = false;
-		for(int j = 0; j < gv_common_arguments_length(); j++)
+		for(size_t j = 0; j < gv_common_arguments_length(); j++)
 		{
 			fflush(stdout);
 			if (gv_common_arguments[j].argument_type == ARGUMENT_WITHOUT_VALUE
