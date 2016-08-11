@@ -272,6 +272,7 @@ fdp_extra_args (GVC_t *gvc, int argc, char** argv)
  */
 int gvParseArgs(GVC_t *gvc, int argc, char** argv)
 {
+	CmdName = dotneato_basename(argv[0]);
 	gv_config* config = gv_parse_arguments(argc, argv);
 	gv_process_arguments(config, gvc);
     int rv;

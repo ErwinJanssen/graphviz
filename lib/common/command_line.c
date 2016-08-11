@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "render.h"
+
 gv_cmdline_argument gv_common_arguments[] =
 {
 	{
@@ -120,9 +122,10 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 {
 	if (config->print_usage)
 	{
-		// Print usage and exit
+		dotneato_usage(0);
+		exit(EXIT_SUCCESS);
 	}
-	else if (config->print_version)
+	if (config->print_version)
 	{
 		// Print version and exit
 	}
