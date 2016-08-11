@@ -61,7 +61,6 @@ gv_config* gv_parse_arguments(int argc, char** argv)
 		bool no_value_argument = false;
 		for(size_t j = 0; j < gv_common_arguments_length(); j++)
 		{
-			fflush(stdout);
 			if (gv_common_arguments[j].argument_type == ARGUMENT_WITHOUT_VALUE
 					&& argument[1] == gv_common_arguments[j].flag)
 			{
@@ -100,8 +99,7 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 		{
 			if(!config->invalid_flags_without_value)
 			{
-				config->invalid_flags_without_value = malloc(sizeof(char));
-				*config->invalid_flags_without_value = '\0';
+				gv_initialize_empty_string(&config->invalid_flags_without_value);
 			}
 			sprintf(config->invalid_flags_without_value, "%s%c",
 					config->invalid_flags_without_value, flag);
@@ -112,4 +110,16 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 void gv_process_arguments(gv_config* config)
 {
 
+}
+
+void gv_initialize_empty_string(char** target_address)
+{
+	(*target_address) = malloc(sizeof(char));
+	if(!(*target_address))
+	{
+		fprintf(stderr, "Error: Not enough memory could be allocated for "
+				"empty string in function '%s'.\n", __FUNCTION__);
+		exit(EXIT_FAILURE);
+	}
+	(*target_address)[0] = '\0';
 }

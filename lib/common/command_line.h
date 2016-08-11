@@ -111,4 +111,10 @@ void gv_parse_flags_without_value(gv_config* config, char* flags);
  */
 void gv_process_arguments(gv_config* config);
 
+/**
+ * Takes the address to a char*, allocates enough memory for one character
+ * and sets this character to '\0'.
+ */
+void gv_initialize_empty_string(char** target_address);
+
 #endif /* LIB_COMMON_COMMAND_LINE_H_ */
