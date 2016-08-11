@@ -19,7 +19,8 @@ TESTS = \
 	command_line \
 	command_line_initialize \
 	command_line_free \
-	command_line_parse_arguments
+	command_line_parse_arguments_seperate \
+	command_line_parse_arguments_mixed 
 
 bin_PROGRAMS = $(TESTS)
 
@@ -35,8 +36,12 @@ command_line_free_SOURCES = command_line_free.c
 command_line_free_LDADD = \
 	$(top_builddir)/lib/gvc/libgvc.la
 
-command_line_parse_arguments_SOURCES = command_line_parse_arguments.c
-command_line_parse_arguments_LDADD = \
+command_line_parse_arguments_seperate_SOURCES = command_line_parse_arguments_seperate.c
+command_line_parse_arguments_seperate_LDADD = \
+	$(top_builddir)/lib/gvc/libgvc.la
+
+command_line_parse_arguments_mixed_SOURCES = command_line_parse_arguments_mixed.c
+command_line_parse_arguments_mixed_LDADD = \
 	$(top_builddir)/lib/gvc/libgvc.la
 
 endif
