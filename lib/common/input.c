@@ -125,7 +125,7 @@ static char *getFlagOpt(int argc, char **argv, int *idx)
  * find next (back)slash moving left; return string to the right.
  * If no next slash is found, return the whole string.
  */
-static char* dotneato_basename (char* path)
+char* dotneato_basename (char* path)
 {
     char* ret;
     char* s = path;
@@ -385,9 +385,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 		break;
 	    case 'y':
 		Y_invert = TRUE;
-		break;
-	    case '?':
-		return (dotneato_usage(0));
 		break;
 	    default:
 		agerr(AGERR, "%s: option -%c unrecognized\n\n", gvc->common.cmdname,
