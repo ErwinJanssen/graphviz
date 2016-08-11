@@ -18,6 +18,8 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
+#include "cgraph.h"
+
 #ifdef _UWIN
 #ifndef _POSIX_			/* ncc doesn't define _POSIX_ */
 /* i.e. if this is the win32 build using nmake with CC=ncc (native C) */
