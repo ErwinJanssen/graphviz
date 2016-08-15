@@ -46,6 +46,14 @@ install:
 
       nmake /f windows/Makefile.vc build_libs
 
+  # Install Criterion
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - cd dependencies/criterion
+  - mkdir build
+  - cd build
+  - cmake ..
+  - cmake --build .
+
 before_build:
 # This file is deleted to reduce noise in the build output. Otherwise several 
 # "target does not exist and will be ignored" messages are printed.
