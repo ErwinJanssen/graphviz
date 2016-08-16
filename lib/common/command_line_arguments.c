@@ -25,6 +25,21 @@ gv_cmdline_argument gv_common_arguments[] =
 		.field_offset = offsetof(gv_config, print_usage)
 	},
 	{
+		.flag = 'c',
+		.argument_type = ARGUMENT_WITHOUT_VALUE,
+		.description = "Configure plugins (Writes $prefix/lib/graphviz/config"
+               "with available plugin information.  Needs write privilege.)"
+		//.field_offset =
+	},
+	{
+		.flag = 'O',
+		.argument_type = ARGUMENT_WITHOUT_VALUE,
+		.description = "Automatically generate an output filename based "
+				"on the input filename with a .'format' appended. "
+				"(Causes all -ofile options to be ignored.)",
+		//.field_offset =
+	},
+	{
 		.flag = 'x',
 		.argument_type = ARGUMENT_WITHOUT_VALUE,
 		.description = "Reduce graph",
@@ -40,6 +55,12 @@ gv_cmdline_argument gv_common_arguments[] =
 		.flag = 'P',
 		.argument_type = ARGUMENT_WITHOUT_VALUE,
 		.description = "Internally generate a graph of the current plugins",
+		//.field_offset =
+	},
+	{
+		.flag = 'v',
+		.argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
+		.description = "Set level of verbosity default=1)",
 		//.field_offset =
 	},
 	{
