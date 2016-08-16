@@ -31,6 +31,7 @@ typedef struct
 	bool configure;
 	bool auto_output_filenames;
 	bool reduce;
+	bool invert_y;
 	char* invalid_flags_without_value;
 } gv_config;
 

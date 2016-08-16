@@ -19,6 +19,7 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
 	cr_expect_eq(actual->configure, expected->configure);
 	cr_expect_eq(actual->auto_output_filenames, expected->auto_output_filenames);
 	cr_expect_eq(actual->reduce, expected->reduce);
+	cr_expect_eq(actual->invert_y, expected->invert_y);
 }
 
 Test(command_line_parse_arguments, dash_V)
@@ -84,6 +85,20 @@ Test(command_line_parse_arguments, dash_x)
 
 	int argc = 2;
 	char* argv[] = {"dot", "-x"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_y)
+{
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->invert_y = true;
+
+	int argc = 2;
+	char* argv[] = {"dot", "-y"};
 	gv_config* actual_config = gv_parse_arguments(argc, argv);
 	compare_gv_config(expected_config, actual_config);
 
