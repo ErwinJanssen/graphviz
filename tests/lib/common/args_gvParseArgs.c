@@ -7,6 +7,8 @@
 #include "config.h"
 #include "globals.h"
 #include "gvc.h"
+#include "render.h"
+
 
 static void redirect_all_std(void)
 {
@@ -204,4 +206,45 @@ Test(command_line, dash_X)
 	cr_expect_not(Reduce);
 	gvParseArgs(Gvc, argc, argv);
 	cr_expect(Reduce);
+}
+
+Test(command_line, dash_O)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-O"};
+
+	cr_expect_not(Gvc->common.auto_outfile_names);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Gvc->common.auto_outfile_names);
+}
+
+Test(command_line, dash_X_dash_O)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 3;
+	char* argv[] = {"dot", "-x", "-O"};
+
+	cr_expect_not(Reduce);
+	cr_expect_not(Gvc->common.auto_outfile_names);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Reduce);
+	cr_expect(Gvc->common.auto_outfile_names);
+}
+
+Test(command_line, dash_xO)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-xO"};
+
+	cr_expect_not(Reduce);
+	cr_expect_not(Gvc->common.auto_outfile_names);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Reduce);
+	cr_expect(Gvc->common.auto_outfile_names);
+
 }

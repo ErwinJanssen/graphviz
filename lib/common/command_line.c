@@ -152,6 +152,10 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 	{
 		Reduce = TRUE;
 	}
+	if(config->auto_output_filenames)
+	{
+		gvc->common.auto_outfile_names = true;
+	}
 }
 
 void* safe_malloc(size_t size, const char* calling_function)
