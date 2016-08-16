@@ -367,10 +367,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 	    case 'y':
 		Y_invert = TRUE;
 		break;
-	    default:
-		agerr(AGERR, "%s: option -%c unrecognized\n\n", gvc->common.cmdname,
-			c);
-		return (dotneato_usage(1));
 	    }
 	} else if (argv[i])
 	    gvc->input_filenames[nfiles++] = argv[i];
