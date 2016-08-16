@@ -124,6 +124,7 @@ copy $(SolutionDir)windows\dependencies\GTK2\bin\zlib1.dll $(OutDir)zlib1.dll</C
     <ClInclude Include="common\colorprocs.h" />
     <ClInclude Include="common\colortbl.h" />
     <ClInclude Include="common\command_line.h" />
+    <ClInclude Include="common\command_line_arguments.h" />
     <ClInclude Include="common\const.h" />
     <ClInclude Include="common\entities.h" />
     <ClInclude Include="common\exparse.h" />
@@ -163,6 +164,7 @@ copy $(SolutionDir)windows\dependencies\GTK2\bin\zlib1.dll $(OutDir)zlib1.dll</C
     <ClCompile Include="common\arrows.c" />
     <ClCompile Include="common\colxlate.c" />
     <ClCompile Include="common\command_line.c" />
+    <ClCompile Include="common\command_line_arguments.c" />
     <ClCompile Include="common\ellipse.c" />
     <ClCompile Include="common\emit.c" />
     <ClCompile Include="common\geom.c" />
