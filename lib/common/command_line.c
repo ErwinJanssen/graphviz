@@ -21,6 +21,7 @@ gv_config* initialize_gv_config(void)
 	gv_config* default_gv_config = safe_malloc(sizeof(gv_config), __FUNCTION__);
 	default_gv_config->print_version = false;
 	default_gv_config->print_usage = false;
+	default_gv_config->configure = false;
 	default_gv_config->reduce = false;
 	default_gv_config->invalid_flags_without_value = NULL;
 	return default_gv_config;

@@ -28,6 +28,7 @@ typedef struct
 {
 	bool print_version;
 	bool print_usage;
+	bool configure;
 	bool reduce;
 	char* invalid_flags_without_value;
 } gv_config;
