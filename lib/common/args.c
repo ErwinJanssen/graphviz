@@ -139,9 +139,6 @@ config_extra_args(GVC_t *gvc, int argc, char** argv)
       case 'O' :
           gvc->common.auto_outfile_names = TRUE;
 	  break;
-      case 'c' :
-          gvc->common.config = TRUE;
-	  break;
       default :
         cnt++;
         if (*p != arg) *p = arg;
