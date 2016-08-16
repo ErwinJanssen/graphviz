@@ -64,6 +64,13 @@ gv_cmdline_argument gv_common_arguments[] =
 		//.field_offset =
 	},
 	{
+		.flag = 'm',
+		.argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
+		.description = "Memory test. Specify number of iterations, default is"
+				" forever. Observe no growth with top. Kill when done.",
+		//.field_offset =
+	},
+	{
 		.flag = 'q',
 		.argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
 		.description = "Set level of message suppression default=1)",
