@@ -107,6 +107,23 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 
 void gv_process_arguments(gv_config* config, GVC_t* gvc)
 {
+	if(config->invalid_flags_without_value)
+	{
+		fprintf(stderr, "Error: encountered the following invalid flags: ");
+		for(size_t i = 0; i < strlen(config->invalid_flags_without_value); i++)
+		{
+			if(i < strlen(config->invalid_flags_without_value) - 1)
+			{
+				fprintf(stderr, "'%c', ", config->invalid_flags_without_value[i]);
+			}
+			else
+			{
+				fprintf(stderr, "'%c'.\n", config->invalid_flags_without_value[i]);
+			}
+		}
+		fprintf(stderr, "Use the -? flag for information about the usage.\n");
+		exit(EXIT_FAILURE);
+	}
 	if (config->print_usage)
 	{
 		dotneato_usage(0);

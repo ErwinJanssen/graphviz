@@ -96,7 +96,7 @@ Test(command_line, dash_V_output,
  */
 Test(command_line, dash_Vrandom_exit,
 		.init = redirect_all_std,
-		.exit_code = 0)
+		.exit_code = EXIT_FAILURE)
 {
 	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
 	GvExitOnUsage = 1;
@@ -107,23 +107,6 @@ Test(command_line, dash_Vrandom_exit,
 
 	// Fail this test if the function above does not call exit.
 	cr_assert(false);
-}
-
-Test(command_line, dash_Vrandom_output,
-		.init = redirect_all_std)
-{
-	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
-	GvExitOnUsage = 0;
-	int argc = 2;
-	char* argv[] = {"dot", "-Vrandom"};
-
-	gvParseArgs(Gvc, argc, argv);
-
-	char expected_stderr[100];
-	sprintf(expected_stderr, "dot - graphviz version %s (%s)\n",
-				PACKAGE_VERSION, BUILDDATE);
-
-	cr_assert_stderr_eq_str(expected_stderr);
 }
 
 /**
@@ -131,7 +114,7 @@ Test(command_line, dash_Vrandom_output,
  */
 Test(command_line, dash_randomV_exit,
 		.init = redirect_all_std,
-		.exit_code = 1)
+		.exit_code = EXIT_FAILURE)
 {
 	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
 	GvExitOnUsage = 1;
@@ -142,24 +125,6 @@ Test(command_line, dash_randomV_exit,
 
 	// Fail this test if the function above does not call exit.
 	cr_assert(false);
-}
-
-Test(command_line, dash_randomV_output,
-		.init = redirect_all_std)
-{
-	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
-	GvExitOnUsage = 0;
-	int argc = 2;
-	char* argv[] = {"dot", "-randomV"};
-
-	gvParseArgs(Gvc, argc, argv);
-
-	char expected_stderr[2000];
-		sprintf(expected_stderr, "Error: dot: option -r unrecognized\n"
-				"\n"
-				"%s", usage_info);
-
-	cr_assert_stderr_eq_str(expected_stderr);
 }
 
 /**
