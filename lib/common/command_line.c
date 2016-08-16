@@ -40,31 +40,37 @@ gv_config* gv_parse_arguments(int argc, char** argv)
 	for (int i = 1; i < argc; i++)
 	{
 		char* argument = argv[i];
-		// For now, assume that an argument must start with a
-		// ARGUMENT_WITHOUT_VALUE type flag before we process it.
-		// These are some simple and dirty check that will be replaced
-		// when more arguments are added to the new code.
-		// Also require that it starts with a dash.
+
 		if (argument[0] != '-')
 		{
+			// TODO add argument to input file list
 			continue;
 		}
-		bool no_value_argument = false;
-		for (size_t j = 0; j < gv_common_arguments_length(); j++)
+
+		if(gv_parse_argument_with_value(config, argv, &i))
 		{
-			if (gv_common_arguments[j].argument_type == ARGUMENT_WITHOUT_VALUE
-					&& argument[1] == gv_common_arguments[j].flag)
-			{
-				no_value_argument = true;
-			}
-		}
-		if (!no_value_argument)
-		{
+			// TODO write this gv_parse_argument_with_value function
 			continue;
 		}
 		gv_parse_flags_without_value(config, argument);
 	}
 	return config;
+}
+
+bool gv_parse_argument_with_value(gv_config* config, char** argv,
+		int* argv_position)
+{
+	char* argument = argv[*argv_position];
+	for(size_t i = 0; i < gv_common_arguments_length(); i++)
+	{
+		if ((gv_common_arguments[i].argument_type == ARGUMENT_WITH_MULTIPLE_VALUES
+				|| gv_common_arguments[i].argument_type == ARGUMENT_WITH_SINGLE_VALUE)
+				&& argument[1] == gv_common_arguments[i].flag)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void gv_parse_flags_without_value(gv_config* config, char* flags)
