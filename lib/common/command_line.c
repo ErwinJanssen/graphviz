@@ -142,6 +142,11 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 		gv_print_version(stderr, gvc);
 		exit(EXIT_SUCCESS);
 	}
+	if (config->configure)
+	{
+		gvconfig(gvc, true);
+		exit(EXIT_SUCCESS);
+	}
 	if (config->reduce)
 	{
 		Reduce = TRUE;

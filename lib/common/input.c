@@ -240,14 +240,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
     	gv_print_version(stderr, gvc);
     }
 
-    /* configure for available plugins */
-    /* needs to know if "dot -c" is set (gvc->common.config) */
-    /* must happen before trying to select any plugins */
-    if (gvc->common.config) {
-        gvconfig(gvc, gvc->common.config);
-	exit (0);
-    }
-
     /* feed the globals */
     Verbose = gvc->common.verbose;
 
