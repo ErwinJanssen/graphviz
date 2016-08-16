@@ -29,6 +29,7 @@ typedef struct
 	bool print_version;
 	bool print_usage;
 	bool configure;
+	bool auto_output_filenames;
 	bool reduce;
 	char* invalid_flags_without_value;
 } gv_config;

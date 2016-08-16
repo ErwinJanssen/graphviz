@@ -33,6 +33,13 @@ Test(command_line_initialze, configure)
 	free_gv_config(&config);
 }
 
+Test(command_line_initialze, auto_output_filenames)
+{
+	gv_config* config = initialize_gv_config();
+	cr_assert_not(config->auto_output_filenames);
+	free_gv_config(&config);
+}
+
 Test(command_line_initialze, reduce)
 {
 	gv_config* config = initialize_gv_config();
