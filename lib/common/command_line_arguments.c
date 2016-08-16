@@ -37,7 +37,7 @@ gv_cmdline_argument gv_common_arguments[] =
 		.description = "Automatically generate an output filename based "
 				"on the input filename with a .'format' appended. "
 				"(Causes all -ofile options to be ignored.)",
-		//.field_offset =
+		.field_offset = offsetof(gv_config, auto_output_filenames)
 	},
 	{
 		.flag = 'x',
