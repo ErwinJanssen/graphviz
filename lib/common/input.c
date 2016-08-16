@@ -208,7 +208,7 @@ static int gvg_init(GVC_t *gvc, graph_t *g, char *fn, int gidx)
     return 0;
 }
 
-static graph_t *P_graph;
+graph_t *P_graph;
 
 graph_t *gvPluginsGraph(GVC_t *gvc)
 {
@@ -312,9 +312,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 		    return(2);
                 }
 		Kflag = 1;
-		break;
-	    case 'P':
-		P_graph = gvplugin_graph(gvc);
 		break;
 	    case 'l':
 		val = getFlagOpt(argc, argv, &i);
