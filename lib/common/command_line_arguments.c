@@ -49,7 +49,7 @@ gv_cmdline_argument gv_common_arguments[] =
 		.flag = 'y',
 		.argument_type = ARGUMENT_WITHOUT_VALUE,
 		.description = "Invert y coordinate in output",
-		//.field_offset =
+		.field_offset = offsetof(gv_config, invert_y)
 	},
 	{
 		.flag = 'P',
