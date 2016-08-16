@@ -28,8 +28,8 @@ gv_cmdline_argument gv_common_arguments[] =
 		.flag = 'c',
 		.argument_type = ARGUMENT_WITHOUT_VALUE,
 		.description = "Configure plugins (Writes $prefix/lib/graphviz/config"
-               "with available plugin information.  Needs write privilege.)"
-		//.field_offset =
+               "with available plugin information.  Needs write privilege.)",
+		.field_offset = offsetof(gv_config, configure)
 	},
 	{
 		.flag = 'O',
