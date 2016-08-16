@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "command_line_arguments.h"
 #include "gvc.h"
 
 /**
@@ -30,38 +31,6 @@ typedef struct
 	bool reduce;
 	char* invalid_flags_without_value;
 } gv_config;
-
-/**
- * Enum for the different types of flags supported by the command line
- */
-typedef enum
-{
-	ARGUMENT_WITH_VALUE, ARGUMENT_WITHOUT_VALUE,
-} gv_argument_type;
-
-/**
- * This struct describes a command line arguments accepted by Graphviz.
- * The field offset is the position of the variable in the gv_config that is
- * affected by this argument.
- */
-typedef struct
-{
-	char flag;
-	gv_argument_type argument_type;
-	char* description;
-	size_t field_offset;
-} gv_cmdline_argument;
-
-/**
- * A list containing information about the common command line arguments.
- * Its length is computed by gv_common_arguments_length().
- */
-extern gv_cmdline_argument gv_common_arguments[];
-
-/**
- * Get the length of the gv_common_arguments array.
- */
-size_t gv_common_arguments_length(void);
 
 /**
  * This function returns an initialized gv_config struct with all values

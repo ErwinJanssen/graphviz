@@ -16,33 +16,6 @@
 #include "globals.h"
 #include "render.h"
 
-gv_cmdline_argument gv_common_arguments[] =
-{
-	{
-		.flag = 'V',
-		.argument_type = ARGUMENT_WITHOUT_VALUE,
-		.description = "Print the version and exit",
-		.field_offset = offsetof(gv_config, print_version)
-	},
-	{
-		.flag = '?',
-		.argument_type = ARGUMENT_WITHOUT_VALUE,
-		.description = "Print the usage and exit",
-		.field_offset = offsetof(gv_config, print_usage)
-	},
-	{
-		.flag = 'x',
-		.argument_type = ARGUMENT_WITHOUT_VALUE,
-		.description = "Reduce graph",
-		.field_offset = offsetof(gv_config, reduce)
-	}
-};
-
-size_t gv_common_arguments_length(void)
-{
-	return sizeof(gv_common_arguments) / sizeof(gv_cmdline_argument);
-}
-
 gv_config* initialize_gv_config(void)
 {
 	gv_config* default_gv_config = safe_malloc(sizeof(gv_config), __FUNCTION__);
