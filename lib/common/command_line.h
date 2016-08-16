@@ -32,6 +32,7 @@ typedef struct
 	bool auto_output_filenames;
 	bool reduce;
 	bool invert_y;
+	bool generate_plugin_graph;
 	char* invalid_flags_without_value;
 } gv_config;
 
