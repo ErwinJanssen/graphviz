@@ -220,6 +220,18 @@ Test(command_line, dash_O)
 	cr_expect(Gvc->common.auto_outfile_names);
 }
 
+Test(command_line, dash_y)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-y"};
+
+	cr_expect_not(Y_invert);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Y_invert);
+}
+
 Test(command_line, dash_X_dash_O)
 {
 	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
@@ -234,6 +246,22 @@ Test(command_line, dash_X_dash_O)
 	cr_expect(Gvc->common.auto_outfile_names);
 }
 
+Test(command_line, dash_X_dash_y_dash_O)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 4;
+	char* argv[] = {"dot", "-x", "-y", "-O"};
+
+	cr_expect_not(Reduce);
+	cr_expect_not(Y_invert);
+	cr_expect_not(Gvc->common.auto_outfile_names);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Reduce);
+	cr_expect(Y_invert);
+	cr_expect(Gvc->common.auto_outfile_names);
+}
+
 Test(command_line, dash_xO)
 {
 	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
@@ -245,6 +273,23 @@ Test(command_line, dash_xO)
 	cr_expect_not(Gvc->common.auto_outfile_names);
 	gvParseArgs(Gvc, argc, argv);
 	cr_expect(Reduce);
+	cr_expect(Gvc->common.auto_outfile_names);
+
+}
+
+Test(command_line, dash_xOy)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-xOy"};
+
+	cr_expect_not(Reduce);
+	cr_expect_not(Y_invert);
+	cr_expect_not(Gvc->common.auto_outfile_names);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Reduce);
+	cr_expect(Y_invert);
 	cr_expect(Gvc->common.auto_outfile_names);
 
 }

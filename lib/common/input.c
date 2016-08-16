@@ -361,9 +361,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 		} else
 		    PSinputscale = POINTS_PER_INCH;
 		break;
-	    case 'y':
-		Y_invert = TRUE;
-		break;
 	    }
 	} else if (argv[i])
 	    gvc->input_filenames[nfiles++] = argv[i];

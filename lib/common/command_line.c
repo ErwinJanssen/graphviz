@@ -149,13 +149,17 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 		gvconfig(gvc, true);
 		exit(EXIT_SUCCESS);
 	}
-	if (config->reduce)
-	{
-		Reduce = TRUE;
-	}
 	if(config->auto_output_filenames)
 	{
 		gvc->common.auto_outfile_names = true;
+	}
+	if (config->reduce)
+	{
+		Reduce = true;
+	}
+	if (config->invert_y)
+	{
+		Y_invert = true;
 	}
 }
 
