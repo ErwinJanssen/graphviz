@@ -25,6 +25,7 @@ gv_config* initialize_gv_config(void)
 	default_gv_config->auto_output_filenames = false;
 	default_gv_config->reduce = false;
 	default_gv_config->invert_y = false;
+	default_gv_config->generate_plugin_graph = false;
 	default_gv_config->invalid_flags_without_value = NULL;
 	return default_gv_config;
 }

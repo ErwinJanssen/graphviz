@@ -54,6 +54,13 @@ Test(command_line_initialze, invert_y)
 	free_gv_config(&config);
 }
 
+Test(command_line_initialze, generate_plugin_graph)
+{
+	gv_config* config = initialize_gv_config();
+	cr_assert_not(config->generate_plugin_graph);
+	free_gv_config(&config);
+}
+
 Test(command_line_initialze, invalid_flags_without_value)
 {
 	gv_config* config = initialize_gv_config();

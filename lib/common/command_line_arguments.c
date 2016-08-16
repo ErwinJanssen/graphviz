@@ -55,7 +55,7 @@ gv_cmdline_argument gv_common_arguments[] =
 		.flag = 'P',
 		.argument_type = ARGUMENT_WITHOUT_VALUE,
 		.description = "Internally generate a graph of the current plugins",
-		//.field_offset =
+		.field_offset = offsetof(gv_config, generate_plugin_graph)
 	},
 	{
 		.flag = 'v',
