@@ -41,7 +41,7 @@ gv_config* gv_parse_arguments(int argc, char** argv)
 	for (int i = 1; i < argc; i++)
 	{
 		char* argument = argv[i];
-		if (argument)
+		if (!argument)
 		{
 			// TODO The other parsing functions set an arguments to 0 when
 			// they are parsed. This check must be removed when the other
