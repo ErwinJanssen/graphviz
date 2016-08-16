@@ -150,6 +150,10 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 		gvconfig(gvc, true);
 		exit(EXIT_SUCCESS);
 	}
+	if(config->generate_plugin_graph)
+	{
+		P_graph = gvplugin_graph(gvc);
+	}
 	if(config->auto_output_filenames)
 	{
 		gvc->common.auto_outfile_names = true;
