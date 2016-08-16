@@ -55,6 +55,13 @@ void free_gv_config(gv_config** config);
 gv_config* gv_parse_arguments(int argc, char** argv);
 
 /**
+ * Called by `gv_parse_arguments` to parse an argument that takes a value.
+ * Returns true if an argument with a value is found, returns false otherwise.
+ */
+bool gv_parse_argument_with_value(gv_config* config, char** argv,
+		int* argv_position);
+
+/**
  * Called by `gv_parse_arguments` to parse the flags that do not have
  * a separate value.
  * This function assumes that `flags` starts with a dash and that it is a
