@@ -41,6 +41,13 @@ gv_config* gv_parse_arguments(int argc, char** argv)
 	for (int i = 1; i < argc; i++)
 	{
 		char* argument = argv[i];
+		if (argument)
+		{
+			// TODO The other parsing functions set an arguments to 0 when
+			// they are parsed. This check must be removed when the other
+			// parsing functions are removed.
+			continue;
+		}
 
 		if (argument[0] != '-')
 		{
@@ -48,9 +55,9 @@ gv_config* gv_parse_arguments(int argc, char** argv)
 			continue;
 		}
 
-		if(gv_parse_argument_with_value(config, argv, &i))
+		if (gv_parse_argument_with_value(config, argv, &i))
 		{
-			// TODO write this gv_parse_argument_with_value function
+			// TODO add arguments to gv_parse_argument_with_value function
 			continue;
 		}
 		gv_parse_flags_without_value(config, argument);
@@ -62,7 +69,7 @@ bool gv_parse_argument_with_value(gv_config* config, char** argv,
 		int* argv_position)
 {
 	char* argument = argv[*argv_position];
-	for(size_t i = 0; i < gv_common_arguments_length(); i++)
+	for (size_t i = 0; i < gv_common_arguments_length(); i++)
 	{
 		if ((gv_common_arguments[i].argument_type == ARGUMENT_WITH_MULTIPLE_VALUES
 				|| gv_common_arguments[i].argument_type == ARGUMENT_WITH_SINGLE_VALUE)
@@ -111,9 +118,9 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 	if(config->invalid_flags_without_value)
 	{
 		fprintf(stderr, "Error: encountered the following invalid flags: ");
-		for(size_t i = 0; i < strlen(config->invalid_flags_without_value); i++)
+		for (size_t i = 0; i < strlen(config->invalid_flags_without_value); i++)
 		{
-			if(i < strlen(config->invalid_flags_without_value) - 1)
+			if (i < strlen(config->invalid_flags_without_value) - 1)
 			{
 				fprintf(stderr, "'%c', ", config->invalid_flags_without_value[i]);
 			}
