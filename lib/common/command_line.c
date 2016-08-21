@@ -96,8 +96,8 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 			if (gv_common_arguments[j].argument_type == ARGUMENT_WITHOUT_VALUE
 					&& flag == gv_common_arguments[j].flag)
 			{
-				bool* field_value = (((bool*) config)
-						+ gv_common_arguments[j].field_offset);
+				bool* field_value = (bool*) get_struct_field(config,
+						gv_common_arguments[j].field_offset);
 				*field_value = true;
 				valid_flag = true;
 				continue;

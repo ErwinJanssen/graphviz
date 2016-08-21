@@ -24,6 +24,7 @@
 
 #include <unistd.h>
 #include <ctype.h>
+#include <stdint.h>
 
 /*
  *  a queue of nodes
@@ -2063,4 +2064,10 @@ void* safe_malloc(size_t size, const char* calling_function)
 		exit(EXIT_FAILURE);
 	}
 	return memory;
+}
+
+void* get_struct_field(void* target_struct, size_t field_offset)
+{
+	// The type `uint8_t` is used, because the size of this type is one byte.
+	return ((uint8_t*) target_struct) + field_offset;
 }
