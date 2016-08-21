@@ -168,18 +168,6 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 	}
 }
 
-void* safe_malloc(size_t size, const char* calling_function)
-{
-	void* memory = malloc(size);
-	if (!memory)
-	{
-		fprintf(stderr, "Error: not enough memory for malloc in function: %s",
-				calling_function);
-		exit(EXIT_FAILURE);
-	}
-	return memory;
-}
-
 void gv_initialize_empty_string(char** target_address)
 {
 	(*target_address) = safe_malloc(sizeof(char), __FUNCTION__);

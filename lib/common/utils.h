@@ -18,6 +18,7 @@
 extern "C" {
 #endif
 
+#include "agxbuf.h"
 
 /*visual studio*/
 #ifdef WIN32
@@ -119,7 +120,17 @@ extern "C" {
 Agnodeinfo_t* ninf(Agnode_t* n);
 Agraphinfo_t* ginf(Agraph_t* g);
 Agedgeinfo_t* einf(Agedge_t* e);
-    /**/
+
+	/**
+	 * Malloc with additional error checking.
+	 * Will always return a valid pointer to some memory, never null.
+	 * If no memory can be allocated, it throws exit and prints the name of the
+	 * function that called it.
+	 * When calling this function, use the __FUNCTION__ macro to pass it's name
+	 * to this function.
+	 */
+	void* safe_malloc(size_t size, const char* calling_function);
+
 #ifdef WIN32	
 	extern void fix_fc(void);
 #endif

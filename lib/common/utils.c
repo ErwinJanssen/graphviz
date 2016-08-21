@@ -2052,3 +2052,15 @@ Agnodeinfo_t* ninf(Agnode_t* n) {return (Agnodeinfo_t*)AGDATA(n);}
 Agraphinfo_t* ginf(Agraph_t* g) {return (Agraphinfo_t*)AGDATA(g);}
 Agedgeinfo_t* einf(Agedge_t* e) {return (Agedgeinfo_t*)AGDATA(e);}
 /* void dumpG(Agraph_t* g) { agwrite(g, stderr); } */
+
+void* safe_malloc(size_t size, const char* calling_function)
+{
+	void* memory = malloc(size);
+	if (!memory)
+	{
+		fprintf(stderr, "Error: not enough memory for malloc in function: %s",
+				calling_function);
+		exit(EXIT_FAILURE);
+	}
+	return memory;
+}
