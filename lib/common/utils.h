@@ -131,6 +131,12 @@ Agedgeinfo_t* einf(Agedge_t* e);
 	 */
 	void* safe_malloc(size_t size, const char* calling_function);
 
+	/**
+	 * Takes a pointer to a struct and an offset value, and returns a pointer
+	 * to the field of this struct located at the offset value.
+	 */
+	void* get_struct_field(void* target_struct, size_t field_offset);
+
 #ifdef WIN32	
 	extern void fix_fc(void);
 #endif
