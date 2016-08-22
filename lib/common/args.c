@@ -115,44 +115,6 @@ memtest_extra_args(GVC_t *gvc, int argc, char** argv)
   return cnt;
 }
 
-/* config_extra_args:
- * Handle special config arguments.
- * Return number of unprocessed arguments; return < 0 on error.
- */
-static int
-config_extra_args(GVC_t *gvc, int argc, char** argv)
-{
-  char** p = argv+1;
-  int    i;
-  char*  arg;
-  int    cnt = 1;
-
-  for (i = 1; i < argc; i++) {
-    arg = argv[i];
-    if (arg && *arg == '-') {
-      switch (arg[1]) {
-      case 'v':
-	gvc->common.verbose = 1;
-	if (isdigit(arg[2]))
-	  gvc->common.verbose = atoi(&arg[2]);
-        break;
-      default :
-        cnt++;
-        if (*p != arg) *p = arg;
-        p++;
-        break;
-      }
-    }
-    else {
-      cnt++;
-      if (*p != arg) *p = arg;
-      p++;
-    }
-  }
-  *p = 0;
-  return cnt;
-}
-
 /* setDouble:
  * If arg is an double, value is stored in v
  * and functions returns 0; otherwise, returns 1.
@@ -274,8 +236,6 @@ int gvParseArgs(GVC_t *gvc, int argc, char** argv)
     if ((argc = fdp_extra_args(gvc, argc, argv)) < 0)
 	return (1-argc);
     if ((argc = memtest_extra_args(gvc, argc, argv)) < 0)
-	return (1-argc);
-    if ((argc = config_extra_args(gvc, argc, argv)) < 0)
 	return (1-argc);
 
     gv_config* config = gv_parse_arguments(argc, argv);
