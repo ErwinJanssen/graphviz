@@ -272,6 +272,30 @@ Test(command_line, dash_v3)
 	cr_expect(Verbose == 3);
 }
 
+Test(command_line, dash_m)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-m"};
+
+	cr_expect(MemTest == 0);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(MemTest == -1);
+}
+
+Test(command_line, dash_m5)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-m5"};
+
+	cr_expect(MemTest == 0);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(MemTest == 5);
+}
+
 Test(command_line, dash_X_dash_O)
 {
 	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
@@ -380,4 +404,22 @@ Test(command_line, dash_xv3OPv2)
 	cr_expect_not_null(P_graph);
 	cr_expect(Gvc->common.verbose == 3);
 	cr_expect(Verbose == 3);
+}
+
+Test(command_line, dash_xm3OPm2)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-xm3OPm2"};
+
+	cr_expect_not(Reduce);
+	cr_expect_not(Gvc->common.auto_outfile_names);
+	cr_expect_null(P_graph);
+	cr_expect(MemTest == 0);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Reduce);
+	cr_expect(Gvc->common.auto_outfile_names);
+	cr_expect_not_null(P_graph);
+	cr_expect(MemTest == 3);
 }
