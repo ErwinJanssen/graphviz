@@ -171,6 +171,17 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 		gvconfig(gvc, true);
 		exit(EXIT_SUCCESS);
 	}
+	if (config->memory_test)
+	{
+		if (config->memory_test_iterations == 0)
+		{
+			MemTest = -1;
+		}
+		else
+		{
+			MemTest = config->memory_test_iterations;
+		}
+	}
 	if (config->generate_plugin_graph)
 	{
 		P_graph = gvplugin_graph(gvc);
