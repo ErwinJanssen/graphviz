@@ -26,12 +26,39 @@ noinst_HEADERS = render.h utils.h memory.h \
 	logic.h const.h macros.h htmllex.h htmltable.h pointset.h intset.h
 noinst_LTLIBRARIES = libcommon_C.la
 
-libcommon_C_la_SOURCES = arrows.c colxlate.c command_line.c command_line_arguments.c ellipse.c textspan.c \
-	args.c memory.c globals.c htmllex.c htmlparse.y htmltable.c input.c \
-	pointset.c intset.c postproc.c routespl.c splines.c psusershape.c \
-	timing.c labels.c ns.c shapes.c utils.c geom.c taper.c \
-	output.c emit.c ps_font_equiv.txt ps_fontmap.txt fontmap.cfg \
-	color_names
+libcommon_C_la_SOURCES = \
+	arrows.c \
+	args.c \
+	color_names \
+	colxlate.c \
+	command_line.c \
+	command_line_arguments.c \
+	ellipse.c \
+	emit.c \
+	fontmap.cfg \
+	geom.c \
+	globals.c \
+	htmllex.c \
+	htmlparse.y \
+	htmltable.c \
+	input.c \
+	intset.c \
+	labels.c \
+	memory.c \
+	ns.c \
+	output.c \
+	pointset.c \
+	postproc.c \
+	ps_font_equiv.txt \
+	ps_fontmap.txt \
+	psusershape.c \
+	routespl.c \
+	shapes.c \
+	splines.c \
+	taper.c \
+	textspan.c \
+	timing.c \
+	utils.c
 
 textfont.o textfont.lo: ps_font_equiv.h
 
