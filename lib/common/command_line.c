@@ -27,7 +27,8 @@ gv_config* initialize_gv_config(void)
 	default_gv_config->reduce = false;
 	default_gv_config->invert_y = false;
 	default_gv_config->generate_plugin_graph = false;
-	default_gv_config->verbose = 0;
+	default_gv_config->verbose = false;
+	default_gv_config->verbosity_level = 1;
 	default_gv_config->invalid_flags_without_value = NULL;
 	return default_gv_config;
 }
@@ -98,31 +99,25 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 			if (flag == gv_common_arguments[j].flag)
 			{
 				gv_cmdline_argument* argument = &gv_common_arguments[j];
-				if (argument->argument_type == ARGUMENT_WITHOUT_VALUE)
+				bool* field_value = (bool*) get_struct_field(config,
+						argument->field_offset);
+				*field_value = true;
+				if (argument->argument_type == ARGUMENT_WITH_OPTIONAL_VALUE
+						&& flags[i + 1] && isdigit(flags[i + 1]))
 				{
-					bool* field_value = (bool*) get_struct_field(config,
-							argument->field_offset);
-					*field_value = true;
+					uint8_t* optional_value = (uint8_t*) get_struct_field(
+							config, argument->field_offset_optional_value);
+					uint8_t new_value = char_to_int(flags[i + 1]);
+					if (new_value > *optional_value)
+					{
+						*optional_value = new_value;
+					}
+					i++;
 					valid_flag = true;
 					continue;
 				}
-				else if (argument->argument_type == ARGUMENT_WITH_OPTIONAL_VALUE)
-				{
-					uint8_t* field_value = (uint8_t*) get_struct_field(config,
-							argument->field_offset);
-					uint8_t new_value = 1;
-					if(flags[i + 1] && isdigit(flags[i + 1]))
-					{
-						new_value = char_to_int(flags[i + 1]);
-						i++;
-					}
-					if(new_value > *field_value)
-					{
-						*field_value = new_value;
-					}
-					valid_flag = true;
-					continue;
-				}
+				valid_flag = true;
+				continue;
 			}
 		}
 		if (!valid_flag)
@@ -140,18 +135,20 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 
 void gv_process_arguments(gv_config* config, GVC_t* gvc)
 {
-	if(config->invalid_flags_without_value)
+	if (config->invalid_flags_without_value)
 	{
 		fprintf(stderr, "Error: encountered the following invalid flags: ");
 		for (size_t i = 0; i < strlen(config->invalid_flags_without_value); i++)
 		{
 			if (i < strlen(config->invalid_flags_without_value) - 1)
 			{
-				fprintf(stderr, "'%c', ", config->invalid_flags_without_value[i]);
+				fprintf(stderr, "'%c', ",
+						config->invalid_flags_without_value[i]);
 			}
 			else
 			{
-				fprintf(stderr, "'%c'.\n", config->invalid_flags_without_value[i]);
+				fprintf(stderr, "'%c'.\n",
+						config->invalid_flags_without_value[i]);
 			}
 		}
 		fprintf(stderr, "Use the -? flag for information about the usage.\n");
@@ -172,11 +169,11 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 		gvconfig(gvc, true);
 		exit(EXIT_SUCCESS);
 	}
-	if(config->generate_plugin_graph)
+	if (config->generate_plugin_graph)
 	{
 		P_graph = gvplugin_graph(gvc);
 	}
-	if(config->auto_output_filenames)
+	if (config->auto_output_filenames)
 	{
 		gvc->common.auto_outfile_names = true;
 	}
@@ -188,8 +185,11 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 	{
 		Y_invert = true;
 	}
-	gvc->common.verbose = config->verbose;
-	Verbose = config->verbose;
+	if (config->verbose)
+	{
+		gvc->common.verbose = config->verbosity_level;
+		Verbose = config->verbosity_level;
+	}
 }
 
 void gv_initialize_empty_string(char** target_address)

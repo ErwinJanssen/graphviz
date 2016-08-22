@@ -34,7 +34,8 @@ typedef struct
 	bool reduce;
 	bool invert_y;
 	bool generate_plugin_graph;
-	uint8_t verbose;
+	bool verbose;
+	uint8_t verbosity_level;
 	char* invalid_flags_without_value;
 } gv_config;
 

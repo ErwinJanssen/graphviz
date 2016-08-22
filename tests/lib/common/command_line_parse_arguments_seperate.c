@@ -22,6 +22,7 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
 	cr_expect_eq(actual->invert_y, expected->invert_y);
 	cr_expect_eq(actual->generate_plugin_graph, expected->generate_plugin_graph);
 	cr_expect_eq(actual->verbose, expected->verbose);
+	cr_expect_eq(actual->verbosity_level, expected->verbosity_level);
 }
 
 Test(command_line_parse_arguments, dash_V)
@@ -125,7 +126,8 @@ Test(command_line_parse_arguments, dash_P)
 Test(command_line_parse_arguments, dash_v)
 {
 	gv_config* expected_config = initialize_gv_config();
-	expected_config->verbose = 1;
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 1;
 
 	int argc = 2;
 	char* argv[] = {"dot", "-v"};
@@ -139,7 +141,8 @@ Test(command_line_parse_arguments, dash_v)
 Test(command_line_parse_arguments, dash_v2)
 {
 	gv_config* expected_config = initialize_gv_config();
-	expected_config->verbose = 2;
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 2;
 
 	int argc = 2;
 	char* argv[] = {"dot", "-v2"};
@@ -153,7 +156,8 @@ Test(command_line_parse_arguments, dash_v2)
 Test(command_line_parse_arguments, dash_v9)
 {
 	gv_config* expected_config = initialize_gv_config();
-	expected_config->verbose = 9;
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 9;
 
 	int argc = 2;
 	char* argv[] = {"dot", "-v9"};
@@ -167,7 +171,8 @@ Test(command_line_parse_arguments, dash_v9)
 Test(command_line_parse_arguments, dash_v10)
 {
 	gv_config* expected_config = initialize_gv_config();
-	expected_config->verbose = 1;
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 1;
 
 	int argc = 2;
 	char* argv[] = {"dot", "-v10"};
@@ -181,7 +186,8 @@ Test(command_line_parse_arguments, dash_v10)
 Test(command_line_parse_arguments, dash_v_dash_v9)
 {
 	gv_config* expected_config = initialize_gv_config();
-	expected_config->verbose = 9;
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 9;
 
 	int argc = 3;
 	char* argv[] = {"dot", "-v", "-v9"};
@@ -195,7 +201,8 @@ Test(command_line_parse_arguments, dash_v_dash_v9)
 Test(command_line_parse_arguments, dash_v9_dash_v)
 {
 	gv_config* expected_config = initialize_gv_config();
-	expected_config->verbose = 9;
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 9;
 
 	int argc = 3;
 	char* argv[] = {"dot", "-v9", "-v"};
