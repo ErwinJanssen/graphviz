@@ -244,6 +244,34 @@ Test(command_line, dash_P)
 	cr_expect_not_null(P_graph);
 }
 
+Test(command_line, dash_v)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-v"};
+
+	cr_expect(Gvc->common.verbose == 0);
+	cr_expect(Verbose == 0);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Gvc->common.verbose == 1);
+	cr_expect(Verbose == 1);
+}
+
+Test(command_line, dash_v3)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-v3"};
+
+	cr_expect(Gvc->common.verbose == 0);
+	cr_expect(Verbose == 0);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Gvc->common.verbose == 3);
+	cr_expect(Verbose == 3);
+}
+
 Test(command_line, dash_X_dash_O)
 {
 	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
@@ -332,4 +360,24 @@ Test(command_line, dash_xOP)
 	cr_expect(Reduce);
 	cr_expect(Gvc->common.auto_outfile_names);
 	cr_expect_not_null(P_graph);
+}
+
+Test(command_line, dash_xv3OPv2)
+{
+	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+	GvExitOnUsage = 1;
+	int argc = 2;
+	char* argv[] = {"dot", "-xv3OPv2"};
+
+	cr_expect_not(Reduce);
+	cr_expect_not(Gvc->common.auto_outfile_names);
+	cr_expect_null(P_graph);
+	cr_expect(Gvc->common.verbose == 0);
+	cr_expect(Verbose == 0);
+	gvParseArgs(Gvc, argc, argv);
+	cr_expect(Reduce);
+	cr_expect(Gvc->common.auto_outfile_names);
+	cr_expect_not_null(P_graph);
+	cr_expect(Gvc->common.verbose == 3);
+	cr_expect(Verbose == 3);
 }

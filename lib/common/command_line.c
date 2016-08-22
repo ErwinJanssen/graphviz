@@ -189,6 +189,8 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 	{
 		Y_invert = true;
 	}
+	gvc->common.verbose = config->verbose;
+	Verbose = config->verbose;
 }
 
 void gv_initialize_empty_string(char** target_address)
