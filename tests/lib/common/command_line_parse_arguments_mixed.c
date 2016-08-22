@@ -21,6 +21,7 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
 	cr_expect_eq(actual->reduce, expected->reduce);
 	cr_expect_eq(actual->invert_y, expected->invert_y);
 	cr_expect_eq(actual->generate_plugin_graph, expected->generate_plugin_graph);
+	cr_expect_eq(actual->verbose, expected->verbose);
 }
 
 Test(command_line_parse_arguments, dash_V_questionmark)
@@ -93,6 +94,22 @@ Test(command_line_parse_arguments, dash_questionmark_dash_x)
 
 	int argc = 3;
 	char* argv[] = {"dot", "-?", "-x"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_questionmark_dash_x_dash_v)
+{
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->print_usage = true;
+	expected_config->reduce = true;
+	expected_config->verbose = 1;
+
+	int argc = 4;
+	char* argv[] = {"dot", "-?", "-x", "-v"};
 	gv_config* actual_config = gv_parse_arguments(argc, argv);
 	compare_gv_config(expected_config, actual_config);
 
@@ -260,3 +277,38 @@ Test(command_line_parse_arguments, dash_Ox_dash_OP)
 	free_gv_config(&expected_config);
 	free_gv_config(&actual_config);
 }
+
+Test(command_line_parse_arguments, dash_Ovx_dash_OP)
+{
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->auto_output_filenames = true;
+	expected_config->reduce = true;
+	expected_config->generate_plugin_graph = true;
+	expected_config->verbose = 1;
+
+	int argc = 3;
+	char* argv[] = {"dot", "-Ovx", "-OP"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_Ov7x_dash_v2OP)
+{
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->auto_output_filenames = true;
+	expected_config->reduce = true;
+	expected_config->generate_plugin_graph = true;
+	expected_config->verbose = 7;
+
+	int argc = 3;
+	char* argv[] = {"dot", "-Ov7x", "-Ov2P"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+

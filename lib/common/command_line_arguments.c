@@ -61,7 +61,7 @@ gv_cmdline_argument gv_common_arguments[] =
 		.flag = 'v',
 		.argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
 		.description = "Set level of verbosity default=1)",
-		//.field_offset =
+		.field_offset = offsetof(gv_config, verbose)
 	},
 	{
 		.flag = 'm',

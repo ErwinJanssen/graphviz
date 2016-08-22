@@ -18,6 +18,8 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
+
 #include "agxbuf.h"
 
 /*visual studio*/
@@ -136,6 +138,12 @@ Agedgeinfo_t* einf(Agedge_t* e);
 	 * to the field of this struct located at the offset value.
 	 */
 	void* get_struct_field(void* target_struct, size_t field_offset);
+
+	/**
+	 * Convert a single digit character to its numerical representation.
+	 *
+	 */
+	uint8_t char_to_int(char number);
 
 #ifdef WIN32	
 	extern void fix_fc(void);
