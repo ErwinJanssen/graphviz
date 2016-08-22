@@ -111,7 +111,6 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 					uint8_t* field_value = (uint8_t*) get_struct_field(config,
 							argument->field_offset);
 					uint8_t new_value = 1;
-					printf("flags[i + 1]  = %c\n", flags[i + 1]);
 					if(flags[i + 1] && isdigit(flags[i + 1]))
 					{
 						new_value = char_to_int(flags[i + 1]);
