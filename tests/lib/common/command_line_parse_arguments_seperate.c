@@ -23,6 +23,8 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
 	cr_expect_eq(actual->generate_plugin_graph, expected->generate_plugin_graph);
 	cr_expect_eq(actual->verbose, expected->verbose);
 	cr_expect_eq(actual->verbosity_level, expected->verbosity_level);
+	cr_expect_eq(actual->memory_test, expected->memory_test);
+	cr_expect_eq(actual->memory_test_iterations, expected->memory_test_iterations);
 }
 
 Test(command_line_parse_arguments, dash_V)
@@ -206,6 +208,36 @@ Test(command_line_parse_arguments, dash_v9_dash_v)
 
 	int argc = 3;
 	char* argv[] = {"dot", "-v9", "-v"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_m)
+{
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->memory_test = true;
+	expected_config->memory_test_iterations = 0;
+
+	int argc = 2;
+	char* argv[] = {"dot", "-m"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_m9_dash_m)
+{
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->memory_test = true;
+	expected_config->memory_test_iterations = 9;
+
+	int argc = 3;
+	char* argv[] = {"dot", "-m9", "-m"};
 	gv_config* actual_config = gv_parse_arguments(argc, argv);
 	compare_gv_config(expected_config, actual_config);
 

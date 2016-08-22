@@ -62,14 +62,15 @@ gv_cmdline_argument gv_common_arguments[] =
 		.argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
 		.description = "Set level of verbosity default=1)",
 		.field_offset = offsetof(gv_config, verbose),
-		.field_offset_optional_value = offsetof(gv_config, verbosity_level),
+		.field_offset_optional_value = offsetof(gv_config, verbosity_level)
 	},
 	{
 		.flag = 'm',
 		.argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
 		.description = "Memory test. Specify number of iterations, default is"
 				" forever. Observe no growth with top. Kill when done.",
-		//.field_offset =
+		.field_offset = offsetof(gv_config, memory_test),
+		.field_offset_optional_value = offsetof(gv_config, memory_test_iterations)
 	},
 	{
 		.flag = 'q',
