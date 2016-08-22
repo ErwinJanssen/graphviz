@@ -10,6 +10,7 @@
 
 #include "command_line.h"
 
+#include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -26,6 +27,7 @@ gv_config* initialize_gv_config(void)
 	default_gv_config->reduce = false;
 	default_gv_config->invert_y = false;
 	default_gv_config->generate_plugin_graph = false;
+	default_gv_config->verbose = 0;
 	default_gv_config->invalid_flags_without_value = NULL;
 	return default_gv_config;
 }
@@ -93,14 +95,35 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 		bool valid_flag = false;
 		for (size_t j = 0; j < gv_common_arguments_length(); j++)
 		{
-			if (gv_common_arguments[j].argument_type == ARGUMENT_WITHOUT_VALUE
-					&& flag == gv_common_arguments[j].flag)
+			if (flag == gv_common_arguments[j].flag)
 			{
-				bool* field_value = (bool*) get_struct_field(config,
-						gv_common_arguments[j].field_offset);
-				*field_value = true;
-				valid_flag = true;
-				continue;
+				gv_cmdline_argument* argument = &gv_common_arguments[j];
+				if (argument->argument_type == ARGUMENT_WITHOUT_VALUE)
+				{
+					bool* field_value = (bool*) get_struct_field(config,
+							argument->field_offset);
+					*field_value = true;
+					valid_flag = true;
+					continue;
+				}
+				else if (argument->argument_type == ARGUMENT_WITH_OPTIONAL_VALUE)
+				{
+					uint8_t* field_value = (uint8_t*) get_struct_field(config,
+							argument->field_offset);
+					uint8_t new_value = 1;
+					printf("flags[i + 1]  = %c\n", flags[i + 1]);
+					if(flags[i + 1] && isdigit(flags[i + 1]))
+					{
+						new_value = char_to_int(flags[i + 1]);
+						i++;
+					}
+					if(new_value > *field_value)
+					{
+						*field_value = new_value;
+					}
+					valid_flag = true;
+					continue;
+				}
 			}
 		}
 		if (!valid_flag)

@@ -2071,3 +2071,8 @@ void* get_struct_field(void* target_struct, size_t field_offset)
 	// The type `uint8_t` is used, because the size of this type is one byte.
 	return ((uint8_t*) target_struct) + field_offset;
 }
+
+uint8_t char_to_int(char number)
+{
+	return (uint8_t) number - '0';
+}
