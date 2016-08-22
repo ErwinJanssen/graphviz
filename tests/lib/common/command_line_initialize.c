@@ -75,6 +75,20 @@ Test(command_line_initialze, verbosity_level)
 	free_gv_config(&config);
 }
 
+Test(command_line_initialze, memory_test)
+{
+	gv_config* config = initialize_gv_config();
+	cr_assert_not(config->memory_test);
+	free_gv_config(&config);
+}
+
+Test(command_line_initialze, memory_test_iterations)
+{
+	gv_config* config = initialize_gv_config();
+	cr_assert(config->memory_test_iterations == 0);
+	free_gv_config(&config);
+}
+
 Test(command_line_initialze, invalid_flags_without_value)
 {
 	gv_config* config = initialize_gv_config();

@@ -36,6 +36,8 @@ typedef struct
 	bool generate_plugin_graph;
 	bool verbose;
 	uint8_t verbosity_level;
+	bool memory_test;
+	uint8_t memory_test_iterations;
 	char* invalid_flags_without_value;
 } gv_config;
 

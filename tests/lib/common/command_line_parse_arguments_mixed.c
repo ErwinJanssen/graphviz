@@ -22,6 +22,9 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
 	cr_expect_eq(actual->invert_y, expected->invert_y);
 	cr_expect_eq(actual->generate_plugin_graph, expected->generate_plugin_graph);
 	cr_expect_eq(actual->verbose, expected->verbose);
+	cr_expect_eq(actual->verbosity_level, expected->verbosity_level);
+	cr_expect_eq(actual->memory_test, expected->memory_test);
+	cr_expect_eq(actual->memory_test_iterations, expected->memory_test_iterations);
 }
 
 Test(command_line_parse_arguments, dash_V_questionmark)
@@ -144,6 +147,25 @@ Test(command_line_parse_arguments, dash_questionmark_dash_x_dash_O_dash_y)
 
 	int argc = 5;
 	char* argv[] = {"dot", "-?", "-x", "-O", "-y"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_questionmark_dash_x_dash_O_dash_m5_dash_y)
+{
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->print_usage = true;
+	expected_config->auto_output_filenames = true;
+	expected_config->reduce = true;
+	expected_config->invert_y = true;
+	expected_config->memory_test = true;
+	expected_config->memory_test_iterations = 5;
+
+	int argc = 6;
+	char* argv[] = {"dot", "-?", "-x", "-O", "-m5", "-y"};
 	gv_config* actual_config = gv_parse_arguments(argc, argv);
 	compare_gv_config(expected_config, actual_config);
 
@@ -308,6 +330,26 @@ Test(command_line_parse_arguments, dash_Ov7x_dash_v2OP)
 
 	int argc = 3;
 	char* argv[] = {"dot", "-Ov7x", "-Ov2P"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_Ov7m3x_dash_v2OP)
+{
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->auto_output_filenames = true;
+	expected_config->reduce = true;
+	expected_config->generate_plugin_graph = true;
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 7;
+	expected_config->memory_test = true;
+	expected_config->memory_test_iterations = 3;
+
+	int argc = 3;
+	char* argv[] = {"dot", "-Ov7m3x", "-Ov2P"};
 	gv_config* actual_config = gv_parse_arguments(argc, argv);
 	compare_gv_config(expected_config, actual_config);
 
