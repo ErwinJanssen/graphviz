@@ -64,7 +64,14 @@ Test(command_line_initialze, generate_plugin_graph)
 Test(command_line_initialze, verbose)
 {
 	gv_config* config = initialize_gv_config();
-	cr_assert(config->verbose == 0);
+	cr_assert_not(config->verbose);
+	free_gv_config(&config);
+}
+
+Test(command_line_initialze, verbosity_level)
+{
+	gv_config* config = initialize_gv_config();
+	cr_assert(config->verbosity_level == 1);
 	free_gv_config(&config);
 }
 

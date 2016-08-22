@@ -106,7 +106,8 @@ Test(command_line_parse_arguments, dash_questionmark_dash_x_dash_v)
 	gv_config* expected_config = initialize_gv_config();
 	expected_config->print_usage = true;
 	expected_config->reduce = true;
-	expected_config->verbose = 1;
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 1;
 
 	int argc = 4;
 	char* argv[] = {"dot", "-?", "-x", "-v"};
@@ -284,7 +285,8 @@ Test(command_line_parse_arguments, dash_Ovx_dash_OP)
 	expected_config->auto_output_filenames = true;
 	expected_config->reduce = true;
 	expected_config->generate_plugin_graph = true;
-	expected_config->verbose = 1;
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 1;
 
 	int argc = 3;
 	char* argv[] = {"dot", "-Ovx", "-OP"};
@@ -301,7 +303,8 @@ Test(command_line_parse_arguments, dash_Ov7x_dash_v2OP)
 	expected_config->auto_output_filenames = true;
 	expected_config->reduce = true;
 	expected_config->generate_plugin_graph = true;
-	expected_config->verbose = 7;
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 7;
 
 	int argc = 3;
 	char* argv[] = {"dot", "-Ov7x", "-Ov2P"};
