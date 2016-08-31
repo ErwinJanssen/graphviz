@@ -11,6 +11,7 @@
 #include "command_line.h"
 
 #include <ctype.h>
+#include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -107,14 +108,14 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 				if (argument->argument_type == ARGUMENT_WITH_OPTIONAL_VALUE
 						&& flags[i + 1] && isdigit(flags[i + 1]))
 				{
-					uint8_t* optional_value = (uint8_t*) get_struct_field(
+					uint32_t* optional_value = (uint32_t*) get_struct_field(
 							config, argument->field_offset_optional_value);
-					uint8_t new_value = char_to_int(flags[i + 1]);
+					uint32_t new_value = gv_read_optional_flag_value(&flags[i + 1]);
 					if (new_value > *optional_value)
 					{
 						*optional_value = new_value;
 					}
-					i++;
+					i += number_of_digits(new_value);
 					valid_flag = true;
 					continue;
 				}
@@ -132,6 +133,33 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
 			sprintf(config->invalid_flags_without_value, "%s%c",
 					config->invalid_flags_without_value, flag);
 		}
+	}
+}
+
+uint32_t gv_read_optional_flag_value(char* partial_argument)
+{
+	const uint8_t max_integer_length = 8;
+	uint8_t digits_read = 0;
+	uint32_t optional_value = 0;
+	while (partial_argument[digits_read] && digits_read <= max_integer_length
+			&& isdigit(partial_argument[digits_read]))
+	{
+		optional_value *= 10;
+		optional_value += char_to_int(partial_argument[digits_read]);
+		digits_read++;
+	}
+	return optional_value;
+}
+
+uint8_t number_of_digits(uint32_t integer)
+{
+	if (integer < 10)
+	{
+		return 1;
+	}
+	else
+	{
+		return (uint8_t) (1 + number_of_digits(integer / 10));
 	}
 }
 
@@ -179,7 +207,14 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 		}
 		else
 		{
-			MemTest = config->memory_test_iterations;
+			if(config->memory_test_iterations > INT_MAX)
+			{
+				MemTest = INT_MAX;
+			}
+			else
+			{
+				MemTest = (int) config->memory_test_iterations;
+			}
 		}
 	}
 	if (config->generate_plugin_graph)
@@ -200,8 +235,17 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 	}
 	if (config->verbose)
 	{
-		gvc->common.verbose = config->verbosity_level;
-		Verbose = config->verbosity_level;
+		unsigned char verbosity_level = 0;
+		if(config->verbosity_level > UCHAR_MAX)
+		{
+			verbosity_level = UCHAR_MAX;
+		}
+		else
+		{
+			verbosity_level = (unsigned char) config->verbosity_level;
+		}
+		gvc->common.verbose = verbosity_level;
+		Verbose = verbosity_level;
 	}
 }
 

@@ -35,9 +35,9 @@ typedef struct
 	bool invert_y;
 	bool generate_plugin_graph;
 	bool verbose;
-	uint8_t verbosity_level;
+	uint32_t verbosity_level;
 	bool memory_test;
-	uint8_t memory_test_iterations;
+	uint32_t memory_test_iterations;
 	char* invalid_flags_without_value;
 } gv_config;
 
@@ -77,6 +77,17 @@ bool gv_parse_argument_with_value(gv_config* config, char** argv,
  * null terminated string.
  */
 void gv_parse_flags_without_value(gv_config* config, char* flags);
+
+/**
+ * This function is called by `gv_parse_flags_without_value` to read the
+ * optional value attached to flag.
+ */
+uint32_t gv_read_optional_flag_value(char* partial_argument);
+
+/**
+ * This functions counts the number of digits that make up an unsigned integer.
+ */
+uint8_t number_of_digits(uint32_t integer);
 
 /**
  * Processes a gv_config struct and acts upon its contents. If gv_config has

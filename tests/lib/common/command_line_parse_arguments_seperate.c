@@ -174,10 +174,25 @@ Test(command_line_parse_arguments, dash_v10)
 {
 	gv_config* expected_config = initialize_gv_config();
 	expected_config->verbose = true;
-	expected_config->verbosity_level = 1;
+	expected_config->verbosity_level = 10;
 
 	int argc = 2;
 	char* argv[] = {"dot", "-v10"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_v254643)
+{
+	gv_config* expected_config = initialize_gv_config();
+	expected_config->verbose = true;
+	expected_config->verbosity_level = 254643;
+
+	int argc = 2;
+	char* argv[] = {"dot", "-v254643"};
 	gv_config* actual_config = gv_parse_arguments(argc, argv);
 	compare_gv_config(expected_config, actual_config);
 
