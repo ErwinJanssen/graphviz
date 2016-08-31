@@ -337,19 +337,19 @@ Test(command_line_parse_arguments, dash_Ov7x_dash_v2OP)
 	free_gv_config(&actual_config);
 }
 
-Test(command_line_parse_arguments, dash_Ov7m3x_dash_v2OP)
+Test(command_line_parse_arguments, dash_Ov7235435m3x_dash_v2OP)
 {
 	gv_config* expected_config = initialize_gv_config();
 	expected_config->auto_output_filenames = true;
 	expected_config->reduce = true;
 	expected_config->generate_plugin_graph = true;
 	expected_config->verbose = true;
-	expected_config->verbosity_level = 7;
+	expected_config->verbosity_level = 7235435;
 	expected_config->memory_test = true;
 	expected_config->memory_test_iterations = 3;
 
 	int argc = 3;
-	char* argv[] = {"dot", "-Ov7m3x", "-Ov2P"};
+	char* argv[] = {"dot", "-Ov7235435m3x", "-Ov2P"};
 	gv_config* actual_config = gv_parse_arguments(argc, argv);
 	compare_gv_config(expected_config, actual_config);
 
