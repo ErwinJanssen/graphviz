@@ -123,19 +123,27 @@ Agnodeinfo_t* ninf(Agnode_t* n);
 Agraphinfo_t* ginf(Agraph_t* g);
 Agedgeinfo_t* einf(Agedge_t* e);
 
-	/**
-	 * Takes a pointer to a struct and an offset value, and returns a pointer
-	 * to the field of this struct located at the offset value.
-	 */
-	void* get_struct_field(void* target_struct, size_t field_offset);
+/**
+ * Takes a pointer to a struct and an offset value, and returns a pointer
+ * to the field of this struct located at the offset value.
+ */
+void* get_struct_field(void* target_struct, size_t field_offset);
 
-	/**
-	 * Convert a single digit character to its numerical representation.
-	 *
-	 */
-	uint8_t char_to_int(char number);
+/**
+ * Convert a single digit character to its numerical representation.
+ */
+uint8_t char_to_int(char number);
 
-#ifdef WIN32	
+/**
+ * Reallocates the memory of destination to fit the source string, then
+ * it copies the contents of source to destination. Returns a pointer to
+ * the destination string.
+ */
+char* safe_strcpy_function(char** destination, char* source);
+
+#define safe_strcpy(destination, source) safe_strcpy_function(&destination, source)
+
+#ifdef WIN32
 	extern void fix_fc(void);
 #endif
 
