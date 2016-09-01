@@ -71,6 +71,7 @@ void* safe_malloc_function(size_t size, const char* calling_function)
 				calling_function);
 		exit(EXIT_FAILURE);
 	}
+	memset(memory, 0, size);
 	return memory;
 }
 

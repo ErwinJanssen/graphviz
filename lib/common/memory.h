@@ -64,6 +64,7 @@ extern "C" {
  * Will always return a valid pointer to some memory, never null.
  * If no memory can be allocated, it throws exit and prints the name of the
  * function that called it.
+ * Memory will be set to all zero.
  * When calling this function, use the __FUNCTION__ macro to pass it's name
  * to this function.
  */
