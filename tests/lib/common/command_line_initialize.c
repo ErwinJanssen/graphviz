@@ -19,6 +19,13 @@ Test(command_line_initialze, not_null)
 	free_gv_config(&config);
 }
 
+Test(command_line_initialze, command_name)
+{
+	gv_config* config = initialize_gv_config();
+	cr_assert_str_eq(config->command_name, "dot");
+	free_gv_config(&config);
+}
+
 Test(command_line_initialze, print_version)
 {
 	gv_config* config = initialize_gv_config();
