@@ -133,6 +133,18 @@ Agedgeinfo_t* einf(Agedge_t* e);
 	 */
 	void* safe_malloc(size_t size, const char* calling_function);
 
+/**
+ * Free that also sets the target to NULL. This prevents accessing freed
+ * memory.
+ */
+void safe_free_function(void** pointer);
+
+/**
+ * This macro makes it possible to call `safe_free(pointer) instead of
+ * casting the address of every pointer to (void **).
+ */
+#define safe_free(pointer) safe_free_function((void **) &(pointer))
+
 	/**
 	 * Takes a pointer to a struct and an offset value, and returns a pointer
 	 * to the field of this struct located at the offset value.

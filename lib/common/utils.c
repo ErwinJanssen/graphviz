@@ -2066,6 +2066,15 @@ void* safe_malloc(size_t size, const char* calling_function)
 	return memory;
 }
 
+void safe_free_function(void** pointer)
+{
+	if (pointer != NULL)
+	{
+		free(*pointer);
+		*pointer = NULL;
+	}
+}
+
 void* get_struct_field(void* target_struct, size_t field_offset)
 {
 	// The type `uint8_t` is used, because the size of this type is one byte.
