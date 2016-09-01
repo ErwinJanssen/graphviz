@@ -38,9 +38,8 @@ gv_config* initialize_gv_config(void)
 
 void free_gv_config(gv_config** config)
 {
-	free((*config)->invalid_flags_without_value);
-	free(*config);
-	*config = NULL;
+	safe_free((*config)->invalid_flags_without_value);
+	safe_free(*config);
 }
 
 gv_config* gv_parse_arguments(int argc, char** argv)
