@@ -340,7 +340,7 @@ Test(command_line, dash_X_dash_y_dash_O)
 	cr_expect(Gvc->common.auto_outfile_names);
 }
 
-Test(command_line, dash_xO)
+Test(command_line, dot_dash_xO)
 {
 	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
 	GvExitOnUsage = 1;
@@ -352,14 +352,16 @@ Test(command_line, dash_xO)
 	gvParseArgs(Gvc, argc, argv);
 	cr_expect(Reduce);
 	cr_expect(Gvc->common.auto_outfile_names);
+	cr_expect_str_eq(Gvc->common.cmdname, "dot");
+	cr_expect_str_eq(CmdName, "dot");
 }
 
-Test(command_line, dash_xOy)
+Test(command_line, neato_dash_xOy)
 {
 	GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
 	GvExitOnUsage = 1;
 	int argc = 2;
-	char* argv[] = {"dot", "-xOy"};
+	char* argv[] = {"neato", "-xOy"};
 
 	cr_expect_not(Reduce);
 	cr_expect_not(Y_invert);
@@ -368,6 +370,8 @@ Test(command_line, dash_xOy)
 	cr_expect(Reduce);
 	cr_expect(Y_invert);
 	cr_expect(Gvc->common.auto_outfile_names);
+	cr_expect_str_eq(Gvc->common.cmdname, "neato");
+	cr_expect_str_eq(CmdName, "neato");
 }
 
 Test(command_line, dash_xOP)

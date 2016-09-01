@@ -169,6 +169,8 @@ uint8_t number_of_digits(uint32_t integer)
 
 void gv_process_arguments(gv_config* config, GVC_t* gvc)
 {
+	safe_strcpy(gvc->common.cmdname, config->command_name);
+	safe_strcpy(CmdName, config->command_name);
 	if (config->invalid_flags_without_value)
 	{
 		fprintf(stderr, "Error: encountered the following invalid flags: ");
