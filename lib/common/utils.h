@@ -131,7 +131,13 @@ Agedgeinfo_t* einf(Agedge_t* e);
 	 * When calling this function, use the __FUNCTION__ macro to pass it's name
 	 * to this function.
 	 */
-	void* safe_malloc(size_t size, const char* calling_function);
+	void* safe_malloc_function(size_t size, const char* calling_function);
+
+	/**
+	 * This macro inserts the calling function as parameter, so it doesn't have to
+	 * be specified in the code.
+	 */
+	#define safe_malloc(size) safe_malloc_function(size, __FUNCTION__);
 
 /**
  * Free that also sets the target to NULL. This prevents accessing freed
