@@ -2054,7 +2054,7 @@ Agraphinfo_t* ginf(Agraph_t* g) {return (Agraphinfo_t*)AGDATA(g);}
 Agedgeinfo_t* einf(Agedge_t* e) {return (Agedgeinfo_t*)AGDATA(e);}
 /* void dumpG(Agraph_t* g) { agwrite(g, stderr); } */
 
-void* safe_malloc(size_t size, const char* calling_function)
+void* safe_malloc_function(size_t size, const char* calling_function)
 {
 	void* memory = malloc(size);
 	if (!memory)

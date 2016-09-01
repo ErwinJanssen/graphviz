@@ -20,7 +20,7 @@
 
 gv_config* initialize_gv_config(void)
 {
-	gv_config* default_gv_config = safe_malloc(sizeof(gv_config), __FUNCTION__);
+	gv_config* default_gv_config = safe_malloc(sizeof(gv_config));
 	default_gv_config->print_version = false;
 	default_gv_config->print_usage = false;
 	default_gv_config->configure = false;
@@ -250,7 +250,7 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
 
 void gv_initialize_empty_string(char** target_address)
 {
-	(*target_address) = safe_malloc(sizeof(char), __FUNCTION__);
+	(*target_address) = safe_malloc(sizeof(char));
 	(*target_address)[0] = '\0';
 }
 
