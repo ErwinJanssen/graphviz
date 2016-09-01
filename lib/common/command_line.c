@@ -22,6 +22,7 @@
 gv_config* initialize_gv_config(void)
 {
 	gv_config* default_gv_config = safe_malloc(sizeof(gv_config));
+	safe_strcpy(default_gv_config->command_name, "dot");
 	default_gv_config->print_version = false;
 	default_gv_config->print_usage = false;
 	default_gv_config->configure = false;
@@ -39,6 +40,7 @@ gv_config* initialize_gv_config(void)
 
 void free_gv_config(gv_config** config)
 {
+	safe_free((*config)->command_name);
 	safe_free((*config)->invalid_flags_without_value);
 	safe_free(*config);
 }
@@ -46,7 +48,9 @@ void free_gv_config(gv_config** config)
 gv_config* gv_parse_arguments(int argc, char** argv)
 {
 	gv_config* config = initialize_gv_config();
-	// Skip argv[0] because this doesn't contain reliable data.
+	// FIXME determining the command name based the argv[0] is hacky, there is
+	// no way to know if argv[0] contains any reliable information.
+	safe_strcpy(config->command_name, dotneato_basename(argv[0]));
 	for (int i = 1; i < argc; i++)
 	{
 		char* argument = argv[i];

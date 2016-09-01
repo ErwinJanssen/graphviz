@@ -27,6 +27,7 @@
  */
 typedef struct
 {
+	char* command_name;
 	bool print_version;
 	bool print_usage;
 	bool configure;

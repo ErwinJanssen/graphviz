@@ -14,6 +14,7 @@
 
 static void compare_gv_config(gv_config* actual, gv_config* expected)
 {
+	cr_expect_str_eq(actual->command_name, expected->command_name);
 	cr_expect_eq(actual->print_version, expected->print_version);
 	cr_expect_eq(actual->print_usage, expected->print_usage);
 	cr_expect_eq(actual->configure, expected->configure);
@@ -25,6 +26,48 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
 	cr_expect_eq(actual->verbosity_level, expected->verbosity_level);
 	cr_expect_eq(actual->memory_test, expected->memory_test);
 	cr_expect_eq(actual->memory_test_iterations, expected->memory_test_iterations);
+}
+
+Test(command_line_parse_arguments, command_name_dot)
+{
+	gv_config* expected_config = initialize_gv_config();
+	safe_strcpy(expected_config->command_name, "dot");
+
+	int argc = 1;
+	char* argv[] = {"dot"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, command_name_neato)
+{
+	gv_config* expected_config = initialize_gv_config();
+	safe_strcpy(expected_config->command_name, "neato");
+
+	int argc = 1;
+	char* argv[] = {"neato"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, command_name_twopi)
+{
+	gv_config* expected_config = initialize_gv_config();
+	safe_strcpy(expected_config->command_name, "twopi");
+
+	int argc = 1;
+	char* argv[] = {"twopi"};
+	gv_config* actual_config = gv_parse_arguments(argc, argv);
+	compare_gv_config(expected_config, actual_config);
+
+	free_gv_config(&expected_config);
+	free_gv_config(&actual_config);
 }
 
 Test(command_line_parse_arguments, dash_V)
