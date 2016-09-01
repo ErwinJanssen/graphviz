@@ -183,9 +183,6 @@ fdp_extra_args (GVC_t *gvc, int argc, char** argv)
  */
 int gvParseArgs(GVC_t *gvc, int argc, char** argv)
 {
-	gvc->common.cmdname = dotneato_basename(argv[0]);
-	CmdName = gvc->common.cmdname;
-
     int rv;
     if ((argc = neato_extra_args(gvc, argc, argv)) < 0)
 	return (1-argc);
