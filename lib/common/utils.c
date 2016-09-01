@@ -2062,5 +2062,12 @@ void* get_struct_field(void* target_struct, size_t field_offset)
 
 uint8_t char_to_int(char number)
 {
-	return (uint8_t) number - '0';
+	return (uint8_t) (number - '0');
+}
+
+char* safe_strcpy_function(char** destination, char* source)
+{
+	*destination = realloc(*destination, strlen(source) + 1);
+	strcpy(*destination, source);
+	return *destination;
 }
