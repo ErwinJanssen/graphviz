@@ -16,6 +16,7 @@
 #include <stdio.h>
 
 #include "globals.h"
+#include "memory.h"
 #include "render.h"
 
 gv_config* initialize_gv_config(void)

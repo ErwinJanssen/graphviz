@@ -59,6 +59,34 @@ extern "C" {
 	extern void *grealloc(void *, size_t);
 #undef extern
 
+/**
+ * Malloc with additional error checking.
+ * Will always return a valid pointer to some memory, never null.
+ * If no memory can be allocated, it throws exit and prints the name of the
+ * function that called it.
+ * When calling this function, use the __FUNCTION__ macro to pass it's name
+ * to this function.
+ */
+void* safe_malloc_function(size_t size, const char* calling_function);
+
+/**
+ * This macro inserts the calling function as parameter, so it doesn't have to
+ * be specified in the code.
+ */
+#define safe_malloc(size) safe_malloc_function(size, __FUNCTION__);
+
+/**
+ * Free that also sets the target to NULL. This prevents accessing freed
+ * memory.
+ */
+void safe_free_function(void** pointer);
+
+/**
+ * This macro makes it possible to call `safe_free(pointer) instead of
+ * casting the address of every pointer to (void **).
+ */
+#define safe_free(pointer) safe_free_function((void **) &(pointer))
+
 #ifdef __cplusplus
 }
 #endif
