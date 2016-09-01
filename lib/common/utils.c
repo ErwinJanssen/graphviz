@@ -2054,27 +2054,6 @@ Agraphinfo_t* ginf(Agraph_t* g) {return (Agraphinfo_t*)AGDATA(g);}
 Agedgeinfo_t* einf(Agedge_t* e) {return (Agedgeinfo_t*)AGDATA(e);}
 /* void dumpG(Agraph_t* g) { agwrite(g, stderr); } */
 
-void* safe_malloc_function(size_t size, const char* calling_function)
-{
-	void* memory = malloc(size);
-	if (!memory)
-	{
-		fprintf(stderr, "Error: not enough memory for malloc in function: %s",
-				calling_function);
-		exit(EXIT_FAILURE);
-	}
-	return memory;
-}
-
-void safe_free_function(void** pointer)
-{
-	if (pointer != NULL)
-	{
-		free(*pointer);
-		*pointer = NULL;
-	}
-}
-
 void* get_struct_field(void* target_struct, size_t field_offset)
 {
 	// The type `uint8_t` is used, because the size of this type is one byte.
