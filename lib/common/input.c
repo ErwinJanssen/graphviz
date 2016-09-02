@@ -237,7 +237,7 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
     Gvfilepath = getenv("GV_FILE_PATH");
 
     if (gvc->common.verbose) {
-    	gv_print_version(stderr, gvc);
+        gv_print_version(stderr, gvc);
     }
 
     /* feed the globals */

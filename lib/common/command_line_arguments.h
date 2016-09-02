@@ -18,10 +18,10 @@
  */
 typedef enum
 {
-	ARGUMENT_WITHOUT_VALUE,
-	ARGUMENT_WITH_OPTIONAL_VALUE,
-	ARGUMENT_WITH_SINGLE_VALUE,
-	ARGUMENT_WITH_MULTIPLE_VALUES
+    ARGUMENT_WITHOUT_VALUE,
+    ARGUMENT_WITH_OPTIONAL_VALUE,
+    ARGUMENT_WITH_SINGLE_VALUE,
+    ARGUMENT_WITH_MULTIPLE_VALUES
 } gv_argument_type;
 
 /**
@@ -31,11 +31,11 @@ typedef enum
  */
 typedef struct
 {
-	char flag;
-	gv_argument_type argument_type;
-	char* description;
-	size_t field_offset;
-	size_t field_offset_optional_value;
+    char flag;
+    gv_argument_type argument_type;
+    char* description;
+    size_t field_offset;
+    size_t field_offset_optional_value;
 } gv_cmdline_argument;
 
 /**
