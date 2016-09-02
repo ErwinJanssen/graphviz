@@ -190,7 +190,7 @@ int gvParseArgs(GVC_t *gvc, int argc, char** argv)
 	return (1-argc);
 
     gv_config* config = gv_parse_arguments(argc, argv);
-	gv_process_arguments(config, gvc);
+    gv_process_arguments(config, gvc);
 
     if ((rv = dotneato_args_initialize(gvc, argc, argv)))
 	return rv;

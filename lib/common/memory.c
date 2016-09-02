@@ -64,22 +64,22 @@ void *grealloc(void *ptr, size_t size)
 
 void* safe_malloc_function(size_t size, const char* calling_function)
 {
-	void* memory = malloc(size);
-	if (!memory)
-	{
-		fprintf(stderr, "Error: not enough memory for malloc in function: %s",
-				calling_function);
-		exit(EXIT_FAILURE);
-	}
-	memset(memory, 0, size);
-	return memory;
+    void* memory = malloc(size);
+    if (!memory)
+    {
+        fprintf(stderr, "Error: not enough memory for malloc in function: %s",
+                calling_function);
+        exit(EXIT_FAILURE);
+    }
+    memset(memory, 0, size);
+    return memory;
 }
 
 void safe_free_function(void** pointer)
 {
-	if (pointer != NULL)
-	{
-		free(*pointer);
-		*pointer = NULL;
-	}
+    if (pointer != NULL)
+    {
+        free(*pointer);
+        *pointer = NULL;
+    }
 }

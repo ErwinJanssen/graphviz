@@ -27,19 +27,19 @@
  */
 typedef struct
 {
-	char* command_name;
-	bool print_version;
-	bool print_usage;
-	bool configure;
-	bool auto_output_filenames;
-	bool reduce;
-	bool invert_y;
-	bool generate_plugin_graph;
-	bool verbose;
-	uint32_t verbosity_level;
-	bool memory_test;
-	uint32_t memory_test_iterations;
-	char* invalid_flags_without_value;
+    char* command_name;
+    bool print_version;
+    bool print_usage;
+    bool configure;
+    bool auto_output_filenames;
+    bool reduce;
+    bool invert_y;
+    bool generate_plugin_graph;
+    bool verbose;
+    uint32_t verbosity_level;
+    bool memory_test;
+    uint32_t memory_test_iterations;
+    char* invalid_flags_without_value;
 } gv_config;
 
 /**
@@ -69,7 +69,7 @@ gv_config* gv_parse_arguments(int argc, char** argv);
  * Returns true if an argument with a value is found, returns false otherwise.
  */
 bool gv_parse_argument_with_value(gv_config* config, char** argv,
-		int* argv_position);
+        int* argv_position);
 
 /**
  * Called by `gv_parse_arguments` to parse the flags that do not have
