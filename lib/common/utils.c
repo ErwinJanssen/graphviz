@@ -2072,6 +2072,21 @@ char* safe_strcpy_function(char** destination, char* source)
     return *destination;
 }
 
+char* safe_strncpy_function(char** destination, char* source, size_t n)
+{
+    if (strlen(source) <= n)
+    {
+        return safe_strcpy_function(destination, source);
+    }
+    else
+    {
+        *destination = realloc(*destination, n + 1);
+        strncpy(*destination, source, n);
+        (*destination)[n] = '\0';
+        return *destination;
+    }
+}
+
 bool float_equal(float a, float b)
 {
     float difference = fabsf(a - b);

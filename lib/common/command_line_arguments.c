@@ -59,14 +59,14 @@ gv_cmdline_argument gv_common_arguments[] =
     },
     {
         .flag = 'v',
-        .argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
+        .argument_type = ARGUMENT_WITH_OPTIONAL_INT,
         .description = "Set level of verbosity default=1)",
         .field_offset = offsetof(gv_config, verbose),
         .field_offset_optional_value = offsetof(gv_config, verbosity_level)
     },
     {
         .flag = 'm',
-        .argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
+        .argument_type = ARGUMENT_WITH_OPTIONAL_INT,
         .description = "Memory test. Specify number of iterations, default is"
                 " forever. Observe no growth with top. Kill when done.",
         .field_offset = offsetof(gv_config, memory_test),
@@ -74,16 +74,17 @@ gv_cmdline_argument gv_common_arguments[] =
     },
     {
         .flag = 'q',
-        .argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
+        .argument_type = ARGUMENT_WITH_OPTIONAL_INT,
         .description = "Set level of message suppression default=1)",
         .field_offset = offsetof(gv_config, message_suppression),
         .field_offset_optional_value = offsetof(gv_config, message_suppression_level)
     },
     {
         .flag = 's',
-        .argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
+        .argument_type = ARGUMENT_WITH_OPTIONAL_FLOAT,
         .description = "Scale input by this value, default=72",
-        //.field_offset =
+        .field_offset = offsetof(gv_config, scale_input),
+        .field_offset_optional_value = offsetof(gv_config, scale_input_value)
     },
     {
         .flag = 'G',
