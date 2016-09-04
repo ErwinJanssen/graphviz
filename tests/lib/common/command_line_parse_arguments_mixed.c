@@ -28,6 +28,15 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
     cr_expect_eq(actual->message_suppression, expected->message_suppression);
     cr_expect_eq(actual->message_suppression_level, expected->message_suppression_level);
     cr_expect_eq(actual->memory_test_iterations, expected->memory_test_iterations);
+
+    if (!actual->invalid_flags_without_value)
+    {
+        cr_expect_null(expected->invalid_flags_without_value);
+    }
+    else
+    {
+        cr_expect_str_eq(actual->invalid_flags_without_value, expected->invalid_flags_without_value);
+    }
 }
 
 Test(command_line_parse_arguments, dot_dash_V_questionmark)
@@ -66,12 +75,12 @@ Test(command_line_parse_arguments, dash_questionmark_BV)
     gv_config* expected_config = initialize_gv_config();
     expected_config->print_version = true;
     expected_config->print_usage = true;
+    safe_strcpy(expected_config->invalid_flags_without_value, "B");
 
     int argc = 2;
     char* argv[] = {"dot", "-?BV"};
     gv_config* actual_config = gv_parse_arguments(argc, argv);
     compare_gv_config(expected_config, actual_config);
-    cr_assert_str_eq(actual_config->invalid_flags_without_value, "B");
 
     free_gv_config(&expected_config);
     free_gv_config(&actual_config);
@@ -82,12 +91,12 @@ Test(command_line_parse_arguments, dash_questionmark_BAV)
     gv_config* expected_config = initialize_gv_config();
     expected_config->print_version = true;
     expected_config->print_usage = true;
+    safe_strcpy(expected_config->invalid_flags_without_value, "BA");
 
     int argc = 2;
     char* argv[] = {"dot", "-?BAV"};
     gv_config* actual_config = gv_parse_arguments(argc, argv);
     compare_gv_config(expected_config, actual_config);
-    cr_assert_str_eq(actual_config->invalid_flags_without_value, "BA");
 
     free_gv_config(&expected_config);
     free_gv_config(&actual_config);
