@@ -26,7 +26,8 @@ bin_PROGRAMS = $(TESTS)
 
 args_gvParseArgs_SOURCES = args_gvParseArgs.c
 args_gvParseArgs_LDADD = \
-	$(top_builddir)/lib/gvc/libgvc.la
+	$(top_builddir)/lib/gvc/libgvc.la \
+	$(top_builddir)/lib/cgraph/libcgraph.la
 
 command_line_initialize_SOURCES = command_line_initialize.c
 command_line_initialize_LDADD = \

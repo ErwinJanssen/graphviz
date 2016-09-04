@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 #include "builddate.h"
+#include "cgraph.h"
 #include "config.h"
 #include "globals.h"
 #include "gvc.h"
@@ -295,6 +296,42 @@ Test(command_line, dash_m5)
     cr_expect(MemTest == 5);
 }
 
+Test(command_line, dash_q)
+{
+    GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+    GvExitOnUsage = 1;
+    int argc = 2;
+    char* argv[] = {"dot", "-q"};
+
+    cr_expect(aggeterr() == AGWARN);
+    gvParseArgs(Gvc, argc, argv);
+    cr_expect(aggeterr() == AGERR);
+}
+
+Test(command_line, dash_q0)
+{
+    GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+    GvExitOnUsage = 1;
+    int argc = 2;
+    char* argv[] = {"dot", "-q0"};
+
+    cr_expect(aggeterr() == AGWARN);
+    gvParseArgs(Gvc, argc, argv);
+    cr_expect(aggeterr() == AGWARN);
+}
+
+Test(command_line, dash_q10)
+{
+    GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+    GvExitOnUsage = 1;
+    int argc = 2;
+    char* argv[] = {"dot", "-q10"};
+
+    cr_expect(aggeterr() == AGWARN);
+    gvParseArgs(Gvc, argc, argv);
+    cr_expect(aggeterr() == AGMAX);
+}
+
 Test(command_line, dash_X_dash_O)
 {
     GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
@@ -409,20 +446,22 @@ Test(command_line, dash_xv3OPv2)
     cr_expect(Verbose == 3);
 }
 
-Test(command_line, dash_xm3OPm2)
+Test(command_line, dash_xm3OPqm2)
 {
     GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
     GvExitOnUsage = 1;
     int argc = 2;
-    char* argv[] = {"dot", "-xm3OPm2"};
+    char* argv[] = {"dot", "-xm3OPqm2"};
 
     cr_expect_not(Reduce);
     cr_expect_not(Gvc->common.auto_outfile_names);
     cr_expect_null(P_graph);
     cr_expect(MemTest == 0);
+    cr_expect(aggeterr() == AGWARN);
     gvParseArgs(Gvc, argc, argv);
     cr_expect(Reduce);
     cr_expect(Gvc->common.auto_outfile_names);
     cr_expect_not_null(P_graph);
     cr_expect(MemTest == 3);
+    cr_expect(aggeterr() == AGERR);
 }

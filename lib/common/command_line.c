@@ -261,6 +261,21 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
         gvc->common.verbose = verbosity_level;
         Verbose = verbosity_level;
     }
+    if (config->message_suppression)
+    {
+        if (config->message_suppression_level == 0)
+        {
+            agseterr(AGWARN);
+        }
+        else if (config->message_suppression_level == 1)
+        {
+            agseterr(AGERR);
+        }
+        else
+        {
+            agseterr(AGMAX);
+        }
+    }
 }
 
 void gv_initialize_empty_string(char** target_address)

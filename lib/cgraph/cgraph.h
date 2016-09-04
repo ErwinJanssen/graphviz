@@ -393,6 +393,7 @@ extern void aginternalmapclearlocalnames(Agraph_t * g);
 typedef enum { AGWARN, AGERR, AGMAX, AGPREV } agerrlevel_t;
 typedef int (*agusererrf) (char*);
 extern agerrlevel_t agseterr(agerrlevel_t);
+extern agerrlevel_t aggeterr(void);
 extern char *aglasterr(void);
 extern int agerr(agerrlevel_t level, const char *fmt, ...);
 extern void agerrorf(const char *fmt, ...);
