@@ -2071,3 +2071,39 @@ char* safe_strcpy_function(char** destination, char* source)
     strcpy(*destination, source);
     return *destination;
 }
+
+bool float_equal(float a, float b)
+{
+    float difference = fabsf(a - b);
+    a = fabsf(a);
+    b = fabsf(b);
+
+    float largest = fmaxf(a, b);
+
+    if(difference <= largest * FLT_EPSILON)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool double_equal(double a, double b)
+{
+    double difference = fabs(a - b);
+    a = fabs(a);
+    b = fabs(b);
+
+    double largest = fmax(a, b);
+
+    if(difference <= largest * DBL_EPSILON)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
