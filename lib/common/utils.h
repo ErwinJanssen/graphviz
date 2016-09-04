@@ -18,6 +18,8 @@
 extern "C" {
 #endif
 
+#include <float.h>
+#include <stdbool.h>
 #include <stdint.h>
 
 #include "agxbuf.h"
@@ -142,6 +144,19 @@ uint8_t char_to_int(char number);
 char* safe_strcpy_function(char** destination, char* source);
 
 #define safe_strcpy(destination, source) safe_strcpy_function(&destination, source)
+
+
+/**
+ * Uses a relative epsilon to determine if two floats are (almost) equal, since
+ * comparing two floats using `==` is unreliable.
+ */
+bool float_equal(float a, float b);
+
+/**
+ * Uses a relative epsilon to determine if two doubles are (almost) equal, since
+ * comparing two doubles using `==` is unreliable.
+ */
+bool double_equal(double a, double b);
 
 #ifdef WIN32
 	extern void fix_fc(void);
