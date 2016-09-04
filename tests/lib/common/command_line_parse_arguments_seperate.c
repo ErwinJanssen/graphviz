@@ -28,6 +28,15 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
     cr_expect_eq(actual->message_suppression, expected->message_suppression);
     cr_expect_eq(actual->message_suppression_level, expected->message_suppression_level);
     cr_expect_eq(actual->memory_test_iterations, expected->memory_test_iterations);
+
+    if (!actual->invalid_flags_without_value)
+    {
+        cr_expect_null(expected->invalid_flags_without_value);
+    }
+    else
+    {
+        cr_expect_str_eq(actual->invalid_flags_without_value, expected->invalid_flags_without_value);
+    }
 }
 
 Test(command_line_parse_arguments, command_name_dot)
