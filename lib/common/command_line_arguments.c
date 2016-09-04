@@ -76,7 +76,8 @@ gv_cmdline_argument gv_common_arguments[] =
         .flag = 'q',
         .argument_type = ARGUMENT_WITH_OPTIONAL_VALUE,
         .description = "Set level of message suppression default=1)",
-        //.field_offset =
+        .field_offset = offsetof(gv_config, message_suppression),
+        .field_offset_optional_value = offsetof(gv_config, message_suppression_level)
     },
     {
         .flag = 's',

@@ -96,6 +96,20 @@ Test(command_line_initialze, memory_test_iterations)
     free_gv_config(&config);
 }
 
+Test(command_line_initialze, message_suppression)
+{
+    gv_config* config = initialize_gv_config();
+    cr_assert(config->message_suppression == 0);
+    free_gv_config(&config);
+}
+
+Test(command_line_initialze, message_suppression_level)
+{
+    gv_config* config = initialize_gv_config();
+    cr_assert(config->message_suppression_level == 1);
+    free_gv_config(&config);
+}
+
 Test(command_line_initialze, invalid_flags_without_value)
 {
     gv_config* config = initialize_gv_config();

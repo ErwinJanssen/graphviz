@@ -34,6 +34,8 @@ gv_config* initialize_gv_config(void)
     default_gv_config->verbosity_level = 1;
     default_gv_config->memory_test = false;
     default_gv_config->memory_test_iterations = 0;
+    default_gv_config->message_suppression = false;
+    default_gv_config->message_suppression_level = 1;
     default_gv_config->invalid_flags_without_value = NULL;
     return default_gv_config;
 }
