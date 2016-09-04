@@ -330,20 +330,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 		if (! gvc->common.auto_outfile_names)
 		    gvjobs_output_filename(gvc, val);
 		break;
-	    case 'q':
-		if (*rest) {
-		    v = atoi(rest);
-		    if (v <= 0) {
-			fprintf(stderr,
-				"Invalid parameter \"%s\" for -q flag - ignored\n",
-				rest);
-		    } else if (v == 1)
-			agseterr(AGERR);
-		    else
-			agseterr(AGMAX);
-		} else
-		    agseterr(AGERR);
-		break;
 	    case 's':
 		if (*rest) {
 		    PSinputscale = atof(rest);

@@ -38,6 +38,11 @@ agerrlevel_t agseterr(agerrlevel_t lvl)
     return oldv;
 }
 
+agerrlevel_t aggeterr(void)
+{
+    return agerrlevel;
+}
+
 char *aglasterr()
 {
     long endpos;
