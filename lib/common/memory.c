@@ -64,6 +64,11 @@ void *grealloc(void *ptr, size_t size)
 
 void* safe_malloc_function(size_t size, const char* calling_function)
 {
+    if (size == 0)
+    {
+        return NULL;
+    }
+
     void* memory = malloc(size);
     if (!memory)
     {
