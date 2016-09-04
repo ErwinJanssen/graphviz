@@ -236,13 +236,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
     /* establish Gvfilepath, if any */
     Gvfilepath = getenv("GV_FILE_PATH");
 
-    if (gvc->common.verbose) {
-        gv_print_version(stderr, gvc);
-    }
-
-    /* feed the globals */
-    Verbose = gvc->common.verbose;
-
     nfiles = 0;
     for (i = 1; i < argc; i++)
 	if (argv[i] && argv[i][0] != '-')

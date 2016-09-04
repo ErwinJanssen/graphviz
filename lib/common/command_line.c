@@ -208,6 +208,21 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
         gv_print_version(stderr, gvc);
         exit(EXIT_SUCCESS);
     }
+    if (config->verbose)
+    {
+        unsigned char verbosity_level = 0;
+        if (config->verbosity_level > UCHAR_MAX)
+        {
+            verbosity_level = UCHAR_MAX;
+        }
+        else
+        {
+            verbosity_level = (unsigned char) config->verbosity_level;
+        }
+        gvc->common.verbose = verbosity_level;
+        Verbose = verbosity_level;
+        gv_print_version(stderr, gvc);
+    }
     if (config->configure)
     {
         gvconfig(gvc, true);
@@ -246,20 +261,6 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
     if (config->invert_y)
     {
         Y_invert = true;
-    }
-    if (config->verbose)
-    {
-        unsigned char verbosity_level = 0;
-        if (config->verbosity_level > UCHAR_MAX)
-        {
-            verbosity_level = UCHAR_MAX;
-        }
-        else
-        {
-            verbosity_level = (unsigned char) config->verbosity_level;
-        }
-        gvc->common.verbose = verbosity_level;
-        Verbose = verbosity_level;
     }
     if (config->message_suppression)
     {
