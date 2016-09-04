@@ -37,6 +37,8 @@ gv_config* initialize_gv_config(void)
     default_gv_config->message_suppression = false;
     default_gv_config->message_suppression_level = 1;
     default_gv_config->invalid_flags_without_value = NULL;
+    default_gv_config->scale_input = false;
+    default_gv_config->scale_input_value = 72;
     return default_gv_config;
 }
 

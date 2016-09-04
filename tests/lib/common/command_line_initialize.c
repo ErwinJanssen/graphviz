@@ -110,6 +110,20 @@ Test(command_line_initialze, message_suppression_level)
     free_gv_config(&config);
 }
 
+Test(command_line_initialze, scale_input)
+{
+    gv_config* config = initialize_gv_config();
+    cr_assert_not(config->scale_input);
+    free_gv_config(&config);
+}
+
+Test(command_line_initialze, scale_input_value)
+{
+    gv_config* config = initialize_gv_config();
+    cr_assert(double_equal(config->scale_input_value, 72));
+    free_gv_config(&config);
+}
+
 Test(command_line_initialze, invalid_flags_without_value)
 {
     gv_config* config = initialize_gv_config();

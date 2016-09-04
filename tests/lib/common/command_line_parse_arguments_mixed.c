@@ -28,6 +28,8 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
     cr_expect_eq(actual->message_suppression, expected->message_suppression);
     cr_expect_eq(actual->message_suppression_level, expected->message_suppression_level);
     cr_expect_eq(actual->memory_test_iterations, expected->memory_test_iterations);
+    cr_expect_eq(actual->scale_input, expected->scale_input);
+    cr_expect(double_equal(actual->scale_input_value, expected->scale_input_value));
 
     if (!actual->invalid_flags_without_value)
     {
@@ -283,15 +285,17 @@ Test(command_line_parse_arguments, dash_Oyx)
     free_gv_config(&actual_config);
 }
 
-Test(command_line_parse_arguments, dash_OPx)
+Test(command_line_parse_arguments, dash_OPsx)
 {
     gv_config* expected_config = initialize_gv_config();
     expected_config->auto_output_filenames = true;
     expected_config->reduce = true;
     expected_config->generate_plugin_graph = true;
+    expected_config->scale_input = true;
+    expected_config->scale_input_value = 72;
 
     int argc = 2;
-    char* argv[] = {"dot", "-OPx"};
+    char* argv[] = {"dot", "-OPsx"};
     gv_config* actual_config = gv_parse_arguments(argc, argv);
     compare_gv_config(expected_config, actual_config);
 
@@ -323,9 +327,11 @@ Test(command_line_parse_arguments, dash_Ovx_dash_OP)
     expected_config->generate_plugin_graph = true;
     expected_config->verbose = true;
     expected_config->verbosity_level = 1;
+    expected_config->scale_input = true;
+    expected_config->scale_input_value = 100.42;
 
     int argc = 3;
-    char* argv[] = {"dot", "-Ovx", "-OP"};
+    char* argv[] = {"dot", "-Ovx", "-Os100.42P"};
     gv_config* actual_config = gv_parse_arguments(argc, argv);
     compare_gv_config(expected_config, actual_config);
 

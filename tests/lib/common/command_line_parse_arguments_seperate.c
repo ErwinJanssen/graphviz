@@ -28,6 +28,8 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
     cr_expect_eq(actual->message_suppression, expected->message_suppression);
     cr_expect_eq(actual->message_suppression_level, expected->message_suppression_level);
     cr_expect_eq(actual->memory_test_iterations, expected->memory_test_iterations);
+    cr_expect_eq(actual->scale_input, expected->scale_input);
+    cr_expect(double_equal(actual->scale_input_value, expected->scale_input_value));
 
     if (!actual->invalid_flags_without_value)
     {
@@ -337,6 +339,36 @@ Test(command_line_parse_arguments, dash_q9_dash_q)
 
     int argc = 3;
     char* argv[] = {"dot", "-q9", "-q"};
+    gv_config* actual_config = gv_parse_arguments(argc, argv);
+    compare_gv_config(expected_config, actual_config);
+
+    free_gv_config(&expected_config);
+    free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_s)
+{
+    gv_config* expected_config = initialize_gv_config();
+    expected_config->scale_input = true;
+    expected_config->scale_input_value = 72;
+
+    int argc = 2;
+    char* argv[] = {"dot", "-s"};
+    gv_config* actual_config = gv_parse_arguments(argc, argv);
+    compare_gv_config(expected_config, actual_config);
+
+    free_gv_config(&expected_config);
+    free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_s50_dot_80)
+{
+    gv_config* expected_config = initialize_gv_config();
+    expected_config->scale_input = true;
+    expected_config->scale_input_value = 50.80;
+
+    int argc = 3;
+    char* argv[] = {"dot", "-s50.80", "-s"};
     gv_config* actual_config = gv_parse_arguments(argc, argv);
     compare_gv_config(expected_config, actual_config);
 

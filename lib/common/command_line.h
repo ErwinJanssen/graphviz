@@ -41,6 +41,8 @@ typedef struct
     uint32_t memory_test_iterations;
     bool message_suppression;
     uint32_t message_suppression_level;
+    bool scale_input;
+    double scale_input_value;
     char* invalid_flags_without_value;
 } gv_config;
 
