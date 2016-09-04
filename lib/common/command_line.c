@@ -110,6 +110,11 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
                 gv_cmdline_argument* argument = &gv_common_arguments[j];
                 bool* field_value = (bool*) get_struct_field(config,
                         argument->field_offset);
+                bool first_encounter = false;
+                if(!*field_value)
+                {
+                    first_encounter = true;
+                }
                 *field_value = true;
                 if (argument->argument_type == ARGUMENT_WITH_OPTIONAL_VALUE
                         && flags[i + 1] && isdigit(flags[i + 1]))
@@ -118,7 +123,7 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
                             config, argument->field_offset_optional_value);
                     uint32_t new_value = gv_read_optional_flag_value(
                             &flags[i + 1]);
-                    if (new_value > *optional_value)
+                    if (first_encounter || new_value > *optional_value)
                     {
                         *optional_value = new_value;
                     }
