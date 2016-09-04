@@ -145,6 +145,18 @@ char* safe_strcpy_function(char** destination, char* source);
 
 #define safe_strcpy(destination, source) safe_strcpy_function(&destination, source)
 
+/**
+ * Reallocates the memory of destination to fit the (part of the) source string.
+ * If the strlen of source is smaller than `n`, it will behave as
+ * `safe_strcpy`, so the size of the destination string will be equal to the
+ * size of the source string.
+ * if the strlen of source is larger than `n`, a terminating zero will be added,
+ * so the size of the destination string will be n + 1.
+ */
+char* safe_strncpy_function(char** destination, char* source, size_t n);
+
+#define safe_strncpy(destination, source, n) safe_strncpy_function(&destination, source, n)
+
 
 /**
  * Uses a relative epsilon to determine if two floats are (almost) equal, since

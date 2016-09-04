@@ -83,9 +83,15 @@ void gv_parse_flags_without_value(gv_config* config, char* flags);
 
 /**
  * This function is called by `gv_parse_flags_without_value` to read the
- * optional value attached to flag.
+ * optional integer value attached to flag.
  */
-uint32_t gv_read_optional_flag_value(char* partial_argument);
+uint32_t gv_read_optional_int_value(char* partial_argument, size_t* i);
+
+/**
+ * This function is called by `gv_parse_flags_without_value` to read the
+ * optional floating point value attached to flag.
+ */
+double gv_read_optional_float_value(char* partial_argument, size_t* i);
 
 /**
  * This functions counts the number of digits that make up an unsigned integer.

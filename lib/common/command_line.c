@@ -116,20 +116,30 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
                     first_encounter = true;
                 }
                 *field_value = true;
-                if (argument->argument_type == ARGUMENT_WITH_OPTIONAL_VALUE
-                        && flags[i + 1] && isdigit(flags[i + 1]))
+                if (flags[i + 1] && isdigit(flags[i + 1]))
                 {
-                    uint32_t* optional_value = (uint32_t*) get_struct_field(
-                            config, argument->field_offset_optional_value);
-                    uint32_t new_value = gv_read_optional_flag_value(
-                            &flags[i + 1]);
-                    if (first_encounter || new_value > *optional_value)
+                    if (argument->argument_type == ARGUMENT_WITH_OPTIONAL_INT)
                     {
-                        *optional_value = new_value;
+                        uint32_t* optional_value = (uint32_t*) get_struct_field(
+                                config, argument->field_offset_optional_value);
+                        uint32_t new_value = gv_read_optional_int_value(
+                                &flags[i + 1], &i);
+                        if (first_encounter || new_value > *optional_value)
+                        {
+                            *optional_value = new_value;
+                        }
                     }
-                    i += number_of_digits(new_value);
-                    valid_flag = true;
-                    continue;
+                    else if (argument->argument_type == ARGUMENT_WITH_OPTIONAL_FLOAT)
+                    {
+                        double* optional_value = (double*) get_struct_field(
+                                config, argument->field_offset_optional_value);
+                        double new_value = gv_read_optional_float_value(
+                                &flags[i + 1], &i);
+                        if (first_encounter || new_value > *optional_value)
+                        {
+                            *optional_value = new_value;
+                        }
+                    }
                 }
                 valid_flag = true;
                 continue;
@@ -148,19 +158,48 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
     }
 }
 
-uint32_t gv_read_optional_flag_value(char* partial_argument)
+uint32_t gv_read_optional_int_value(char* partial_argument, size_t* i)
 {
-    const uint8_t max_integer_length = 8;
+    const uint8_t max_digits = 8;
     uint8_t digits_read = 0;
     uint32_t optional_value = 0;
-    while (partial_argument[digits_read] && digits_read <= max_integer_length
+    while (partial_argument[digits_read] && digits_read <= max_digits
             && isdigit(partial_argument[digits_read]))
     {
         optional_value *= 10;
         optional_value += char_to_int(partial_argument[digits_read]);
         digits_read++;
+        (*i)++;
     }
     return optional_value;
+}
+
+double gv_read_optional_float_value(char* partial_argument, size_t* i)
+{
+    const uint8_t max_digits = 8;
+    uint8_t digits_read = 0;
+    bool decimal_point_found = false;
+    while (partial_argument[digits_read] && digits_read <= max_digits
+            && (isdigit(partial_argument[digits_read])
+                    || partial_argument[digits_read] == '.'))
+    {
+        if (partial_argument[digits_read] == '.')
+        {
+            if(!decimal_point_found)
+            {
+                decimal_point_found = true;
+            }
+            else
+            {
+                break;
+            }
+        }
+        digits_read++;
+        (*i)++;
+    }
+    char* optional_value_string = NULL;
+    optional_value_string = safe_strncpy(optional_value_string, partial_argument, digits_read);
+    return atof(optional_value_string);
 }
 
 uint8_t number_of_digits(uint32_t integer)
