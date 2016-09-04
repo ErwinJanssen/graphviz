@@ -25,6 +25,8 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
     cr_expect_eq(actual->verbose, expected->verbose);
     cr_expect_eq(actual->verbosity_level, expected->verbosity_level);
     cr_expect_eq(actual->memory_test, expected->memory_test);
+    cr_expect_eq(actual->message_suppression, expected->message_suppression);
+    cr_expect_eq(actual->message_suppression_level, expected->message_suppression_level);
     cr_expect_eq(actual->memory_test_iterations, expected->memory_test_iterations);
 }
 
@@ -322,7 +324,7 @@ Test(command_line_parse_arguments, dash_Ovx_dash_OP)
     free_gv_config(&actual_config);
 }
 
-Test(command_line_parse_arguments, dash_Ov7x_dash_v2OP)
+Test(command_line_parse_arguments, dash_Ov7x_dash_v2OP_dash_q60)
 {
     gv_config* expected_config = initialize_gv_config();
     expected_config->auto_output_filenames = true;
@@ -330,9 +332,11 @@ Test(command_line_parse_arguments, dash_Ov7x_dash_v2OP)
     expected_config->generate_plugin_graph = true;
     expected_config->verbose = true;
     expected_config->verbosity_level = 7;
+    expected_config->message_suppression = true;
+    expected_config->message_suppression_level = 60;
 
-    int argc = 3;
-    char* argv[] = {"dot", "-Ov7x", "-Ov2P"};
+    int argc = 4;
+    char* argv[] = {"dot", "-Ov7x", "-Ov2P", "-q60"};
     gv_config* actual_config = gv_parse_arguments(argc, argv);
     compare_gv_config(expected_config, actual_config);
 

@@ -39,6 +39,8 @@ typedef struct
     uint32_t verbosity_level;
     bool memory_test;
     uint32_t memory_test_iterations;
+    bool message_suppression;
+    uint32_t message_suppression_level;
     char* invalid_flags_without_value;
 } gv_config;
 

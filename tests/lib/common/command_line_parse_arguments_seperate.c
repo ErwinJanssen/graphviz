@@ -25,6 +25,8 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
     cr_expect_eq(actual->verbose, expected->verbose);
     cr_expect_eq(actual->verbosity_level, expected->verbosity_level);
     cr_expect_eq(actual->memory_test, expected->memory_test);
+    cr_expect_eq(actual->message_suppression, expected->message_suppression);
+    cr_expect_eq(actual->message_suppression_level, expected->message_suppression_level);
     cr_expect_eq(actual->memory_test_iterations, expected->memory_test_iterations);
 }
 
@@ -296,6 +298,36 @@ Test(command_line_parse_arguments, dash_m9_dash_m)
 
     int argc = 3;
     char* argv[] = {"dot", "-m9", "-m"};
+    gv_config* actual_config = gv_parse_arguments(argc, argv);
+    compare_gv_config(expected_config, actual_config);
+
+    free_gv_config(&expected_config);
+    free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_q)
+{
+    gv_config* expected_config = initialize_gv_config();
+    expected_config->message_suppression = true;
+    expected_config->message_suppression_level = 1;
+
+    int argc = 2;
+    char* argv[] = {"dot", "-q"};
+    gv_config* actual_config = gv_parse_arguments(argc, argv);
+    compare_gv_config(expected_config, actual_config);
+
+    free_gv_config(&expected_config);
+    free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_q9_dash_q)
+{
+    gv_config* expected_config = initialize_gv_config();
+    expected_config->message_suppression = true;
+    expected_config->message_suppression_level = 9;
+
+    int argc = 3;
+    char* argv[] = {"dot", "-q9", "-q"};
     gv_config* actual_config = gv_parse_arguments(argc, argv);
     compare_gv_config(expected_config, actual_config);
 
