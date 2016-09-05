@@ -323,20 +323,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 		if (! gvc->common.auto_outfile_names)
 		    gvjobs_output_filename(gvc, val);
 		break;
-	    case 's':
-		if (*rest) {
-		    PSinputscale = atof(rest);
-		    if (PSinputscale < 0) {
-			fprintf(stderr,
-				"Invalid parameter \"%s\" for -s flag\n",
-				rest);
-			return (dotneato_usage(1));
-		    }
-		    else if (PSinputscale == 0)
-			PSinputscale = POINTS_PER_INCH;
-		} else
-		    PSinputscale = POINTS_PER_INCH;
-		break;
 	    }
 	} else if (argv[i])
 	    gvc->input_filenames[nfiles++] = argv[i];
