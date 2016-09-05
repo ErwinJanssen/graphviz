@@ -36,7 +36,7 @@ typedef struct
     gv_argument_type argument_type;
     char* description;
     size_t field_offset;
-    size_t field_offset_optional_value;
+    size_t additional_field_offset;
 } gv_cmdline_argument;
 
 /**
