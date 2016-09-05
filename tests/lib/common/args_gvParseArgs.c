@@ -332,6 +332,39 @@ Test(command_line, dash_q10)
     cr_expect(aggeterr() == AGMAX);
 }
 
+Test(command_line, dash_s)
+{
+    GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+    GvExitOnUsage = 1;
+    int argc = 2;
+    char* argv[] = {"dot", "-s"};
+
+    gvParseArgs(Gvc, argc, argv);
+    cr_expect(double_equal(PSinputscale, 72));
+}
+
+Test(command_line, dash_s0)
+{
+    GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+    GvExitOnUsage = 1;
+    int argc = 2;
+    char* argv[] = {"dot", "-s0"};
+
+    gvParseArgs(Gvc, argc, argv);
+    cr_expect(double_equal(PSinputscale, 72));
+}
+
+Test(command_line, dash_s147_dot_234)
+{
+    GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
+    GvExitOnUsage = 1;
+    int argc = 2;
+    char* argv[] = {"dot", "-s147.234"};
+
+    gvParseArgs(Gvc, argc, argv);
+    cr_expect(double_equal(PSinputscale, 147.234));
+}
+
 Test(command_line, dash_X_dash_O)
 {
     GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
@@ -392,12 +425,12 @@ Test(command_line, dot_dash_xO)
     cr_expect_str_eq(CmdName, "dot");
 }
 
-Test(command_line, neato_dash_xOy)
+Test(command_line, neato_dash_xOs15_dot_76y)
 {
     GVC_t *Gvc = gvContextPlugins(lt_preloaded_symbols, DEMAND_LOADING);
     GvExitOnUsage = 1;
     int argc = 2;
-    char* argv[] = {"neato", "-xOy"};
+    char* argv[] = {"neato", "-xOs15.76y"};
 
     cr_expect_not(Reduce);
     cr_expect_not(Y_invert);
@@ -408,6 +441,7 @@ Test(command_line, neato_dash_xOy)
     cr_expect(Gvc->common.auto_outfile_names);
     cr_expect_str_eq(Gvc->common.cmdname, "neato");
     cr_expect_str_eq(CmdName, "neato");
+    cr_expect(double_equal(PSinputscale, 15.76));
 }
 
 Test(command_line, dash_xOP)
