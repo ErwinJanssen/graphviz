@@ -124,7 +124,7 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
                     if (argument->argument_type == ARGUMENT_WITH_OPTIONAL_INT)
                     {
                         uint32_t* optional_value = (uint32_t*) get_struct_field(
-                                config, argument->field_offset_optional_value);
+                                config, argument->additional_field_offset);
                         uint32_t new_value = gv_read_optional_int_value(
                                 &flags[i + 1], &i);
                         if (first_encounter || new_value > *optional_value)
@@ -135,7 +135,7 @@ void gv_parse_flags_without_value(gv_config* config, char* flags)
                     else if (argument->argument_type == ARGUMENT_WITH_OPTIONAL_FLOAT)
                     {
                         double* optional_value = (double*) get_struct_field(
-                                config, argument->field_offset_optional_value);
+                                config, argument->additional_field_offset);
                         double new_value = gv_read_optional_float_value(
                                 &flags[i + 1], &i);
                         if (first_encounter || new_value > *optional_value)
