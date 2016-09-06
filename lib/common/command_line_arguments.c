@@ -90,7 +90,8 @@ gv_cmdline_argument gv_common_arguments[] =
         .flag = 'G',
         .argument_type = ARGUMENT_WITH_MULTIPLE_VALUES,
         .description = "Set additional graph attribute in the form of name=val",
-        //.field_offset =
+        .field_offset = offsetof(gv_config, graph_attributes),
+        .additional_field_offset = offsetof(gv_config, graph_attributes_count)
     },
     {
         .flag = 'N',

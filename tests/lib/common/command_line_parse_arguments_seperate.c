@@ -30,6 +30,14 @@ static void compare_gv_config(gv_config* actual, gv_config* expected)
     cr_expect_eq(actual->memory_test_iterations, expected->memory_test_iterations);
     cr_expect_eq(actual->scale_input, expected->scale_input);
     cr_expect(double_equal(actual->scale_input_value, expected->scale_input_value));
+    cr_expect_eq(actual->graph_attributes_count, expected->graph_attributes_count);
+    if (actual->graph_attributes_count == expected->graph_attributes_count)
+    {
+        for (size_t i = 0; i < actual->graph_attributes_count; i++)
+        {
+            cr_expect_str_eq(actual->graph_attributes[i], expected->graph_attributes[i]);
+        }
+    }
 
     if (!actual->invalid_flags_without_value)
     {
@@ -369,6 +377,70 @@ Test(command_line_parse_arguments, dash_s50_dot_80)
 
     int argc = 3;
     char* argv[] = {"dot", "-s50.80", "-s"};
+    gv_config* actual_config = gv_parse_arguments(argc, argv);
+    compare_gv_config(expected_config, actual_config);
+
+    free_gv_config(&expected_config);
+    free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_GdirLR)
+{
+    gv_config* expected_config = initialize_gv_config();
+    expected_config->graph_attributes_count = 1;
+    char* graph_attributes[] = {"dir=LR"};
+    expected_config->graph_attributes = graph_attributes;
+
+    int argc = 2;
+    char* argv[] = {"dot", "-Gdir=LR"};
+    gv_config* actual_config = gv_parse_arguments(argc, argv);
+    compare_gv_config(expected_config, actual_config);
+
+    free_gv_config(&expected_config);
+    free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_G_dirLR)
+{
+    gv_config* expected_config = initialize_gv_config();
+    expected_config->graph_attributes_count = 1;
+    char* graph_attributes[] = {"dir=LR"};
+    expected_config->graph_attributes = graph_attributes;
+
+    int argc = 3;
+    char* argv[] = {"dot", "-G", "dir=LR"};
+    gv_config* actual_config = gv_parse_arguments(argc, argv);
+    compare_gv_config(expected_config, actual_config);
+
+    free_gv_config(&expected_config);
+    free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_G_dirLR_Gdpi300)
+{
+    gv_config* expected_config = initialize_gv_config();
+    expected_config->graph_attributes_count = 2;
+    char* graph_attributes[] = {"dir=LR", "dpi=300"};
+    expected_config->graph_attributes = graph_attributes;
+
+    int argc = 4;
+    char* argv[] = {"dot", "-G", "dir=LR", "-Gdpi=300"};
+    gv_config* actual_config = gv_parse_arguments(argc, argv);
+    compare_gv_config(expected_config, actual_config);
+
+    free_gv_config(&expected_config);
+    free_gv_config(&actual_config);
+}
+
+Test(command_line_parse_arguments, dash_G_Gdpi300)
+{
+    gv_config* expected_config = initialize_gv_config();
+    expected_config->graph_attributes_count = 1;
+    char* graph_attributes[] = {"dpi=300"};
+    expected_config->graph_attributes = graph_attributes;
+
+    int argc = 4;
+    char* argv[] = {"dot", "-G", "-Gdpi=300"};
     gv_config* actual_config = gv_parse_arguments(argc, argv);
     compare_gv_config(expected_config, actual_config);
 
