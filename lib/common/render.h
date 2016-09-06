@@ -98,6 +98,8 @@ extern "C" {
     extern void do_graph_label(graph_t * sg);
     extern void graph_init(graph_t * g, boolean use_rankdir);
     extern void graph_cleanup(graph_t * g);
+    extern void global_def(agxbuf* xb, char *dcl, int kind,
+            attrsym_t * ((*dclfun)(Agraph_t *, int kind, char *, char *)));
     extern int dotneato_args_initialize(GVC_t * gvc, int, char **);
     extern int dotneato_usage(int);
     char* dotneato_basename (char* path);

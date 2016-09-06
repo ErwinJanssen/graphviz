@@ -174,7 +174,7 @@ static void use_library(GVC_t *gvc, const char *name)
     gvc->common.lib = Lib;
 }
 
-static void global_def(agxbuf* xb, char *dcl, int kind,
+void global_def(agxbuf* xb, char *dcl, int kind,
          attrsym_t * ((*dclfun) (Agraph_t *, int kind, char *, char *)) )
 {
     char *p;
@@ -247,14 +247,6 @@ int dotneato_args_initialize(GVC_t * gvc, int argc, char **argv)
 	if (argv[i] && argv[i][0] == '-') {
 	    rest = &(argv[i][2]);
 	    switch (c = argv[i][1]) {
-	    case 'G':
-		if (*rest)
-		    global_def(&xb, rest, AGRAPH, agattr);
-		else {
-		    fprintf(stderr, "Missing argument for -G flag\n");
-		    return (dotneato_usage(1));
-		}
-		break;
 	    case 'N':
 		if (*rest)
 		    global_def(&xb, rest, AGNODE,agattr);

@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "agxbuf.h"
 #include "geom.h"
 #include "globals.h"
 #include "memory.h"
@@ -371,6 +372,16 @@ void gv_process_arguments(gv_config* config, GVC_t* gvc)
         else
         {
             PSinputscale = config->scale_input_value;
+        }
+    }
+    unsigned char buf[SMALLBUF];
+    agxbuf xb;
+    agxbinit(&xb, SMALLBUF, buf);
+    if (config->graph_attributes_count > 0)
+    {
+        for (size_t i = 0; i < config->graph_attributes_count; i++)
+        {
+            global_def(&xb, config->graph_attributes[i], AGRAPH, agattr);
         }
     }
 }

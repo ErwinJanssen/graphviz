@@ -439,7 +439,7 @@ Test(command_line_parse_arguments, dash_G_Gdpi300)
     char* graph_attributes[] = {"dpi=300"};
     expected_config->graph_attributes = graph_attributes;
 
-    int argc = 4;
+    int argc = 3;
     char* argv[] = {"dot", "-G", "-Gdpi=300"};
     gv_config* actual_config = gv_parse_arguments(argc, argv);
     compare_gv_config(expected_config, actual_config);
