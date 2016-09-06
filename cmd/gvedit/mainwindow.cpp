@@ -12,6 +12,16 @@
  *************************************************************************/
 
 #include <QtGui>
+#include <QtWidgets/QDockWidget>
+#include <QtWidgets/QFileDialog>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QMdiArea>
+#include <QtWidgets/QMdiSubWindow>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QToolBar>
+
 #include <qframe.h>
 #include "mainwindow.h"
 #include "mdichild.h"

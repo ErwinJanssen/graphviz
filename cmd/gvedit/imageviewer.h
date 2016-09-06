@@ -17,6 +17,7 @@
 #define IMAGEVIEWER_H
 #include <QtGui>
 #include <QMainWindow>
+#include <QMdiSubWindow>
 #include <QPrinter>
 
 QT_BEGIN_NAMESPACE

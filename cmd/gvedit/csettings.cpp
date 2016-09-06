@@ -22,6 +22,7 @@
 #include "string.h"
 #include "mainwindow.h"
 #include <QTemporaryFile>
+#include <QtWidgets/QMdiArea>
 
 extern int errorPipe(char *errMsg);
 

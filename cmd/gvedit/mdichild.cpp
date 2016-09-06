@@ -13,6 +13,10 @@
 
 
 #include <QtGui>
+#include <QtWidgets/QFileDialog>
+#include <QtWidgets/QMdiArea>
+#include <QtWidgets/QMdiSubWindow>
+#include <QtWidgets/QMessageBox>
 
 #include "mdichild.h"
 #include "mainwindow.h"

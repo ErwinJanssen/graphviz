@@ -15,6 +15,14 @@
 #include "imageviewer.h"
 #include "mdichild.h"
 
+#include <QtWidgets/QAction>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QScrollBar>
+
 extern int errorPipe(char *errMsg);
 
 
