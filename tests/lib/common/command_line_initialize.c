@@ -124,6 +124,20 @@ Test(command_line_initialze, scale_input_value)
     free_gv_config(&config);
 }
 
+Test(command_line_initialze, graph_attributes)
+{
+    gv_config* config = initialize_gv_config();
+    cr_assert_null(config->graph_attributes);
+    free_gv_config(&config);
+}
+
+Test(command_line_initialze, graph_attributes_count)
+{
+    gv_config* config = initialize_gv_config();
+    cr_assert(config->graph_attributes_count == 0);
+    free_gv_config(&config);
+}
+
 Test(command_line_initialze, invalid_flags_without_value)
 {
     gv_config* config = initialize_gv_config();

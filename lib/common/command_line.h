@@ -43,6 +43,8 @@ typedef struct
     uint32_t message_suppression_level;
     bool scale_input;
     double scale_input_value;
+    char** graph_attributes;
+    size_t graph_attributes_count;
     char* invalid_flags_without_value;
 } gv_config;
 
