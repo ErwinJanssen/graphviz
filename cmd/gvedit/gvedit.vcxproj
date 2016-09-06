@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -14,97 +14,128 @@
     <ProjectGuid>{33E97266-F213-3639-BCAB-2F3F95E15B16}</ProjectGuid>
     <RootNamespace>gvedit</RootNamespace>
     <Keyword>Qt4VSv1.0</Keyword>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <PlatformToolSet>v140</PlatformToolSet>
+    <OutputDirectory>$(SolutionDir)$(Configuration)\Graphviz\bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>gvedit</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <PlatformToolSet>v140</PlatformToolSet>
+    <OutputDirectory>$(SolutionDir)$(Configuration)\Graphviz\bin\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>gvedit</PrimaryOutput>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_ProjectFileVersion>14.0.25123.0</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\Graphviz\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">gvedit</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\Graphviz\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">gvedit</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)Debug\Graphviz\bin\</OutDir>
-    <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)Release\Graphviz\bin\</OutDir>
-    <IntDir>$(Configuration)\$(ProjectName)\</IntDir>
-    <LinkIncremental>false</LinkIncremental>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Midl>
-      <WarningLevel>0</WarningLevel>
-      <DefaultCharType>Unsigned</DefaultCharType>
-      <EnableErrorChecks>None</EnableErrorChecks>
-    </Midl>
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;HAVE_CONFIG_H;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <WarningLevel>Level4</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <EnablePREfast>true</EnablePREfast>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(QTDIR)include;$(QTDIR)include\Qt3DInput;$(QTDIR)include\QtCore;$(QTDIR)include\QtGUI;$(QTDIR)include\QtPrintSupport;$(QTDIR)include\QtWidgets;$(SolutionDir)windows\include;$(SolutionDir)lib\cdt;$(SolutionDir)lib\cgraph;$(SolutionDir)lib\common;$(SolutionDir)lib\gvc;$(SolutionDir)lib\pathplan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;HAVE_CONFIG_H;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-    <Link>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <LinkTimeCodeGeneration />
-      <AdditionalLibraryDirectories>$(QTDIR)lib;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;$(SolutionDir);$(SolutionDir)windows\include;$(SolutionDir)lib\gvc;$(SolutionDir)lib\common;$(SolutionDir)lib\pathplan;$(SolutionDir)lib\cgraph;$(SolutionDir)lib\cdt;C:\Programs\Development\Qt\5.7\msvc2015\include;C:\Programs\Development\Qt\5.7\msvc2015\include\QtPrintSupport;C:\Programs\Development\Qt\5.7\msvc2015\include\QtWidgets;C:\Programs\Development\Qt\5.7\msvc2015\include\QtGui;C:\Programs\Development\Qt\5.7\msvc2015\include\QtANGLE;C:\Programs\Development\Qt\5.7\msvc2015\include\QtCore;release;C:\Programs\Development\Qt\5.7\msvc2015\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>release\</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;HAVE_CONFIG_H;QT_NO_DEBUG;QT_PRINTSUPPORT_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>C:\Programs\Development\Qt\5.7\msvc2015\lib\qtmain.lib;shell32.lib;..\..\Release\Graphviz\bin\gvc.lib;..\..\Release\Graphviz\bin\cgraph.lib;..\..\Release\Graphviz\bin\cdt.lib;C:\Programs\Development\Qt\5.7\msvc2015\lib\Qt5PrintSupport.lib;C:\Programs\Development\Qt\5.7\msvc2015\lib\Qt5Widgets.lib;C:\Programs\Development\Qt\5.7\msvc2015\lib\Qt5Gui.lib;C:\Programs\Development\Qt\5.7\msvc2015\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Programs\Development\Qt\5.7\msvc2015\lib;C:\utils\postgresql\pgsql\lib;C:\utils\my_sql\my_sql\lib;..\..\Release\Graphviz\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\gvedit.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
     <Midl>
-      <WarningLevel>0</WarningLevel>
       <DefaultCharType>Unsigned</DefaultCharType>
       <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
     </Midl>
-    <ClCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;HAVE_CONFIG_H;QT_DLL;QT_NO_DEBUG;QT_GUI_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <WarningLevel>Level4</WarningLevel>
-      <EnablePREfast>true</EnablePREfast>
-      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(QTDIR)include;$(QTDIR)include\Qt3DInput;$(QTDIR)include\QtCore;$(QTDIR)include\QtGUI;$(QTDIR)include\QtPrintSupport;$(QTDIR)include\QtWidgets;$(SolutionDir)windows\include;$(SolutionDir)lib\cdt;$(SolutionDir)lib\cgraph;$(SolutionDir)lib\common;$(SolutionDir)lib\gvc;$(SolutionDir)lib\pathplan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;HAVE_CONFIG_H;QT_DLL;QT_NO_DEBUG;QT_GUI_LIB;QT_CORE_LIB;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_THREAD_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;HAVE_CONFIG_H;QT_NO_DEBUG;QT_PRINTSUPPORT_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;$(SolutionDir);$(SolutionDir)windows\include;$(SolutionDir)lib\gvc;$(SolutionDir)lib\common;$(SolutionDir)lib\pathplan;$(SolutionDir)lib\cgraph;$(SolutionDir)lib\cdt;C:\Programs\Development\Qt\5.7\msvc2015\include;C:\Programs\Development\Qt\5.7\msvc2015\include\QtPrintSupport;C:\Programs\Development\Qt\5.7\msvc2015\include\QtWidgets;C:\Programs\Development\Qt\5.7\msvc2015\include\QtGui;C:\Programs\Development\Qt\5.7\msvc2015\include\QtANGLE;C:\Programs\Development\Qt\5.7\msvc2015\include\QtCore;debug;C:\Programs\Development\Qt\5.7\msvc2015\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>debug\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;HAVE_CONFIG_H;QT_PRINTSUPPORT_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <AdditionalDependencies>C:\Programs\Development\Qt\5.7\msvc2015\lib\qtmaind.lib;shell32.lib;..\..\Release\Graphviz\bin\gvc.lib;..\..\Release\Graphviz\bin\cgraph.lib;..\..\Release\Graphviz\bin\cdt.lib;C:\Programs\Development\Qt\5.7\msvc2015\lib\Qt5PrintSupportd.lib;C:\Programs\Development\Qt\5.7\msvc2015\lib\Qt5Widgetsd.lib;C:\Programs\Development\Qt\5.7\msvc2015\lib\Qt5Guid.lib;C:\Programs\Development\Qt\5.7\msvc2015\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Programs\Development\Qt\5.7\msvc2015\lib;C:\utils\postgresql\pgsql\lib;C:\utils\my_sql\my_sql\lib;..\..\Release\Graphviz\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\gvedit.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
-      <LinkTimeCodeGeneration />
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>$(QTDIR)lib;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
     </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;HAVE_CONFIG_H;QT_PRINTSUPPORT_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="csettings.cpp" />
@@ -114,30 +145,70 @@
     <ClCompile Include="mdichild.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="csettings.h" />
-    <ClInclude Include="imageviewer.h" />
-    <ClInclude Include="mainwindow.h" />
-    <ClInclude Include="mdichild.h" />
+    <CustomBuild Include="csettings.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">csettings.h;C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe  -DUNICODE -DWIN32 -DHAVE_CONFIG_H -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -IC:/Programs/Development/Qt/5.7/msvc2015/mkspecs/win32-msvc2015 -IC:/Code/Repositories/graphviz/cmd/gvedit -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)windows/include" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/gvc" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/common" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/pathplan" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cgraph" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cdt" -IC:/Programs/Development/Qt/5.7/msvc2015/include -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtPrintSupport -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtWidgets -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtGui -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtANGLE -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtCore csettings.h -o release\moc_csettings.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC csettings.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_csettings.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">csettings.h;C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe  -DUNICODE -DWIN32 -DHAVE_CONFIG_H -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -IC:/Programs/Development/Qt/5.7/msvc2015/mkspecs/win32-msvc2015 -IC:/Code/Repositories/graphviz/cmd/gvedit -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)windows/include" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/gvc" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/common" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/pathplan" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cgraph" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cdt" -IC:/Programs/Development/Qt/5.7/msvc2015/include -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtPrintSupport -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtWidgets -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtGui -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtANGLE -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtCore csettings.h -o debug\moc_csettings.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC csettings.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_csettings.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="imageviewer.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">imageviewer.h;C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe  -DUNICODE -DWIN32 -DHAVE_CONFIG_H -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -IC:/Programs/Development/Qt/5.7/msvc2015/mkspecs/win32-msvc2015 -IC:/Code/Repositories/graphviz/cmd/gvedit -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)windows/include" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/gvc" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/common" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/pathplan" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cgraph" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cdt" -IC:/Programs/Development/Qt/5.7/msvc2015/include -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtPrintSupport -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtWidgets -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtGui -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtANGLE -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtCore imageviewer.h -o release\moc_imageviewer.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC imageviewer.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_imageviewer.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">imageviewer.h;C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe  -DUNICODE -DWIN32 -DHAVE_CONFIG_H -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -IC:/Programs/Development/Qt/5.7/msvc2015/mkspecs/win32-msvc2015 -IC:/Code/Repositories/graphviz/cmd/gvedit -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)windows/include" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/gvc" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/common" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/pathplan" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cgraph" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cdt" -IC:/Programs/Development/Qt/5.7/msvc2015/include -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtPrintSupport -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtWidgets -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtGui -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtANGLE -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtCore imageviewer.h -o debug\moc_imageviewer.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC imageviewer.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_imageviewer.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">mainwindow.h;C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe  -DUNICODE -DWIN32 -DHAVE_CONFIG_H -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -IC:/Programs/Development/Qt/5.7/msvc2015/mkspecs/win32-msvc2015 -IC:/Code/Repositories/graphviz/cmd/gvedit -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)windows/include" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/gvc" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/common" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/pathplan" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cgraph" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cdt" -IC:/Programs/Development/Qt/5.7/msvc2015/include -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtPrintSupport -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtWidgets -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtGui -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtANGLE -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtCore mainwindow.h -o release\moc_mainwindow.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC mainwindow.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_mainwindow.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">mainwindow.h;C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe  -DUNICODE -DWIN32 -DHAVE_CONFIG_H -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -IC:/Programs/Development/Qt/5.7/msvc2015/mkspecs/win32-msvc2015 -IC:/Code/Repositories/graphviz/cmd/gvedit -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)windows/include" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/gvc" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/common" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/pathplan" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cgraph" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cdt" -IC:/Programs/Development/Qt/5.7/msvc2015/include -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtPrintSupport -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtWidgets -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtGui -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtANGLE -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtCore mainwindow.h -o debug\moc_mainwindow.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC mainwindow.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_mainwindow.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="mdichild.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">mdichild.h;C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe  -DUNICODE -DWIN32 -DHAVE_CONFIG_H -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -IC:/Programs/Development/Qt/5.7/msvc2015/mkspecs/win32-msvc2015 -IC:/Code/Repositories/graphviz/cmd/gvedit -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)windows/include" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/gvc" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/common" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/pathplan" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cgraph" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cdt" -IC:/Programs/Development/Qt/5.7/msvc2015/include -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtPrintSupport -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtWidgets -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtGui -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtANGLE -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtCore mdichild.h -o release\moc_mdichild.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MOC mdichild.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\moc_mdichild.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">mdichild.h;C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Programs\Development\Qt\5.7\msvc2015\bin\moc.exe  -DUNICODE -DWIN32 -DHAVE_CONFIG_H -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -D_MSC_VER=1900 -D_WIN32 -IC:/Programs/Development/Qt/5.7/msvc2015/mkspecs/win32-msvc2015 -IC:/Code/Repositories/graphviz/cmd/gvedit -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)windows/include" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/gvc" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/common" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/pathplan" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cgraph" -I"C:/Code/Repositories/graphviz/cmd/gvedit/$(SolutionDir)lib/cdt" -IC:/Programs/Development/Qt/5.7/msvc2015/include -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtPrintSupport -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtWidgets -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtGui -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtANGLE -IC:/Programs/Development/Qt/5.7/msvc2015/include/QtCore mdichild.h -o debug\moc_mdichild.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MOC mdichild.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\moc_mdichild.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
     <ClInclude Include="ui_settings.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="images\copy.png" />
-    <Image Include="images\cut.png" />
-    <Image Include="images\icon.png" />
-    <Image Include="images\new.png" />
-    <Image Include="images\open.png" />
-    <Image Include="images\paste.png" />
-    <Image Include="images\run.png" />
-    <Image Include="images\save.png" />
-    <Image Include="images\settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\lib\gvc.vcxproj">
-      <Project>{15229511-9f6c-48a5-9194-660ca6492563}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
+    <None Include="images\copy.png" />
+    <None Include="images\cut.png" />
+    <None Include="images\icon.png" />
+    <CustomBuild Include="mdi.qrc">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">mdi.qrc;C:\Programs\Development\Qt\5.7\msvc2015\bin\rcc.exe;images\icon.png;images\save.png;images\open.png;images\cut.png;images\copy.png;images\run.png;images\new.png;images\paste.png;images\settings.png;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Programs\Development\Qt\5.7\msvc2015\bin\rcc.exe -name mdi mdi.qrc -o release\qrc_mdi.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">RCC mdi.qrc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release\qrc_mdi.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">mdi.qrc;C:\Programs\Development\Qt\5.7\msvc2015\bin\rcc.exe;images\icon.png;images\save.png;images\open.png;images\cut.png;images\copy.png;images\run.png;images\new.png;images\paste.png;images\settings.png;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Programs\Development\Qt\5.7\msvc2015\bin\rcc.exe -name mdi mdi.qrc -o debug\qrc_mdi.cpp</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">RCC mdi.qrc</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug\qrc_mdi.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <None Include="images\new.png" />
+    <None Include="images\open.png" />
+    <None Include="images\paste.png" />
+    <None Include="images\run.png" />
+    <None Include="images\save.png" />
+    <None Include="images\settings.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>
