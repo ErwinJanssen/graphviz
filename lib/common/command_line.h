@@ -72,8 +72,14 @@ gv_config* gv_parse_arguments(int argc, char** argv);
  * Called by `gv_parse_arguments` to parse an argument that takes a value.
  * Returns true if an argument with a value is found, returns false otherwise.
  */
-bool gv_parse_argument_with_value(gv_config* config, char** argv,
+bool gv_parse_argument_with_value(gv_config* config, int argc, char** argv,
         int* argv_position);
+
+/**
+ * Read the value attached to an argument. If the value is in the next argument,
+ * increment arg_position by one. If no value is present, return NULL;
+ */
+char* gv_get_argument_value(int argc, char** argv, int* argv_position);
 
 /**
  * Called by `gv_parse_arguments` to parse the flags that do not have

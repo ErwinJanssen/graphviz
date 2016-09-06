@@ -73,7 +73,7 @@ gv_config* gv_parse_arguments(int argc, char** argv)
             continue;
         }
 
-        if (gv_parse_argument_with_value(config, argv, &i))
+        if (gv_parse_argument_with_value(config, argc, argv, &i))
         {
             // TODO add arguments to gv_parse_argument_with_value function
             continue;
@@ -83,20 +83,61 @@ gv_config* gv_parse_arguments(int argc, char** argv)
     return config;
 }
 
-bool gv_parse_argument_with_value(gv_config* config, char** argv,
+bool gv_parse_argument_with_value(gv_config* config, int argc, char** argv,
         int* argv_position)
 {
     char* argument = argv[*argv_position];
     for (size_t i = 0; i < gv_common_arguments_length(); i++)
     {
-        if ((gv_common_arguments[i].argument_type == ARGUMENT_WITH_MULTIPLE_VALUES
-                || gv_common_arguments[i].argument_type == ARGUMENT_WITH_SINGLE_VALUE)
-                && argument[1] == gv_common_arguments[i].flag)
+        gv_cmdline_argument argument_type = gv_common_arguments[i];
+        if (argument[1] == argument_type.flag)
         {
-            return true;
+            if (argument_type.argument_type == ARGUMENT_WITH_SINGLE_VALUE)
+            {
+                return true;
+            }
+            else if (argument_type.argument_type == ARGUMENT_WITH_MULTIPLE_VALUES)
+            {
+                char* value = gv_get_argument_value(argc, argv, argv_position);
+                if (!value)
+                {
+                    fprintf(stderr, "Encountered -%c without value, ignoring.\n", argument[1]);
+                    return true;
+                }
+                char*** value_field = (char***) get_struct_field(config,
+                        argument_type.field_offset);
+                size_t* counter_field = (size_t*) get_struct_field(config,
+                        argument_type.additional_field_offset);
+                (*counter_field)++;
+                (*value_field) = realloc(*value_field, (*counter_field) * sizeof(char**));
+                (*value_field)[(*counter_field) - 1] = NULL;
+                safe_strcpy((*value_field)[(*counter_field) - 1], value);
+                return true;
+            }
         }
     }
     return false;
+}
+
+char* gv_get_argument_value(int argc, char** argv, int* argv_position)
+{
+    if (strlen(argv[*argv_position]) <= 2)
+    {
+        if ((*argv_position) + 1 == argc || argv[(*argv_position) + 1][0] == '-')
+        {
+            return NULL;
+        }
+        else
+        {
+            (*argv_position)++;
+            return argv[(*argv_position)];
+        }
+    }
+    else
+    {
+        char* value = NULL;
+        return safe_strcpy(value, &(argv[*argv_position][2]));
+    }
 }
 
 void gv_parse_flags_without_value(gv_config* config, char* flags)
