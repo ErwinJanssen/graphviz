@@ -61,6 +61,8 @@ gv_config* gv_parse_arguments(int argc, char** argv)
     safe_strcpy(config->command_name, dotneato_basename(argv[0]));
     for (int i = 1; i < argc; i++)
     {
+        fprintf(stderr, "gv_parse_arguments counter: %d\n", i);
+        fflush(stderr);
         char* argument = argv[i];
         if (!argument)
         {
@@ -75,9 +77,12 @@ gv_config* gv_parse_arguments(int argc, char** argv)
             // TODO add argument to input file list
             continue;
         }
-
+        fprintf(stderr, "Before gv_parse_argument_with_value\n");
+        fflush(stderr);
         if (gv_parse_argument_with_value(config, argc, argv, &i))
         {
+            fprintf(stderr, "After gv_parse_argument_with_value\n");
+            fflush(stderr);
             // TODO add arguments to gv_parse_argument_with_value function
             continue;
         }
@@ -126,7 +131,7 @@ char* gv_get_argument_value(int argc, char** argv, int* argv_position)
 {
     if (strlen(argv[*argv_position]) <= 2)
     {
-        if ((*argv_position) + 1 == argc || argv[(*argv_position) + 1][0] == '-')
+        if ((*argv_position) + 1 >= argc || argv[(*argv_position) + 1][0] == '-')
         {
             return NULL;
         }
