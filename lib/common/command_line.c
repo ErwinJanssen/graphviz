@@ -101,6 +101,10 @@ bool gv_parse_argument_with_value(gv_config* config, int argc, char** argv,
             }
             else if (argument_type.argument_type == ARGUMENT_WITH_MULTIPLE_VALUES)
             {
+                if (argument_type.flag != 'G')
+                {
+                    return true;
+                }
                 char* value = gv_get_argument_value(argc, argv, argv_position);
                 if (!value)
                 {
