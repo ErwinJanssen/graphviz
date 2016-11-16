@@ -15,12 +15,28 @@ services:
 - docker
 
 env:
-- DOCKER_BUILD=FALSE
-- DOCKER_BUILD=TRUE
+  global:
+    # Coverity key
+    - secure: "K2rMy5N38otq5Tg64fxTaPxS+lmrCNrvRaLQXbLbb8fWX2X+bErX9QsR6W96+L9p/0H512U/sagPUqwR9FwIG/VanFWdidjJTOffDmDwLAKAG9MDZKXm6tZNuvKtIXkxMRGnn1jmvtP3IyNaUI/yaLsyt5Fbzf7Fd8mSHi2JAjeeu9bftRC9ejk9dXGDoKPa8C3kZTO/xmpWWoZLxeJt4911bdH2GCHDDE6I2U82YQfoRbaqeqHVAlPl5/+98hVtfbmegfrOETeRGw0Va4MiCxvzw/Dqbdb5URtEaX9y881RplqJf2tjDNrhBbmm0Nx1YrtLGjzcS0QdYAe3QcDfi1SUeCP0XWur1yuOum93DiC0tM3djiDVojhaotEMIs1tumE/pOXMKsM+Zv+Fexc+/zUT9luTtRS/NILUcnIOnremo0C1InzRQfXSBoRgdyNr+htntKKuZGT1t32FGkUZo5bQ8dgED5z6OzGchWOJNEwONk4sK4xnkwsL9Cxov/oc2zkIrVfwqEfsqy6oB4/EY+45B5XvbxT2ogpk9+Vshov8N6ZNIQOMe5YYSlmx/b/FVo/LELSSNxal5bk3YtvVa2EqrN/opipDjqPmDrMKFnecYZHyEdEfFS8Hfsdsvuewym0WI3smMsz8W8Cuy099PV+L58xuXy59lew7xaaRhuA="
+  
+  matrix:
+    - DOCKER_BUILD=FALSE
+    - DOCKER_BUILD=TRUE
+
+before_install:
+- echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "ErwinJanssen/graphviz"
+      description: "Build submitted via Travis CI"
+    notification_email: erwinjanssen@outlook.com
+    build_command_prepend: "./autogen.sh; make clean"
+    build_command: "make"
+    branch_pattern: coverity-scan
 
 install:
-# Enable colored gcc output
-- export CC=colorgcc
 # Install unit testing framework Criterion.
 - cd dependencies/criterion
 - mkdir build
