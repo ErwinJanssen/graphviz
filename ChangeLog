@@ -7,7 +7,7 @@ December 20, 2016
 	language bindings (John Ellson)
 	- number rounding added to SVG renderer (same as PS and TK rounding)
 	to aid regression testing. (John Ellson)
-	- additional regressson test framework, used in Travis CI builds. (Erwin Janssen)
+	- Additional regressson test framework, used in Appveyor and Travis CI builds. (Erwin Janssen)
 	- PHP7 support (requires swig-3.0.11 or later). (John Ellson)
 	- Allow user to specify clustering algorithm in gvmap. (Emden Gansner)
 	- Add Sierpinski graph generator to gvgen. (Emden Gansner)
