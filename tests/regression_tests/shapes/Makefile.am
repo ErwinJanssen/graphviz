@@ -1,2 +1,2 @@
 check test rtest:
-	python shapes.py
+	python -u shapes.py

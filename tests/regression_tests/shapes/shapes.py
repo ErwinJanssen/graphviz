@@ -74,6 +74,10 @@ output_types = [
     'xdot'
 ]
 
+print('')
+print('Executing "shapes" regression test:')
+print('')
+
 failures = 0
 for shape in shapes:
     for output_type in output_types:
@@ -85,6 +89,7 @@ print('')
 print('Results for "shapes" regression test:')
 print('    Number of tests: ' + str(len(shapes) * len(output_types)))
 print('    Number of failures: ' + str(failures))
+print('')
 
 if not failures == 0:
     exit(1) 

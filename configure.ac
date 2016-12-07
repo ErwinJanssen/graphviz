@@ -3199,6 +3199,7 @@ AC_CONFIG_FILES(Makefile
   tests/unit_tests/lib/Makefile
   tests/unit_tests/lib/common/Makefile
   tests/regression_tests/Makefile
+  tests/regression_tests/colors/Makefile
   tests/regression_tests/shapes/Makefile
 	share/Makefile
 	share/examples/Makefile

@@ -1,1 +1,1 @@
-SUBDIRS = shapes
+SUBDIRS = colors shapes
