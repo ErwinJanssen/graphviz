@@ -1,15 +1,20 @@
 language: c
 sudo: true
+
+compiler:
+  - gcc
+  - clang
+
 addons:
   apt:
     packages:
+    - clang
     - ksh
     - libgd2-xpm-dev
     - tcl-dev
     - libdevil-dev
     - libxaw7-dev
     - freeglut3-dev
-    - colorgcc
     - libgd-dev
 
 services:
@@ -30,8 +35,6 @@ env:
 
 
 install:
-# Enable colored gcc output
-- export CC=colorgcc
 # Install unit testing framework Criterion.
 - cd dependencies/criterion
 - mkdir build
