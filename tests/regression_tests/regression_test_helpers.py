@@ -1,3 +1,4 @@
+from PIL import Image, ImageChops, ImageOps
 from subprocess import Popen, PIPE
 import os.path, filecmp, difflib
 
@@ -37,6 +38,15 @@ def compare_graphs(name, output_type):
         print('Failure: ' + filename + ' - No reference file present.')
         return False
 
+    if output_type in ['gv', 'svg', 'xdot']:
+        return compare_graphs_text_format(filename, filename_reference, filename_output)
+    elif output_type in ['gif', 'jpg', 'png']:
+        return compare_graphs_binary_format(filename, filename_reference, filename_output)
+    else:
+        print('Output type ' + output_type + ' has no comparison supoort.')
+        return False
+
+def compare_graphs_text_format(filename, filename_reference, filename_output):
     with open(filename_reference) as reference_file:
         with open(filename_output) as output_file:
             reference = reference_file.readlines()
@@ -65,3 +75,24 @@ def compare_graphs(name, output_type):
 
                 print('Failure: ' + filename + ' - Generated file does not match reference file.')
                 return False
+
+def compare_graphs_binary_format(filename, filename_reference, filename_output):
+    # We convert the reference and output images to greyscale, because the
+    # image output has minor differences on different platforms (different
+    # anti-aliasing or slightly different colors). Untill the output is the
+    # same on all platforms, this workaround is required.
+    reference = ImageOps.grayscale(Image.open(filename_reference))
+    output = ImageOps.grayscale(Image.open(filename_output))
+    difference = ImageChops.difference(reference, output)
+    if difference.getbbox() is None:
+        print('Success: ' + filename)
+        return True
+    else:
+        if not os.path.exists('difference'):
+            os.makedirs('difference')
+
+        # Store diff to file
+        difference.save('difference/' + filename)
+
+        print('Failure: ' + filename + ' - Generated file does not match reference file.')
+        return False

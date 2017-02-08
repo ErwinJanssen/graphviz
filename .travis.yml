@@ -42,7 +42,9 @@ install:
 - sudo ldconfig
 - cd ${TRAVIS_BUILD_DIR}
 - if [ ${DOCKER_BUILD} == "TRUE" ] ; then docker build -t centos7-build-env ci/centos7/ ; fi
-    
+# Install Pillow for regression tests
+- sudo pip install pillow
+
 script:
 - cd ${TRAVIS_BUILD_DIR}
 - if [ ${DOCKER_BUILD} == "FALSE" ] ; then sudo ./ci/${BUILD_SYSTEM}-build_and_test.sh ; fi

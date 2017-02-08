@@ -69,9 +69,13 @@ shapes = [
 ]
 
 output_types = [
+    # Text based output tyes
     'gv',
     'svg',
-    'xdot'
+    'xdot',
+
+    # Binary output types
+    'gif'
 ]
 
 print('')
@@ -92,4 +96,4 @@ print('    Number of failures: ' + str(failures))
 print('')
 
 if not failures == 0:
-    exit(1) 
+    exit(1)
