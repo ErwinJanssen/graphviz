@@ -31,7 +31,6 @@ env:
 - BUILD_SYSTEM=cmake
   DOCKER_BUILD=TRUE
 
-
 install:
 # Install unit testing framework Criterion.
 - cd dependencies/criterion
@@ -45,9 +44,7 @@ install:
 - if [ ${DOCKER_BUILD} ] ; then docker build -t centos7-build-env ci/centos7/ ; fi
 
 script:
-- cd ${TRAVIS_BUILD_DIR}
-- if [ ! ${DOCKER_BUILD} ] ; then sudo ./ci/${BUILD_SYSTEM}-build_and_test.sh ; fi
-- if [ ${DOCKER_BUILD} ] ; then docker run --rm -v `pwd`:/graphviz -w /graphviz -i -t centos7-build-env bash "ci/${BUILD_SYSTEM}-build_and_test.sh" ; fi
+- sudo ./ci/travis-script.sh
 
 before_deploy:
 - export DEPLOYED_FILE=$(ls *.tar.gz)
