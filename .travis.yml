@@ -1,6 +1,5 @@
 language: c
 dist: trusty
-sudo: required
 
 compiler:
   - gcc
@@ -44,21 +43,8 @@ matrix:
         branches:
           - analyze
 
-
-install:
-# Install unit testing framework Criterion.
-- cd dependencies/criterion
-- mkdir build
-- cd build
-- cmake ..
-- cmake --build .
-- sudo make install
-- sudo ldconfig
-- cd ${TRAVIS_BUILD_DIR}
-- if [ ${DOCKER_BUILD} ] ; then docker build -t centos7-build-env ci/centos7/ ; fi
-
 script:
-- sudo ./ci/travis-script.sh
+- ./ci/travis-script.sh
 
 before_deploy:
 - export DEPLOYED_FILE=$(ls *.tar.gz)
