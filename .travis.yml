@@ -1,5 +1,6 @@
 language: c
-sudo: true
+dist: trusty
+sudo: required
 
 compiler:
   - gcc
@@ -30,6 +31,19 @@ env:
 
 - BUILD_SYSTEM=cmake
   DOCKER_BUILD=TRUE
+
+matrix:
+  include:
+  - env: BUILD_SYSTEM=autotools SONARQUBE=TRUE
+    compiler: gcc
+    addons:
+      sonarqube:
+        organization: "erwinjanssen-github"
+        token:
+          secure: "u4H26XoghRdg9ZKPZE/C+zgSkcHkYI+4Q5wR1QaNJUknUDODfKe2iMH7G9HqW/ON8yVNqFnirc8XA2JRqvag3yEGITLpM0uycL+j6UTeXyQ8mw91hz7bXRv05DoU4GtzTn0145685alTeYtgbJ8B+CooxdqAfj1NJnrISIcnB/ZXvvb8l97UjZwNsCBomptLH/n69cESIQLTfz9PiIXapWhcpEJh0U0Sbq7/ToP22d0/Nu0i9yrLeAhsxJu/9zha4DfbqgO2lXwWvZ88ja8RABMD32gJE5l4CDWfLk+wFEbqLXLx84mkxQPwvZ8fXVsBSLySYKjq3QceQGZCzD0icC4JjYLBsNjwQIgVLB5blu5o8QCvaUYubOFySfNwwHQCCXnwyLmw8lq5PaALfA/rp4md3DgnjFxSgTV2DwbsjqkbEWnSAqPD2cZB4I5oXYTwuHbsT55YbIiQgSvjfuGLFXHxVeOChqpadR5cafQiGAqytTFTBcvMmn86Q4RZ9ZCvglMrL02DJg5zsCRajPIrXZDY7PBL+FV4uYeGKdNaMt6jJgd/sDoAQh5/nFCDE8SLvjA2Yg8wxNKKWPJuJaRMjfr5seDt+x/05OrvptnPEwGmXsEMQZwyFQ4j5yMhbqPFYtUa9QApHFGeEVC3hyUBw/xE55sudBfAOMLa9cVVhIM="
+        branches:
+          - analyze
+
 
 install:
 # Install unit testing framework Criterion.
@@ -67,3 +81,7 @@ deploy:
 notifications:
   email:
     on_success: always
+
+cache:
+  directories:
+  - '$HOME/.sonar/cache'
