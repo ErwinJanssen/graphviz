@@ -1,6 +1,10 @@
 language: c
 sudo: true
 
+os:
+  - linux
+  - osx
+
 compiler:
   - gcc
   - clang
@@ -31,6 +35,13 @@ env:
 - BUILD_SYSTEM=cmake
   DOCKER_BUILD=TRUE
 
+matrix:
+  exclude:
+    - os: osx
+      env: BUILD_SYSTEM=autotools DOCKER_BUILD=TRUE
+    - os: osx
+      env: BUILD_SYSTEM=cmake DOCKER_BUILD=TRUE
+
 install:
 # Install unit testing framework Criterion.
 - cd dependencies/criterion
@@ -39,7 +50,7 @@ install:
 - cmake ..
 - cmake --build .
 - sudo make install
-- sudo ldconfig
+- if [ ${TRAVIS_OS_NAME} == "linux" ] ; then sudo ldconfig ; fi
 - cd ${TRAVIS_BUILD_DIR}
 - if [ ${DOCKER_BUILD} ] ; then docker build -t centos7-build-env ci/centos7/ ; fi
 
