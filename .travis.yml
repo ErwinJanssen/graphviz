@@ -55,6 +55,8 @@ install:
 - if [ ${DOCKER_BUILD} ] ; then docker build -t centos7-build-env ci/centos7/ ; fi
 
 script:
+- echo ${BUILD_SYSTEM}
+- sudo echo ${BUILD_SYSTEM}
 - sudo ./ci/travis-script.sh
 
 before_deploy:
