@@ -57,7 +57,7 @@ install:
 script:
 - echo ${BUILD_SYSTEM}
 - sudo echo ${BUILD_SYSTEM}
-- sudo ./ci/travis-script.sh
+- sudo ci/travis-script.sh
 
 before_deploy:
 - export DEPLOYED_FILE=$(ls *.tar.gz)

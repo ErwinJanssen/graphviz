@@ -1,4 +1,8 @@
 #!/bin/sh
+echo "test"
+echo ${BUILD_SYSTEM}
+echo "value: ${BUILD_SYSTEM}"
+echo "2nd value: $BUILD_SYSTEM"
 cd ${TRAVIS_BUILD_DIR}
 if [ ! ${DOCKER_BUILD} ] ; then
     ./ci/${BUILD_SYSTEM}-build_and_test.sh
