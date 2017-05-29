@@ -44,21 +44,19 @@ build_script:
 
   # Package
   - ps: >-
-      if($env:configuration -eq "Release") {
-        if($env:build_system -eq "cmake") {
-          cpack
-        }
-        elseif($env:build_system -eq "msbuild") {
-          rm Release\Graphviz\bin\*.lastcodeanalysissucceeded;
-          rm Release\Graphviz\bin\*.iobj;
-          rm Release\Graphviz\bin\*.ipdb;
-          rm Release\Graphviz\bin\*.ilk;
-        }
+      if($env:build_system -eq "cmake") {
+        cpack -C $env:configuration
+      }
+      elseif($env:build_system -eq "msbuild" -and $env:configuration -eq "Release") {
+        rm Release\Graphviz\bin\*.lastcodeanalysissucceeded;
+        rm Release\Graphviz\bin\*.iobj;
+        rm Release\Graphviz\bin\*.ipdb;
+        rm Release\Graphviz\bin\*.ilk;
       }
 
   # Test
   - ps: >-
-      if($env:build_system -eq "cmake" -and $env:configuration -eq "Release") {
+      if($env:build_system -eq "cmake") {
         mv Graphviz-*.exe Graphviz-install.exe;
         # Install using installer and add bin directory to path.
         # Piping the output of the installer to Out-Null, makes the script wait
