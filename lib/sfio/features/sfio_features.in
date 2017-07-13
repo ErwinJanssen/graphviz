@@ -1,0 +1,55 @@
+/* file not removable if still opened */
+#cmakedefine _tmp_rmfail
+
+#ifdef _tmp_rmfail
+#   undef _tmp_rmfail
+#   define _tmp_rmfail 1
+#endif
+
+/* st_blksize is a field in struct stat */
+#cmakedefine _stat_blksize
+
+#ifdef _stat_blksize
+#   undef _stat_blksize
+#   define _stat_blksize 1
+#endif
+
+/* open() has a vararg prototype */
+#cmakedefine _proto_open
+
+#ifdef _proto_open
+#   undef _proto_open
+#   define _proto_open 1
+#endif
+
+/* fd is first arg to poll() */
+#cmakedefine _lib_poll_fd_1
+
+#ifdef _lib_poll_fd_1
+#   undef _lib_poll_fd_1
+#   define _lib_poll_fd_1 1
+#endif
+
+/* fd is second arg to poll() */
+#cmakedefine _lib_poll_fd_2
+
+#ifdef _lib_poll_fd_2
+#   undef _lib_poll_fd_2
+#   define _lib_poll_fd_2 1
+#endif
+
+/* ioctl(I_PEEK) works */
+#cmakedefine _stream_peek
+
+#ifdef _stream_peek
+#   undef _stream_peek
+#   define _stream_peek 1
+#endif
+
+/* recv(MSG_PEEK) works */
+#cmakedefine _socket_peek
+
+#ifdef _socket_peek
+#   undef _socket_peek
+#   define _socket_peek 1
+#endif
