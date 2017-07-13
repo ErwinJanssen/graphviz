@@ -27,27 +27,36 @@ include(CheckFunctionExists)
 check_function_exists( _NSGetEnviron    HAVE__NSGETENVIRON  )
 check_function_exists( drand48          HAVE_DRAND48        )
 check_function_exists( cbrt             HAVE_CBRT           )
+check_function_exists( ftruncate        HAVE_FTRUNCATE      )
 check_function_exists( getpagesize      HAVE_GETPAGESIZE    )
 check_function_exists( getenv           HAVE_GETENV         )
 check_function_exists( lrand48          HAVE_LRAND48        )
+check_function_exists( lseek64          HAVE_LSEEK64        )
 check_function_exists( mallinfo         HAVE_MALLINFO       )
 check_function_exists( mallopt          HAVE_MALLOPT        )
 check_function_exists( mstats           HAVE_MSTATS         )
+check_function_exists( select           HAVE_SELECT         )
 check_function_exists( setenv           HAVE_SETENV         )
 check_function_exists( setmode          HAVE_SETMODE        )
 check_function_exists( sincos           HAVE_SINCOS         )
 check_function_exists( srand48          HAVE_SRAND48        )
+check_function_exists( stat64           HAVE_STAT64         )
 check_function_exists( strcasecmp       HAVE_STRCASECMP     )
 check_function_exists( strncasecmp      HAVE_STRNCASECMP    )
+check_function_exists( unlink           HAVE_UNLINK         )
 check_function_exists( vsnprintf        HAVE_VSNPRINTF      )
+check_function_exists( vfork            HAVE_VFORK          )
+check_function_exists( waitpid          HAVE_WAITPID        )
 
 # Type checks
 # The function check_size_type also checks if the type exists
 # and sets HAVE_${VARIABLE} accordingly.
 include(CheckTypeSize)
 
-check_type_size( ssize_t     SSIZE_T     )
-check_type_size( intptr_t    INTPTR_T    )
+check_type_size( off64_t            OFF64_T         )
+check_type_size( intptr_t           INTPTR_T        )
+check_type_size( ssize_t            SSIZE_T         )
+check_type_size( "struct stat64"    STRUCT_STAT64   )
 
 # Library checks
 set( HAVE_ANN       ${ANN_FOUND}        )
