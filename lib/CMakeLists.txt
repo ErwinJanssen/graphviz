@@ -27,5 +27,8 @@ add_subdirectory(xdot)
 # Dependent on: cdt
 add_subdirectory(cgraph)
 
+# Dependent on: sfio
+add_subdirectory(ast)
+
 # Multiple dependencies
 add_subdirectory(gvc)
