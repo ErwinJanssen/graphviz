@@ -60,7 +60,7 @@ gxl2gv_SOURCES = cvtgxl.c gv2gxl.c gxl2gv.c
 gxl2gv_LDADD = \
 	$(top_builddir)/lib/ingraphs/libingraphs_C.la \
 	$(top_builddir)/lib/cgraph/libcgraph.la \
-	$(top_builddir)/lib/cdt/libcdt.la @EXPAT_LIBS@ 
+	$(top_builddir)/lib/cdt/libcdt.la @EXPAT_LIBS@
 
 gxl2gv.1.pdf: $(srcdir)/gxl2gv.1
 	- @GROFF@ -Tps -man $(srcdir)/gxl2gv.1 | @PS2PDF@ - - >gxl2gv.1.pdf
@@ -69,7 +69,7 @@ sccmap_SOURCES = sccmap.c
 
 sccmap_LDADD = \
 	$(top_builddir)/lib/ingraphs/libingraphs_C.la \
-	$(top_builddir)/lib/cgraph/libcgraph.la @EXPAT_LIBS@ 
+	$(top_builddir)/lib/cgraph/libcgraph.la @EXPAT_LIBS@
 
 sccmap.1.pdf: $(srcdir)/sccmap.1
 	- @GROFF@ -Tps -man $(srcdir)/sccmap.1 | @PS2PDF@ - - >sccmap.1.pdf
@@ -216,7 +216,7 @@ y.tab.c y.tab.h : y.output
 
 y.output: $(top_srcdir)/cmd/tools/gmlparse.y
 	@YACC@ -dv $(top_srcdir)/cmd/tools/gmlparse.y
- 
+
 gmlparse.o gmlparse.lo gmlscan.o gmlscan.lo : gmlscan.c gmlparse.h
 
 gmlscan.c: $(top_srcdir)/cmd/tools/gmlscan.l
@@ -236,7 +236,7 @@ graphml2gv_SOURCES = graphml2gv.c
 graphml2gv_LDADD = \
 	$(top_builddir)/lib/ingraphs/libingraphs_C.la \
 	$(top_builddir)/lib/cgraph/libcgraph.la \
-	$(top_builddir)/lib/cdt/libcdt.la @EXPAT_LIBS@ 
+	$(top_builddir)/lib/cdt/libcdt.la @EXPAT_LIBS@
 
 graphml2gv.1.pdf: $(srcdir)/graphml2gv.1
 	- @GROFF@ -Tps -man $(srcdir)/graphml2gv.1 | @PS2PDF@ - - >graphml2gv.1.pdf
@@ -259,16 +259,9 @@ gvgen_LDADD = \
 gvgen.1.pdf: $(srcdir)/gvgen.1
 	- @GROFF@ -Tps -man $(srcdir)/gvgen.1 | @PS2PDF@ - - >gvgen.1.pdf
 
-EXTRA_DIST = $(man_MANS) $(pdf_DATA) bcomps.vcxproj* \
-	acyclic.vcxproj* bcomps.vcxproj* ccomps.vcxproj* dijkstra.vcxproj* gc.vcxproj* \
-    gvcolor.vcxproj* gvgen.vcxproj* gvpack.vcxproj* gxl2gv.vcxproj* \
-	mm2gv.vcxproj* nop.vcxproj* sccmap.vcxproj* tred.vcxproj* unflatten.vcxproj* \
-	gmlscan.c gmlparse.c gmlparse.h y.output y.tab.c y.tab.h gml2gv.vcxproj* \
-	graphml2gv.vcxproj* gv2gml.vcxproj*
+EXTRA_DIST = $(man_MANS) $(pdf_DATA) \
+	gmlscan.c gmlparse.c gmlparse.h y.output y.tab.c y.tab.h
 
-# FIXME - these are missing
-#	gv2gxl.vcxproj*
-		
-CLEANFILES = stamp.h 
+CLEANFILES = stamp.h
 
 DISTCLEANFILES = $(pdf_DATA) gmlparse.[ch] gmlscan.c y.output y.tab.[ch]
