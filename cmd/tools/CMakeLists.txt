@@ -141,6 +141,24 @@ tool_defaults(graphml2gv)
 
 endif(EXPAT_FOUND)
 
+# =================================== gv2gml ===================================
+# This tool doesn't have a manpage, so `add_simple_tool` can't be used
+add_executable(gv2gml gv2gml.c)
+
+target_link_libraries(gv2gml
+    cgraph
+    ingraphs
+)
+
+if(NOT HAVE_GETOPT_H)
+    target_link_libraries(gv2gml getopt)
+endif(NOT HAVE_GETOPT_H)
+
+install(
+    TARGETS gv2gml
+    RUNTIME DESTINATION ${BINARY_INSTALL_DIR}
+)
+
 # ================================== gvcolor ===================================
 add_executable(gvcolor
     # Header files
