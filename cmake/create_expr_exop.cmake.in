@@ -1,0 +1,14 @@
+file(READ @CMAKE_CURRENT_BINARY_DIR@/exparse.h exparse)
+
+string(REGEX MATCHALL "[A-Z]+[ ]*=[ ]*[0-9]*" tokens "${exparse}")
+
+file(WRITE @CMAKE_CURRENT_BINARY_DIR@/exop.h "static const char* exop[] = {
+")
+
+foreach(raw_token IN LISTS tokens)
+  string(REGEX MATCH "[A-Z]+" token "${raw_token}")
+  file(APPEND @CMAKE_CURRENT_BINARY_DIR@/exop.h "    \"${token}\",
+")
+endforeach(raw_token)
+
+file(APPEND @CMAKE_CURRENT_BINARY_DIR@/exop.h "};")
