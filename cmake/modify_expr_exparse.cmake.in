@@ -1,0 +1,21 @@
+file(READ @CMAKE_CURRENT_BINARY_DIR@/exparse.h file_contents)
+string(REPLACE "yy" "ex" file_contents "${file_contents}")
+string(REPLACE "YY" "EX" file_contents "${file_contents}")
+string(REPLACE "unsigned long int" "uint_64_t" file_contents "${file_contents}")
+string(REPLACE "unsigned long" "uint_64_t" file_contents "${file_contents}")
+
+file(WRITE @CMAKE_CURRENT_BINARY_DIR@/exparse.h "#ifndef _EXPARSE_H
+#define _EXPARSE_H
+")
+file(APPEND @CMAKE_CURRENT_BINARY_DIR@/exparse.h "${file_contents}")
+file(APPEND @CMAKE_CURRENT_BINARY_DIR@/exparse.h "#endif /* _EXPARSE_H */")
+
+file(READ @CMAKE_CURRENT_BINARY_DIR@/exparse.c file_contents)
+string(REPLACE "yy" "ex" file_contents "${file_contents}")
+string(REPLACE "YY" "EX" file_contents "${file_contents}")
+string(REPLACE "unsigned long int" "uint_64_t" file_contents "${file_contents}")
+string(REPLACE "unsigned long" "uint_64_t" file_contents "${file_contents}")
+string(REPLACE "fprintf" "sfprintf" file_contents "${file_contents}")
+string(REPLACE "FILE" "Sfio_t" file_contents "${file_contents}")
+string(REPLACE "stderr" "sfstderr" file_contents "${file_contents}")
+file(WRITE @CMAKE_CURRENT_BINARY_DIR@/exparse.c "${file_contents}")

@@ -33,3 +33,4 @@ add_subdirectory(ast)
 
 # Multiple dependencies
 add_subdirectory(gvc)
+add_subdirectory(expr)
