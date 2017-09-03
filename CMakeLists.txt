@@ -163,6 +163,7 @@ add_subdirectory(windows)
 add_subdirectory(lib)
 add_subdirectory(plugin)
 add_subdirectory(cmd)
+add_subdirectory(contrib)
 
 enable_testing()
 add_subdirectory(tests)
