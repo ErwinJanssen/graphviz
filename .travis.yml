@@ -49,6 +49,12 @@ install:
 - if [ ${DOCKER_BUILD} == "TRUE" ] ; then docker build -t centos7-build-env ci/centos7/ ; fi
 
 script:
+# These tools are used in the build process, it's usefull to know the versions
+- bison --version
+- cmake --version
+- flex --version
+- git --version
+
 - cd ${TRAVIS_BUILD_DIR}
 - if [ ${DOCKER_BUILD} == "FALSE" ] ; then sudo ./ci/${BUILD_SYSTEM}-build_and_test.sh ; fi
 - if [ ${DOCKER_BUILD} == "TRUE" ] ; then docker run --rm -v `pwd`:/graphviz -w /graphviz -i -t centos7-build-env bash "ci/${BUILD_SYSTEM}-build_and_test.sh" ; fi
