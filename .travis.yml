@@ -3,6 +3,7 @@ sudo: true
 addons:
   apt:
     packages:
+    - cmake
     - ksh
     - libgd2-xpm-dev
     - tcl-dev
